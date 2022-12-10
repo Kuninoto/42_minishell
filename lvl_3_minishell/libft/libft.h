@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/10 02:51:32 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/10 20:02:42 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,11 @@ int			prt_hexa(unsigned int nbr, bool upper_case);
 
 // Appends to_append on to_free, creating a new string, and frees to_free 
 char		*join_free(char *to_free, char *to_append);
+// Returns s1+s2, creating a new string, and frees s2
+char		*join_freev2(char *s1, char *s2);
 // Prints error_msg, followed by a newline, to STDERR and exits the program on failure
 void		handle_errors(char *error_msg);
+// Frees all elements in matrix and matrix!
+void		free_matrix(char **matrix);
 
 #endif
