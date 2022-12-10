@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_free.c                                        :+:      :+:    :+:   */
+/*   join_freev2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 21:38:23 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/10 19:07:33 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2022/12/10 18:48:23 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2022/12/10 19:01:20 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*join_free(char *to_free, char *to_append)
+// Returns a string product of s1 + s2 and frees s2
+char	*join_freev2(char *s1, char *s2)
 {
 	size_t	len_s1;
 	size_t	len_s2;
@@ -20,21 +21,20 @@ char	*join_free(char *to_free, char *to_append)
 	size_t	i;
 	size_t	j;
 
-	if (!to_free || !to_append)
+	if (!s1 || !s2)
 		return (NULL);
-	len_s1 = ft_strlen(to_free);
-	len_s2 = ft_strlen(to_append);
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
 	appended = malloc((len_s1 + len_s2 + 1) * sizeof(char));
 	if (!appended)
 		return (NULL);
 	i = 0;
 	j = 0;
 	while (j < len_s1)
-		appended[i++] = to_free[j++];
+		appended[i++] = s1[j++];
 	j = 0;
 	while (j < len_s2)
-		appended[i++] = to_append[j++];
+		appended[i++] = s2[j++];
 	appended[i] = '\0';
-	free(to_free);
 	return (appended);
 }

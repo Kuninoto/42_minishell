@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/10 02:03:24 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/10 02:04:35 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2022/12/10 20:16:14 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,10 @@ LIBFT = ./libft/libft.a
 RM = rm -rf
 
 NAME = minishell
-SRCS = main.c
+SRCS = srcs/commands/echo.c\
+	   srcs/utils/welcome_art.c\
+	   srcs/parser.c\
+	   main.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
@@ -25,14 +28,14 @@ $(LIBFT):
 	$(MAKE) -C ./libft
 
 $(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o minishell
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o minishell
 
 clean:
 	$(MAKE) clean -C ./libft
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	$(RM) $(OBJS)
 fclean: clean
 	$(MAKE) fclean -C ./libft
-	$(RM) $(NAME) $(BONUS_NAME)
+	$(RM) $(NAME)
 re: fclean all
 
 .SILENT:
