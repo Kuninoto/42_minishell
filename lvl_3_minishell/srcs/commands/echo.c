@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 18:27:19 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/11 20:08:45 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	cmd_echo(char **inputs)
 			ft_putchar_fd(' ', STDOUT_FILENO);
 		i++;
 	}
-	if(next_line)
+	if (next_line)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	
 }

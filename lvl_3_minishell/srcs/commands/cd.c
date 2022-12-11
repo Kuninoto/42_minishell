@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 20:06:14 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 21:08:09 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2022/12/11 20:20:58 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2022/12/11 20:37:43 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	cmd_pwd(void)
+void	cmd_cd(char *path)
 {
-	char	*path;
-	
- //	path = join_freev2("", getenv("PWD"));
-	
-	path = NULL;
-	// 0 as length parameter lets getcwd() copy the entire 
-	// absolute path without length restrictions
- 	path = getcwd(path, 0);
-	if (path == NULL)
-	{
-		perror("Failed to execute getcwd()");
-		return ;
-	}
-	ft_putstr_fd(path, STDOUT_FILENO);
-	ft_putchar_fd('\n', STDOUT_FILENO);
-	free(path);
+	if (chdir(path) == SUCESS)
+		return;
+	else
+		perror("Failed to execute cd");
 }
-
