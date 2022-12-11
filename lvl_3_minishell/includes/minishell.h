@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/10 20:15:29 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:49:10 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	welcome_art(void);
 
 // Wannabe echo
 void	cmd_echo(char **inputs);
+void	cmd_binaries(char **input);
+void	cmd_pwd(void);
 char	**parse_input(char *input);
-
 
 
 #endif
