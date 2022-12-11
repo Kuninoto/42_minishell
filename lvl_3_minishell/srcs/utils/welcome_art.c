@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   welcome_art.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:40:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/10 16:56:333 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:07:31 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	welcome_art(void)
 	char	art[845 * 6];
 	int		fd;
 
-	fd = open("./srcs/utils/art.txt",  O_RDONLY);
+	fd = open("./srcs/utils/art.txt", O_RDONLY);
 	if (fd == -1)
 		perror("Failed to open welcome art");
 	read(fd, art, 845 * 6);

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 20:45:48 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:07:15 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,19 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 
-
 void	welcome_art(void);
 char	**parse_input(char *input);
 
 // COMMANDS
 
-void	cmd_binaries(char **input);
+void	cmd_binaries(char **inputs);
 // Wannabe echo
 void	cmd_echo(char **inputs);
 // Wannabe pwd
 void	cmd_pwd(void);
 // Wannabe cd
 void	cmd_cd(char *path);
-
-
+// Wannabe exit
+void	cmd_exit(void);
 
 #endif

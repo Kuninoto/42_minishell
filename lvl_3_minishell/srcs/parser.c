@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 17:23:26 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/11 22:37:43 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 char	**parse_input(char *input)
 {
-	return  (ft_split(input, ' '));
+	return (ft_split(input, ' '));
 }

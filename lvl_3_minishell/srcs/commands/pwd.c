@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:06:14 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 21:08:09 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:17:18 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 void	cmd_pwd(void)
 {
 	char	*path;
-	
- //	path = join_freev2("", getenv("PWD"));
-	
+
 	path = NULL;
 	// 0 as length parameter lets getcwd() copy the entire 
 	// absolute path without length restrictions
- 	path = getcwd(path, 0);
+	path = getcwd(path, 0);
 	if (path == NULL)
 	{
 		perror("Failed to execute getcwd()");
@@ -31,4 +29,3 @@ void	cmd_pwd(void)
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	free(path);
 }
-
