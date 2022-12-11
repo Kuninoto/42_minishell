@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/11 22:08:21 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/11 23:15:46 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,15 @@
 
 void	cmd_binaries(char **inputs)
 {
-	char 	*envp[] = {"PATH=", "TERM=", NULL};
+	char	*envp[] = {"PATH=", "TERM=", NULL};
 	char	*binary_path;
 	char	*args[] = {"", NULL};
 	int		i;
 
 	envp[0] = join_freev2(envp[0], getenv("PATH"));
 	envp[1] = join_freev2(envp[1], getenv("TERM"));
- 	binary_path = ft_strjoin("/usr/bin/", inputs[0]);
+	binary_path = ft_strjoin("/usr/bin/", inputs[0]);
 	args[0] = binary_path;
-	
 	i = 0;
 	while (inputs[++i])
 		args[i] = inputs[i];

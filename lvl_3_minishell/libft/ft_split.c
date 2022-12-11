@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:42:18 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/11 17:23:12 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/11 23:06:59 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ char	**ft_split(char const *s, char c)
 			return (NULL);
 		i += letters_in_word(s, c, i);
 	}
-	str[j] = 0;
+	str[j] = NULL;
 	return (str);
 }
