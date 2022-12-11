@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 18:50:15 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/11 20:37:36 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ int	main(void)
 	{
 		input = readline("$ ");
 		inputs = parse_input(input);
-		if (fork() == 0)
-		{
+		// cd must be applied without forking
+		if (ft_strncmp(inputs[0], "cd\0", 3) == 0)
+			cmd_cd(inputs[1]);
+		else if (fork() == SUCESS)
 			cmd_check(inputs);
-		}
 		wait(NULL);
 		free(input);
 		free_matrix(inputs);

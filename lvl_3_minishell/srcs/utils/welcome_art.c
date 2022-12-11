@@ -19,7 +19,7 @@ void	welcome_art(void)
 
 	fd = open("./srcs/utils/art.txt",  O_RDONLY);
 	if (fd == -1)
-		perror("fd -1");
+		perror("Failed to open welcome art");
 	read(fd, art, 845 * 6);
 	art[845 * 5] = '\0';
 	close(fd);

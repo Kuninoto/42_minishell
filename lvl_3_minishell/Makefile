@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roramos <roramos@student.42.fr>            +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/10 02:03:24 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/11 18:50:29 by roramos          ###   ########.fr        #
+#    Updated: 2022/12/11 20:54:23 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,9 @@ LIBFT = ./libft/libft.a
 RM = rm -rf
 
 NAME = minishell
-SRCS = srcs/commands/echo.c\
-		srcs/commands/binaries.c\
+SRCS =  srcs/commands/binaries.c\
+		srcs/commands/cd.c\
+		srcs/commands/echo.c\
 		srcs/commands/pwd.c\
 	   	srcs/utils/welcome_art.c\
 	   	srcs/parser.c\
