@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: roramos <roramos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/10 02:03:24 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/10 20:16:14 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2022/12/11 18:50:29 by roramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,11 @@ RM = rm -rf
 
 NAME = minishell
 SRCS = srcs/commands/echo.c\
-	   srcs/utils/welcome_art.c\
-	   srcs/parser.c\
-	   main.c
+		srcs/commands/binaries.c\
+		srcs/commands/pwd.c\
+	   	srcs/utils/welcome_art.c\
+	   	srcs/parser.c\
+	   	main.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/10 20:18:44 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/11 18:27:19 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 void	cmd_echo(char **inputs)
 {
-	size_t i;
+	size_t 	i;
+	bool	next_line;
 
-	i = 1;
-	if (ft_strnstr(inputs[i], "-n", 3))
+	next_line = true;
+	i = 1;		
+	if (ft_strncmp(inputs[i], "-n\0", 3) == 0)
 	{
-		while (inputs[i])
-		{
-			write(STDOUT_FILENO, inputs[i], ft_strlen(inputs[i]));
-			i++;
-		}
-		return ;
-	}
+		next_line = false;
+		i++;
+	}	
 	while (inputs[i])
 	{
-		write(STDOUT_FILENO, inputs[i], ft_strlen(inputs[i]));
+		ft_putstr_fd(ft_strtrim(inputs[i], "\""), STDOUT_FILENO);
+		if (inputs[i + 1])
+			ft_putchar_fd(' ', STDOUT_FILENO);
 		i++;
 	}
-	write(STDOUT_FILENO, "\n", 1);
+	if(next_line)
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	
 }
