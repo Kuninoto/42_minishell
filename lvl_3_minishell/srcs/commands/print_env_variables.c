@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   print_env_variables.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 23:29:50 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/12 02:17:38 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2022/12/12 01:31:48 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2022/12/12 02:20:02 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	cmd_env(char **envp)
+void	print_env_variables(char *variable_name)
 {
-	size_t	i;
+	char	*var_value;
 
-	i = 0;
-	while (envp[i] != NULL)
+	if (variable_name)
 	{
-		printf("%s\n", envp[i]);
-		i++;
+		var_value = getenv(variable_name);
+		if (var_value != NULL)
+			printf("%s\n", var_value);
 	}
 }
