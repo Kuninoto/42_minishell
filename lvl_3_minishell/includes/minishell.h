@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 23:32:22 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/12 01:48:50 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	**parse_input(char *input);
 
 // COMMANDS
 
-void	cmd_binaries(char **inputs, char **envp);
+// Returns true if it has sucessfully executed a binary
+bool	cmd_binaries(char **inputs, char **envp);
 // Wannabe echo
 void	cmd_echo(char **inputs);
 // Wannabe pwd
@@ -42,5 +43,7 @@ void	cmd_pwd(void);
 void	cmd_cd(char *path);
 // Wannabe env
 void	cmd_env(char **envp);
+
+void	print_env_variables(char *variable_name);
 
 #endif
