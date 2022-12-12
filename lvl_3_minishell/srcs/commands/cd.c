@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:20:58 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 23:16:21 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/12 00:39:11 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void	cmd_cd(char *path)
 {
+	if (path == NULL)
+		return ;
 	if (chdir(path) == SUCESS)
 		return ;
-	else
-		perror("Failed to execute cd");
+	perror("Failed to execute cd");
 }

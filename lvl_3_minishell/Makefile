@@ -6,7 +6,7 @@
 #    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/10 02:03:24 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/11 22:18:32 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2022/12/11 23:33:31 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS =  srcs/commands/binaries.c\
 		srcs/commands/cd.c\
 		srcs/commands/echo.c\
 		srcs/commands/pwd.c\
+		srcs/commands/env.c\
 	   	srcs/utils/welcome_art.c\
 	   	srcs/parser.c\
 	   	main.c
