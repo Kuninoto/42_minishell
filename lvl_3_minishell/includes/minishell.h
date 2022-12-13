@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/13 00:10:52 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/13 01:52:07 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,8 @@ typedef struct s_simple_command {
 	char	**arguments;
 }				t_simple_command;
 
-/* typedef struct	s_command_table {
-	t_simple_command *array;
-}				t_command_table; */
-
 void	welcome_art(void);
 char	**parse_input(char *input);
-
-// t_simple_command *parse_input(char *input);
 
 // COMMANDS
 
