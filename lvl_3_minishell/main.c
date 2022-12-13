@@ -6,25 +6,25 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/12 02:15:28 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/12 21:09:38 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
 // Returns true if it has sucessfully executed an implemented command or printed an env variable
-bool	cmd_check(char **inputs, char **envp)
+bool	cmd_check(char **parsed, char **envp)
 {
-	if (ft_strncmp(inputs[0], "cd\0", 3) == 0)
-		cmd_cd(inputs[1]);
-	else if (ft_strncmp(inputs[0], "echo\0", 5) == 0)
-		cmd_echo(inputs);
-	else if (ft_strncmp(inputs[0], "pwd\0", 4) == 0)
+	if (ft_strncmp(parsed[0], "cd\0", 3) == 0)
+		cmd_cd(parsed[1]);
+	else if (ft_strncmp(parsed[0], "echo\0", 5) == 0)
+		cmd_echo(parsed);
+	else if (ft_strncmp(parsed[0], "pwd\0", 4) == 0)
 		cmd_pwd();
-	else if (ft_strncmp(inputs[0], "env\0", 4) == 0)
+	else if (ft_strncmp(parsed[0], "env\0", 4) == 0)
 		cmd_env(envp);
-	else if (ft_strncmp(inputs[0], "$", 1) == 0)
-		print_env_variables(&inputs[0][1]);
+	else if (ft_strncmp(parsed[0], "$", 1) == 0)
+		print_env_variables(&parsed[0][1]);
 	else
 		return (false);
 	return (true);
@@ -53,7 +53,7 @@ void	config_signals(void)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
-	char	**inputs;
+	char	**parsed;
 	pid_t	child_pid;
 
 	(void)argc;
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		input = readline("$ ");
-		// CTRL + D
+		// CTRL+D
 		if (input == NULL)
 		{
 			write(STDOUT_FILENO, "\n", 1);
@@ -73,27 +73,27 @@ int	main(int argc, char **argv, char **envp)
 		if (input[0] == '\0')
 			continue;
 		add_history(input);
+		// exit must be applied without forking
 		if (ft_strncmp(input, "exit\0", 5) == 0)
 		{
 			rl_clear_history();
 			exit(EXIT_SUCCESS);
 		}
-		// exit must be applied without forking
-		inputs = parse_input(input);
+		parsed = parse_input(input);
 		free(input);
 		// cd must be applied without forking
-		if (cmd_check(inputs, envp) == false)
+		if (cmd_check(parsed, envp) == false)
 		{	
 			child_pid = fork();
 			if (child_pid == 0)
 			{
-				if (cmd_binaries(inputs, envp) == true)
+				if (cmd_binaries(parsed, envp) == true)
 					kill(child_pid, SIGKILL);
 			}
 			else
 				wait(NULL);
 		}
-		free_matrix(inputs);
+		free_matrix(parsed);
 	}
 	return (EXIT_SUCCESS);
 }

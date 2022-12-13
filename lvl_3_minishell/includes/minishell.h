@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/12 01:48:50 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/13 00:10:52 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,36 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 
+typedef struct s_simple_command {
+	char	*command;
+	char	**arguments;
+}				t_simple_command;
+
+/* typedef struct	s_command_table {
+	t_simple_command *array;
+}				t_command_table; */
+
 void	welcome_art(void);
 char	**parse_input(char *input);
 
+// t_simple_command *parse_input(char *input);
+
 // COMMANDS
 
-// Returns true if it has sucessfully executed a binary
-bool	cmd_binaries(char **inputs, char **envp);
+/*
+	Returns true if it has sucessfully 
+	executed a binary from /usr/bin 
+*/
+bool	cmd_binaries(char **parsed, char **envp);
 // Wannabe echo
-void	cmd_echo(char **inputs);
+void	cmd_echo(char **parsed);
 // Wannabe pwd
 void	cmd_pwd(void);
 // Wannabe cd
 void	cmd_cd(char *path);
 // Wannabe env
 void	cmd_env(char **envp);
-
+// Expands the environment variable passed as parameter
 void	print_env_variables(char *variable_name);
 
 #endif

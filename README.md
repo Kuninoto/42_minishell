@@ -22,6 +22,9 @@
 - https://indradhanush.github.io/blog/writing-a-unix-shell-part-1/
 - https://indradhanush.github.io/blog/writing-a-unix-shell-part-2/
 - https://indradhanush.github.io/blog/writing-a-unix-shell-part-3/
+- https://www.youtube.com/watch?v=ubt-UjcQUYg
+- https://www.youtube.com/watch?v=ZjzMdsTWF0U
+- https://www.youtube.com/watch?v=k6TTj4C0LF0
 - https://www.tutorialspoint.com/unix_system_calls/execve.htm
 - https://www.geeksforgeeks.org/signals-and-traps-in-unix/
 - https://www.tutorialspoint.com/unix/unix-signals-traps.htm
@@ -35,6 +38,12 @@
 - http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/index.html
 - https://www.rozmichelle.com/pipes-forks-dups/
 - https://velog.io/@sham/minishell%EA%B3%BC-readline
+Parsing:
+- https://youtu.be/bxpc9Pp5pZM
+- https://youtu.be/r6vNthpQtSI
+- https://www.youtube.com/watch?v=dDtZLm7HIJs
+- https://www.youtube.com/watch?v=SToUyjAsaFk
+
 
 ---
 Made by Nuno Carvalho (Kuninoto) | nnuno-ca@student.42porto.com  
