@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/13 16:13:05 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/13 19:17:23 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ void	config_signals(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*input;
-	char	**parsed;
+	char		*input;
+	t_statement	*statement_list;
 
 	(void)argc;
 	(void)argv;
+	(void)envp;
 	config_signals();
 	welcome_art();
 	while (1)
@@ -77,9 +78,12 @@ int	main(int argc, char **argv, char **envp)
 			rl_clear_history();
 			exit(EXIT_SUCCESS);
 		}
-		parsed = parse_input(input);
+		statement_list = parse_input(input);
+		for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
+			printf("%s -> ", temp->command);
+		printf("\n");
 		free(input);
-		// cd must be applied without forking
+		/* // cd must be applied without forking
 		if (cmd_check(parsed, envp) == false)
 		{	
 			if (fork() == 0)
@@ -90,7 +94,7 @@ int	main(int argc, char **argv, char **envp)
 			else
 				wait(NULL);
 		}
-		free_matrix(parsed);
+		free_matrix(parsed); */
 	}
 	return (EXIT_SUCCESS);
 }

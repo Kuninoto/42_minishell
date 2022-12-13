@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/10 02:03:24 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/12 01:33:42 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2022/12/13 18:07:04 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS =  srcs/commands/binaries.c\
 		srcs/commands/pwd.c\
 		srcs/commands/env.c\
 		srcs/commands/print_env_variables.c\
+		srcs/utils/linked_lists/linked_lists_utils.c\
 	   	srcs/utils/welcome_art.c\
 	   	srcs/parser.c\
 	   	main.c
