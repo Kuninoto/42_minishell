@@ -46,6 +46,7 @@ Parsing:
 - https://www.youtube.com/watch?v=SToUyjAsaFk
 - https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
 - https://en.wikipedia.org/wiki/Abstract_syntax_tree
+- https://github.com/mit-pdos/xv6-public/blob/master/sh.c
 
 
 ---
