@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/13 01:52:07 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/13 18:57:41 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,30 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 
-typedef struct s_simple_command {
-	char	*command;
-	char	**arguments;
-}				t_simple_command;
+typedef enum	e_operator {
+	PIPE,	// |
+	AND,	// &&
+	OR,		// ||
+	REDIRECT_OUTPUT_REPLACE, // > (replace)
+	REDIRECT_OUTPUT_APPEND, // >> (append)
+	REDIRECT_INPUT,	// <
+	NONE,
+}				t_operator;
 
-void	welcome_art(void);
-char	**parse_input(char *input);
+typedef struct s_statement {
+	char		*command;
+	char		**arguments;
+	t_operator	operator;
+	struct s_statement	*next;
+}				t_statement;
+
+// LINKED LIST
+t_statement *new_node(size_t nr_statements);
+t_statement	*lstlast(t_statement *head);
+void		lstadd_back(t_statement **head, t_statement *new_node);
+
+void		welcome_art(void);
+t_statement *parse_input(char *input);
 
 // COMMANDS
 
