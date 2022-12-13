@@ -38,11 +38,14 @@
 - http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/index.html
 - https://www.rozmichelle.com/pipes-forks-dups/
 - https://velog.io/@sham/minishell%EA%B3%BC-readline
+- https://github.com/Swoorup/mysh
 Parsing:
 - https://youtu.be/bxpc9Pp5pZM
 - https://youtu.be/r6vNthpQtSI
 - https://www.youtube.com/watch?v=dDtZLm7HIJs
 - https://www.youtube.com/watch?v=SToUyjAsaFk
+- https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+- https://en.wikipedia.org/wiki/Abstract_syntax_tree
 
 
 ---
