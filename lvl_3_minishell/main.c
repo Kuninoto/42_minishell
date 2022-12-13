@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/12 21:09:38 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/13 16:13:05 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*input;
 	char	**parsed;
-	pid_t	child_pid;
 
 	(void)argc;
 	(void)argv;
-
 	config_signals();
 	welcome_art();
 	while (1)
@@ -84,11 +82,10 @@ int	main(int argc, char **argv, char **envp)
 		// cd must be applied without forking
 		if (cmd_check(parsed, envp) == false)
 		{	
-			child_pid = fork();
-			if (child_pid == 0)
+			if (fork() == 0)
 			{
 				if (cmd_binaries(parsed, envp) == true)
-					kill(child_pid, SIGKILL);
+					exit(EXIT_SUCCESS);
 			}
 			else
 				wait(NULL);
