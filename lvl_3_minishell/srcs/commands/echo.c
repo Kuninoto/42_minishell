@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 00:53:15 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 22:39:17 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,25 @@ void	cmd_echo(t_statement *statement)
 	new_line = true;
 	i = 1;
 	// echo with no message || echo -n with no message
-	if (!statement->args[1])
+	if (!statement->argv[1])
 		return ;
-	if (ft_strncmp(statement->args[i], "-n\0", 3) == 0)
+	if (streq(statement->argv[i], "-n"))
 	{
-		if (!statement->args[2])
+		if (!statement->argv[2])
 			return ;
 		new_line = false;
 		i++;
 	}
-	while (statement->args[i])
+	while (statement->argv[i])
 	{
-		if (has_quotes(statement->args[i]))
+		if (has_quotes(statement->argv[i]))
 		{
-			line = ft_strtrim(statement->args[i], "\"'");
+			line = ft_strtrim(statement->argv[i], "\"'");
 			ft_putstr_fd(line, STDOUT_FILENO);
 		}
 		else
 		{
-			line = statement->args[i];
+			line = statement->argv[i];
 			j = -1;
 			while (line[++j])
 			{
@@ -57,7 +57,7 @@ void	cmd_echo(t_statement *statement)
 				ft_putchar_fd(line[j], STDOUT_FILENO);
 			}
 		}
-		if (statement->args[i + 1])
+		if (statement->argv[i + 1])
 			write(STDOUT_FILENO, " ", 1);
 		i++;
 		free(line);

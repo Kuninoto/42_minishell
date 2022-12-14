@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 18:50:59 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 23:11:57 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,47 +28,52 @@
 # include <sys/stat.h>
 # include <sys/wait.h>
 
+// CONSTANTS
+# define OPERATORS "|<>&()"
+
 typedef enum	e_operator {
-	NONE,	// 0
-	AND,	// &&	1
-	OR,		// ||	2
-	REDIRECT_OUTPUT_REPLACE, // > (replace)	3
-	REDIRECT_OUTPUT_APPEND, // >> (append)	4
-	REDIRECT_INPUT,	// <	5
-	PIPE,	// |	6
+	NONE, // 0
+	AND, // && 1
+	OR,	// || 2
+	REDIRECT_OUTPUT_REPLACE, // > 3
+	REDIRECT_OUTPUT_APPEND, // >> 4
+	REDIRECT_INPUT,	// < 5
+	PIPE, // | 6
 }				t_operator;
 
 typedef struct s_statement {
-	char		*cmd;
-	char		**args;
-	t_operator	operator;
+	char				**argv;
+	t_operator			operator;
 	struct s_statement	*next;
 }				t_statement;
 
-// LINKED LIST
-t_statement *new_node(size_t nr_statements);
-int			lstsize(t_statement *lst);
-void		lstclear(t_statement **head);
-
+// Prints the minishell gradient ASCII art
 void		welcome_art(void);
 t_statement *parse_input(char *input);
 
 // COMMANDS
-
-/*
-	Returns true if it has sucessfully 
-	executed a binary from /usr/bin 
-*/
-bool	cmd_binaries(t_statement *statement, char **envp);
+/* Returns true if it has sucessfully 
+executed a binary from /usr/bin */
+bool		cmd_binaries(t_statement *statement, char **envp);
 // Wannabe echo
-void	cmd_echo(t_statement *statement);
+void		cmd_echo(t_statement *statement);
 // Wannabe pwd
-void	cmd_pwd(void);
+void		cmd_pwd(void);
 // Wannabe cd
-void	cmd_cd(char *path);
+void		cmd_cd(char *path);
 // Wannabe env
-void	cmd_env(char **envp);
+void		cmd_env(char **envp);
 // Expands the environment variable passed as parameter
-void	print_env_variables(char *variable_name);
+void		print_env_variables(char *variable_name);
+
+// Utils
+// LINKED LISTS
+
+t_statement *new_node(size_t nr_statements);
+/* Returns the size of the linked list 
+which head is passed as a parameter */
+size_t		lstsize(t_statement *head);
+// Frees the linked list which head is passed as parameter
+void		lstclear(t_statement **head);
 
 #endif
