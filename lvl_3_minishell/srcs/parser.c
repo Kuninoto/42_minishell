@@ -3,34 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 16:19:46 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 23:13:13 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-# define OPERATORS "|<>&()"
-
-t_operator get_operator(char *operator)
+t_operator	get_operator(char *operator)
 {
 	if (!operator)
 		return (NONE);
-	else if (ft_strncmp(operator, "&&", 2) == 0)
-		return (AND);
-	else if (ft_strncmp(operator, ">>", 2) == 0)
-		return (REDIRECT_OUTPUT_APPEND);
-	else if (ft_strncmp(operator, ">", 1) == 0)
-		return (REDIRECT_OUTPUT_REPLACE);
-	//TODO fazer o <<
-	else if (ft_strncmp(operator, "<", 1) == 0)
-		return (REDIRECT_INPUT);
-	else if (ft_strncmp(operator, "||", 2) == 0)
-		return (OR);
-	else if (ft_strncmp(operator, "|", 1) == 0)
+	if (streq(operator, "|"))
 		return (PIPE);
+	if (streq(operator, "&&"))
+		return (AND);
+	if (streq(operator, ">"))
+		return (REDIRECT_OUTPUT_REPLACE);
+	if (streq(operator, ">>"))
+		return (REDIRECT_OUTPUT_APPEND);
+	/* if (streq(operator, "<<"))
+		return (); */
+	if (streq(operator, "<"))
+		return (REDIRECT_INPUT);
+	if (streq(operator, "||"))
+		return (OR);
 	return (NONE);
 	// TODO
 /* 	else if (operator[0] == ')')
@@ -54,27 +53,24 @@ size_t	get_nr_statements(char **splitted)
 	return (counter);
 }
 
-t_statement *parse_input(char *input)
+t_statement	*parse_input(char *input)
 {
 	char		**splitted;
-	size_t		nr_statements;
 	t_statement	*temp;
 	t_statement	*head;
 	size_t		i;
 	size_t		j;
 
 	splitted = ft_split(input, ' ');
-	nr_statements = get_nr_statements(&splitted[0]);
-	temp = new_node(nr_statements);
+	temp = new_node(get_nr_statements(&splitted[0]));
 	head = temp;
 	i = 0;
 	while (splitted[i])
 	{
 		j = 0;
-		temp->cmd = splitted[i];
 		while (splitted[i] && !ft_strchr(OPERATORS, splitted[i][0]))
-			temp->args[j++] = splitted[i++];
-		temp->args[j] = NULL;
+			temp->argv[j++] = splitted[i++];
+		temp->argv[j] = NULL;
 		if (!splitted[i])
 			break ;
 		temp->operator = get_operator(splitted[i++]);
@@ -85,21 +81,8 @@ t_statement *parse_input(char *input)
 	free(splitted);
 	return (head);
 }
-//!
-//TODO
-/*
-	ls -a | wc -l
-	operator pipe is not being assigned to ls structure
-*/
 
 /*
 	ls -a | wc -l
 	<command> <arguments> <operator> <command> <arguments>
-
-	ls
-	-a
-	||
-	wc
-	-l
-	NULL
 */

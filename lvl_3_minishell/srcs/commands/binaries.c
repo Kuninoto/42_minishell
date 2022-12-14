@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binaries.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/14 18:15:41 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 21:46:40 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,23 @@ bool	cmd_binaries(t_statement *statement, char **envp)
 	executed = true;
 	/* if (!statement->cmd)
 		return (executed); */
-	if (statement->cmd[0] == '.' || statement->cmd[0] == '/')
-		binary_path = statement->cmd;
-	else
-		binary_path = ft_strjoin("/usr/bin/", statement->cmd);
-	if (execve(binary_path, statement->args, envp) == -1)
+	if (statement->argv[0][0] == '.' || statement->argv[0][0] == '/')
 	{
-		printf("%s: command not found\n", statement->cmd);
-		executed = false;
+		if (execve(statement->argv[0], statement->argv, envp) == -1)
+		{
+			printf("%s: command not found\n", statement->argv[0]);
+			executed = false;
+		}
+	}
+	else
+	{	
+		binary_path = ft_strjoin("/usr/bin/", statement->argv[0]);
+		if (execve(binary_path, statement->argv, envp) == -1)
+		{
+			printf("%s: command not found\n", statement->argv[0]);
+			executed = false;
+			free(binary_path);
+		}
 	}
 	return (executed);
-//!	free(binary_path);
 }

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/13 22:23:47 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 22:24:21 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ char		*join_freev2(char *s1, char *s2);
 /* Prints error_msg, followed by a newline, 
    to STDERR and exits the program on failure */
 void		panic(char *error_msg);
-// Frees all elements in matrix and matrix!
+// Frees all elements in the matrix and its pointer
 void		free_matrix(char **matrix);
+// Checks if both strings passed as parameters are absolutely equal
+bool		streq(char *str1, char *str2);
 
 #endif
