@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 18:25:27 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:50:59 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@
 # include <sys/wait.h>
 
 typedef enum	e_operator {
-	PIPE,	// |	0
+	NONE,	// 0
 	AND,	// &&	1
 	OR,		// ||	2
 	REDIRECT_OUTPUT_REPLACE, // > (replace)	3
 	REDIRECT_OUTPUT_APPEND, // >> (append)	4
 	REDIRECT_INPUT,	// <	5
-	NONE,	// 6
+	PIPE,	// |	6
 }				t_operator;
 
 typedef struct s_statement {
