@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 00:36:59 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 14:29:20 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,17 @@ int	main(int argc, char **argv, char **envp)
 		}
 		statement_list = parse_input(input);
 		free(input);
-	/* 	for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
+
+		for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
 		{
 			printf("COMMAND: %s\n", temp->cmd);
 			printf("ARGS: ");
 			for (size_t i = 0; temp->args[i] != NULL; i++)
 				printf("%s ", temp->args[i]);
-			if (temp->operator)
-				printf("\nOPERATOR: %d\n", temp->operator);
+			printf("\nOPERATOR: %d\n", temp->operator);
 			printf("\n");
 		}
-		printf("\n"); */
+		printf("\n");
 
 		temp = statement_list;
 		while (temp != NULL)
