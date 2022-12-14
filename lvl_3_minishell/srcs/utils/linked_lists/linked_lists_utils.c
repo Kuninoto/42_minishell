@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_lists_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 17:23:01 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/13 23:31:18 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:25:10 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ void	lstclear(t_statement **head)
 		temp = next_node;
 	}
 	*head = NULL;
+}
+
+int	lstsize(t_statement *lst)
+{
+	t_statement	*temp;
+	size_t	size;
+
+	temp = lst;
+	size = 0;
+	while (temp != NULL)
+	{
+		temp = temp->next;
+		size++;
+	}
+	return (size);
 }
 
 t_statement *new_node(size_t nr_statements)

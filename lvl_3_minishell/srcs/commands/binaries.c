@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binaries.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/14 00:43:35 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 18:15:41 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ bool	cmd_binaries(t_statement *statement, char **envp)
 	char	*binary_path;
 
 	executed = true;
+	/* if (!statement->cmd)
+		return (executed); */
 	if (statement->cmd[0] == '.' || statement->cmd[0] == '/')
 		binary_path = statement->cmd;
 	else
@@ -28,5 +30,5 @@ bool	cmd_binaries(t_statement *statement, char **envp)
 		executed = false;
 	}
 	return (executed);
-//	free(binary_path);
+//!	free(binary_path);
 }
