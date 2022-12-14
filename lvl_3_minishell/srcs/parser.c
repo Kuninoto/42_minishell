@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 14:29:48 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 16:19:46 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ size_t	get_nr_statements(char **splitted)
 		counter++;
 		i++;
 	}
-//	printf("counter = %ld\n", counter);
 	return (counter);
 }
 
