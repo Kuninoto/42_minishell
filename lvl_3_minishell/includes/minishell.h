@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/13 18:57:41 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/13 23:31:14 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,25 @@
 # include <sys/wait.h>
 
 typedef enum	e_operator {
-	PIPE,	// |
-	AND,	// &&
-	OR,		// ||
-	REDIRECT_OUTPUT_REPLACE, // > (replace)
-	REDIRECT_OUTPUT_APPEND, // >> (append)
-	REDIRECT_INPUT,	// <
-	NONE,
+	PIPE,	// |	0
+	AND,	// &&	1
+	OR,		// ||	2
+	REDIRECT_OUTPUT_REPLACE, // > (replace)	3
+	REDIRECT_OUTPUT_APPEND, // >> (append)	4
+	REDIRECT_INPUT,	// <	5
+	NONE,	// 6
 }				t_operator;
 
 typedef struct s_statement {
-	char		*command;
-	char		**arguments;
+	char		*cmd;
+	char		**args;
 	t_operator	operator;
 	struct s_statement	*next;
 }				t_statement;
 
 // LINKED LIST
 t_statement *new_node(size_t nr_statements);
-t_statement	*lstlast(t_statement *head);
-void		lstadd_back(t_statement **head, t_statement *new_node);
+void		lstclear(t_statement **head);
 
 void		welcome_art(void);
 t_statement *parse_input(char *input);
@@ -59,9 +58,9 @@ t_statement *parse_input(char *input);
 	Returns true if it has sucessfully 
 	executed a binary from /usr/bin 
 */
-bool	cmd_binaries(char **parsed, char **envp);
+bool	cmd_binaries(t_statement *statement, char **envp);
 // Wannabe echo
-void	cmd_echo(char **parsed);
+void	cmd_echo(t_statement *statement);
 // Wannabe pwd
 void	cmd_pwd(void);
 // Wannabe cd
