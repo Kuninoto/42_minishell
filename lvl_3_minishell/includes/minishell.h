@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 23:59:11 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/15 14:37:22 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ typedef struct s_statement {
 	struct s_statement	*next;
 }				t_statement;
 
-typedef enum s_token {
+/* typedef enum s_token {
 	NONE,
 	COMMAND,
 	ARGUMENT,
 	OPERATOR,
-}				t_token;
+}				t_token; */
 
 // Prints the minishell gradient ASCII art
 void		welcome_art(void);
