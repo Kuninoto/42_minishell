@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 17:23:01 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 23:12:38 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 23:47:56 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ size_t	lstsize(t_statement *head)
 	return (size);
 }
 
-t_statement	*new_node(size_t nr_statements)
+t_statement	*new_node(int argc)
 {
 	t_statement *new_node;
 
 	new_node = malloc(sizeof(t_statement));
-	new_node->argv = malloc((nr_statements + 1) * sizeof(char *));
+	new_node->argc = argc;
+	new_node->argv = malloc((argc + 1) * sizeof(char *));
 	new_node->operator = NONE;
 	new_node->next = NULL;
 	return (new_node);

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 22:39:17 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 23:52:10 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,24 @@ bool	has_quotes(char *line)
 
 void	cmd_echo(t_statement *statement)
 {
-	bool	new_line;
-	size_t	i;
-	size_t	j;
+	bool	has_n;
+	int		i;
+	int		j;
 	char	*line;
 
-	new_line = true;
-	i = 1;
-	// echo with no message || echo -n with no message
+	// echo with no message
 	if (!statement->argv[1])
 		return ;
-	if (streq(statement->argv[i], "-n"))
+	has_n = streq(statement->argv[1], "-n");
+	i = 1;
+	if (has_n)
 	{
+		// echo -n with no message
 		if (!statement->argv[2])
 			return ;
-		new_line = false;
-		i++;
+		i = 2;
 	}
-	while (statement->argv[i])
+	while (i != statement->argc)
 	{
 		if (has_quotes(statement->argv[i]))
 		{
@@ -62,6 +62,6 @@ void	cmd_echo(t_statement *statement)
 		i++;
 		free(line);
 	}
-	if (new_line)
+	if (!has_n)
 		write(STDOUT_FILENO, "\n", 1);
 }

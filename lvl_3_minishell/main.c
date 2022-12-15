@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 23:14:06 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 23:46:42 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,7 @@ int	main(int argc, char **argv, char **envp)
 		free(input);
 		for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
 		{
+			printf("ARGC: %d\n", temp->argc);
 			printf("ARGV: ");
 			for (size_t i = 0; temp->argv[i] != NULL; i++)
 				printf("%s ", temp->argv[i]);
