@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/15 14:49:31 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/15 16:24:12 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,24 @@ void	exec_cmd(t_statement *current_node, char **envp)
 		if (pipe(pipedes) == -1)
 			panic("Failed to pipe");
 			
-		// right side
+		// left side
 		if (fork() == 0)
 		{
 			close(STDOUT_FILENO); // fd 1
 			dup(pipedes[1]);	// fd output
 			close(pipedes[0]);
     		close(pipedes[1]);
-			exec_cmd(current_node, envp);
+			cmd_check(current_node, envp);
 		}
 		
-		// left side
+		// right side
 		if (fork() == 0)
 		{
 			close(STDIN_FILENO); // fd 0
 			dup(pipedes[0]);	// input
 			close(pipedes[0]);
     		close(pipedes[1]);
-			exec_cmd(current_node->next, envp);
+			cmd_check(current_node->next, envp);
 		}
 		close(pipedes[0]);
     	close(pipedes[1]);
@@ -93,6 +93,7 @@ void	exec_cmd(t_statement *current_node, char **envp)
 			exit(EXIT_SUCCESS);
 		}
 	}
+	exit(EXIT_SUCCESS);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -148,8 +149,11 @@ int	main(int argc, char **argv, char **envp)
 			wait(NULL);
 		}
 		else
-			exec_cmd(statement_list, envp);
-
+		{
+			if (fork() == 0)
+				exec_cmd(statement_list, envp);
+			wait(NULL);
+		}
 		/* 
 		temp = statement_list;
 		while (temp != NULL)
