@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/15 18:53:57 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/15 19:11:28 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,21 +89,23 @@ void	exec_cmd(t_statement *current_node, char **envp)
 		cmd_binaries(current_node, envp);
 		exit(EXIT_SUCCESS);
 	}
-	/* else
+	else
 	{
-		current_node->operator = NONE;
 		if (current_node->operator == REDIRECT_OUTPUT_REPLACE)
 		{
+			current_node->operator = NONE;
 			if (fork() == 0)
 			{
-				close(STDOUT_FILENO);
-				open(current_node->next->argv[0], O_CREAT|O_TRUNC);
-				exec_cmd(current_node, envp);
+				write(1, "ola", 3);
+				close(STDOUT_FILENO); // 1
+				printf("%d", open(current_node->next->argv[0], O_CREAT | O_TRUNC));
+				close(1);
+				//cmd_binaries(current_node, envp);
 				exit(EXIT_SUCCESS);
 			}
 			wait(NULL);
 		}
-	} */
+	} 
 	exit(EXIT_SUCCESS);
 }
 
