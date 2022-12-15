@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/15 16:24:12 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/15 18:53:57 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 // Returns true if it has sucessfully executed an implemented command or printed an env variable
 bool	cmd_check(t_statement *statement, char **envp)
 {
-	if (streq(statement->argv[0], "cd"))
-		cmd_cd(statement->argv[1]);
-	else if (streq(statement->argv[0], "echo"))
+	if (streq(statement->argv[0], "echo"))
 		cmd_echo(statement);
 	else if (streq(statement->argv[0], "pwd"))
 		cmd_pwd();
@@ -68,9 +66,8 @@ void	exec_cmd(t_statement *current_node, char **envp)
 			dup(pipedes[1]);	// fd output
 			close(pipedes[0]);
     		close(pipedes[1]);
-			cmd_check(current_node, envp);
+			exec_cmd(current_node, envp);
 		}
-		
 		// right side
 		if (fork() == 0)
 		{
@@ -78,21 +75,35 @@ void	exec_cmd(t_statement *current_node, char **envp)
 			dup(pipedes[0]);	// input
 			close(pipedes[0]);
     		close(pipedes[1]);
-			cmd_check(current_node->next, envp);
+			exec_cmd(current_node->next, envp);
 		}
 		close(pipedes[0]);
     	close(pipedes[1]);
 		wait(NULL);
 		wait(NULL);
-	}	
+	}
 	else if (current_node->operator == NONE)
 	{
-		if (cmd_check(current_node, envp) == false)
-		{
-			cmd_binaries(current_node, envp);
-			exit(EXIT_SUCCESS);
-		}
+		if (cmd_check(current_node, envp))
+			return ;
+		cmd_binaries(current_node, envp);
+		exit(EXIT_SUCCESS);
 	}
+	/* else
+	{
+		current_node->operator = NONE;
+		if (current_node->operator == REDIRECT_OUTPUT_REPLACE)
+		{
+			if (fork() == 0)
+			{
+				close(STDOUT_FILENO);
+				open(current_node->next->argv[0], O_CREAT|O_TRUNC);
+				exec_cmd(current_node, envp);
+				exit(EXIT_SUCCESS);
+			}
+			wait(NULL);
+		}
+	} */
 	exit(EXIT_SUCCESS);
 }
 
@@ -141,10 +152,12 @@ int	main(int argc, char **argv, char **envp)
 		// cd is not working because it must be applied without forking
 		if (lstsize(statement_list) == 1)
 		{
-			if (fork() == 0)
+			if (streq(statement_list->argv[0], "cd"))
+				cmd_cd(statement_list->argv[1]);
+			else if (fork() == 0)
 			{		
 				exec_cmd(statement_list, envp);
-				exit(EXIT_SUCCESS);
+			//	exit(EXIT_SUCCESS);
 			}
 			wait(NULL);
 		}
