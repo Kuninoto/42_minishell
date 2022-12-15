@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 23:11:57 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/14 23:59:11 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,28 @@
 # define OPERATORS "|<>&()"
 
 typedef enum	e_operator {
-	NONE, // 0
-	AND, // && 1
-	OR,	// || 2
-	REDIRECT_OUTPUT_REPLACE, // > 3
-	REDIRECT_OUTPUT_APPEND, // >> 4
-	REDIRECT_INPUT,	// < 5
-	PIPE, // | 6
+	NONE,
+	AND, // &&
+	OR,	// ||
+	REDIRECT_OUTPUT_REPLACE, // >
+	REDIRECT_OUTPUT_APPEND, // >>
+	REDIRECT_INPUT,	// <
+	PIPE, // |
 }				t_operator;
 
 typedef struct s_statement {
+	int					argc;
 	char				**argv;
 	t_operator			operator;
 	struct s_statement	*next;
 }				t_statement;
+
+typedef enum s_token {
+	NONE,
+	COMMAND,
+	ARGUMENT,
+	OPERATOR,
+}				t_token;
 
 // Prints the minishell gradient ASCII art
 void		welcome_art(void);
@@ -69,7 +77,7 @@ void		print_env_variables(char *variable_name);
 // Utils
 // LINKED LISTS
 
-t_statement *new_node(size_t nr_statements);
+t_statement	*new_node(int argc);
 /* Returns the size of the linked list 
 which head is passed as a parameter */
 size_t		lstsize(t_statement *head);
