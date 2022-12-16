@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 23:13:13 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/16 15:11:56 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_operator	get_operator(char *operator)
 		return (PIPE);
 	if (streq(operator, "&&"))
 		return (AND);
-	if (streq(operator, ">"))
-		return (REDIRECT_OUTPUT_REPLACE);
 	if (streq(operator, ">>"))
 		return (REDIRECT_OUTPUT_APPEND);
+	if (streq(operator, ">"))
+		return (REDIRECT_OUTPUT_REPLACE);
 	/* if (streq(operator, "<<"))
 		return (); */
 	if (streq(operator, "<"))
