@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/15 14:37:22 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/16 21:56:29 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,9 @@ void		welcome_art(void);
 t_statement *parse_input(char *input);
 
 // COMMANDS
+/* Returns true if it has sucessfully executed an
+implemented command or printed an env variable*/
+bool	cmd_check(t_statement *statement, char **envp);
 /* Returns true if it has sucessfully 
 executed a binary from /usr/bin */
 bool		cmd_binaries(t_statement *statement, char **envp);
@@ -83,5 +86,7 @@ which head is passed as a parameter */
 size_t		lstsize(t_statement *head);
 // Frees the linked list which head is passed as parameter
 void		lstclear(t_statement **head);
+
+void	exec_cmd(t_statement *current_node, char **envp);
 
 #endif
