@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/15 19:11:28 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/16 15:24:11 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,20 +91,13 @@ void	exec_cmd(t_statement *current_node, char **envp)
 	}
 	else
 	{
-		if (current_node->operator == REDIRECT_OUTPUT_REPLACE)
-		{
-			current_node->operator = NONE;
-			if (fork() == 0)
-			{
-				write(1, "ola", 3);
-				close(STDOUT_FILENO); // 1
-				printf("%d", open(current_node->next->argv[0], O_CREAT | O_TRUNC));
-				close(1);
-				//cmd_binaries(current_node, envp);
-				exit(EXIT_SUCCESS);
-			}
-			wait(NULL);
-		}
+		close(STDOUT_FILENO); // 1
+		if (current_node->operator == REDIRECT_OUTPUT_APPEND)
+			open(current_node->next->argv[0], O_WRONLY|O_APPEND);
+		else if (current_node->operator == REDIRECT_OUTPUT_REPLACE)
+			open(current_node->next->argv[0], O_WRONLY|O_TRUNC|O_CREAT);
+		current_node->operator = NONE;
+		exec_cmd(current_node, envp);
 	} 
 	exit(EXIT_SUCCESS);
 }
@@ -159,7 +152,7 @@ int	main(int argc, char **argv, char **envp)
 			else if (fork() == 0)
 			{		
 				exec_cmd(statement_list, envp);
-			//	exit(EXIT_SUCCESS);
+				exit(EXIT_SUCCESS);
 			}
 			wait(NULL);
 		}
