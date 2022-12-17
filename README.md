@@ -19,9 +19,11 @@
 > At [42School](https://en.wikipedia.org/wiki/42_(school)), almost every project must be written in accordance to the [Norm](./extras/en_norm.pdf), the schools' coding standard. As a result, the implementation of certain parts may appear strange and for sure had room for improvement.
 
 ## Useful links
+Understanding Bash/Shell behavior:
 - https://indradhanush.github.io/blog/writing-a-unix-shell-part-1/
 - https://indradhanush.github.io/blog/writing-a-unix-shell-part-2/
 - https://indradhanush.github.io/blog/writing-a-unix-shell-part-3/
+- https://www.gnu.org/software/bash/manual/html_node/Redirections.html
 - https://www.youtube.com/watch?v=ubt-UjcQUYg
 - https://www.youtube.com/watch?v=ZjzMdsTWF0U
 - https://www.youtube.com/watch?v=k6TTj4C0LF0
@@ -44,9 +46,12 @@ Parsing:
 - https://youtu.be/r6vNthpQtSI
 - https://www.youtube.com/watch?v=dDtZLm7HIJs
 - https://www.youtube.com/watch?v=SToUyjAsaFk
-- https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
-- https://en.wikipedia.org/wiki/Abstract_syntax_tree
 - https://github.com/mit-pdos/xv6-public/blob/master/sh.c
+- https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+AST:
+- https://en.wikipedia.org/wiki/Abstract_syntax_tree
+- https://stackoverflow.com/questions/1721553/how-to-construct-an-abstract-syntax-tree
+- https://www.twilio.com/blog/abstract-syntax-trees
 
 
 ---
