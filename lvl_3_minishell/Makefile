@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/10 02:03:24 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/13 18:07:04 by nnuno-ca         ###   ########.fr        #
+#    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
+#    Updated: 2022/12/17 19:26:54 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ LIBFT = ./libft/libft.a
 RM = rm -rf
 
 NAME = minishell
-SRCS =  srcs/commands/binaries.c\
+SRCS =  srcs/commands/check.c\
+		srcs/commands/binaries.c\
 		srcs/commands/cd.c\
 		srcs/commands/echo.c\
 		srcs/commands/pwd.c\
