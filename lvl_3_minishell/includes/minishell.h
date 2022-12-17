@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/15 14:37:22 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/17 19:09:42 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,20 @@
 // CONSTANTS
 # define OPERATORS "|<>&()"
 
+/* typedef enum s_token {
+	NOTHING,
+	COMMAND,
+	ARGUMENT,
+	OPERATOR,
+}				t_token; */
+
 typedef enum	e_operator {
 	NONE,
 	AND, // &&
 	OR,	// ||
-	REDIRECT_OUTPUT_REPLACE, // >
-	REDIRECT_OUTPUT_APPEND, // >>
-	REDIRECT_INPUT,	// <
+	RDR_OUT_REPLACE, // >
+	RDR_OUT_APPEND, // >>
+	RDR_INPUT,	// <
 	PIPE, // |
 }				t_operator;
 
@@ -48,12 +55,6 @@ typedef struct s_statement {
 	struct s_statement	*next;
 }				t_statement;
 
-/* typedef enum s_token {
-	NONE,
-	COMMAND,
-	ARGUMENT,
-	OPERATOR,
-}				t_token; */
 
 // Prints the minishell gradient ASCII art
 void		welcome_art(void);
