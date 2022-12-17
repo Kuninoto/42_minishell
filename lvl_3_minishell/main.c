@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/17 19:26:20 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/17 19:35:47 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	exec_pipe(t_statement *node, char **envp)
 	node->operator = NONE;
 	if (pipe(pipedes) == -1)
 		panic("Failed to pipe");
-		
 	// left side
 	if (fork() == 0)
 	{
@@ -158,24 +157,9 @@ int	main(int argc, char **argv, char **envp)
 				exec_cmd(statement_list, envp);
 			wait(NULL);
 		}
-		/* 
-		temp = statement_list;
-		while (temp != NULL)
-		{
-			if (cmd_check(temp, envp) == false)
-			{	
-				if (fork() == 0)
-				{
-					if (cmd_binaries(temp, envp) == true)
-						exit(EXIT_SUCCESS);
-				}
-				else
-					wait(NULL);
-			}
-			temp = temp->next;
-		}
-		*/
 		lstclear(&statement_list);
 	}
 	return (EXIT_SUCCESS);
 }
+
+// WEXITSTATUS(returnValue);
