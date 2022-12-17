@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/16 15:24:11 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/17 19:26:20 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-
-// Returns true if it has sucessfully executed an implemented command or printed an env variable
-bool	cmd_check(t_statement *statement, char **envp)
-{
-	if (streq(statement->argv[0], "echo"))
-		cmd_echo(statement);
-	else if (streq(statement->argv[0], "pwd"))
-		cmd_pwd();
-	else if (streq(statement->argv[0], "env"))
-		cmd_env(envp);
-	else if (statement->argv[0][0] ==  '$')
-		print_env_variables(&statement->argv[0][1]);
-	else
-		return (false);
-	return (true);
-}
 
 void	dismiss_signal(int signum)
 {
@@ -48,40 +32,44 @@ void	config_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	exec_cmd(t_statement *current_node, char **envp)
+void	exec_pipe(t_statement *node, char **envp)
 {
 	int	pipedes[2];
+
+	node->operator = NONE;
+	if (pipe(pipedes) == -1)
+		panic("Failed to pipe");
+		
+	// left side
+	if (fork() == 0)
+	{
+		close(STDOUT_FILENO); // fd 1
+		dup(pipedes[1]);	// fd output
+		close(pipedes[0]);
+		close(pipedes[1]);
+		exec_cmd(node, envp);
+	}
+	// right side
+	if (fork() == 0)
+	{
+		close(STDIN_FILENO); // fd 0
+		dup(pipedes[0]);	// input
+		close(pipedes[0]);
+		close(pipedes[1]);
+		exec_cmd(node->next, envp);
+	}
+	close(pipedes[0]);
+	close(pipedes[1]);
+	wait(NULL);
+	wait(NULL);
+}
+
+void	exec_cmd(t_statement *current_node, char **envp)
+{
 	//	bytes written on pipedes[1] can be read on pipedes[0]
 	//ls -a | wc -l 
 	if (current_node->operator == PIPE)
-	{
-		current_node->operator = NONE;
-		if (pipe(pipedes) == -1)
-			panic("Failed to pipe");
-			
-		// left side
-		if (fork() == 0)
-		{
-			close(STDOUT_FILENO); // fd 1
-			dup(pipedes[1]);	// fd output
-			close(pipedes[0]);
-    		close(pipedes[1]);
-			exec_cmd(current_node, envp);
-		}
-		// right side
-		if (fork() == 0)
-		{
-			close(STDIN_FILENO); // fd 0
-			dup(pipedes[0]);	// input
-			close(pipedes[0]);
-    		close(pipedes[1]);
-			exec_cmd(current_node->next, envp);
-		}
-		close(pipedes[0]);
-    	close(pipedes[1]);
-		wait(NULL);
-		wait(NULL);
-	}
+		exec_pipe(current_node, envp);
 	else if (current_node->operator == NONE)
 	{
 		if (cmd_check(current_node, envp))
@@ -91,11 +79,19 @@ void	exec_cmd(t_statement *current_node, char **envp)
 	}
 	else
 	{
-		close(STDOUT_FILENO); // 1
-		if (current_node->operator == REDIRECT_OUTPUT_APPEND)
-			open(current_node->next->argv[0], O_WRONLY|O_APPEND);
-		else if (current_node->operator == REDIRECT_OUTPUT_REPLACE)
-			open(current_node->next->argv[0], O_WRONLY|O_TRUNC|O_CREAT);
+		if (current_node->operator == RDR_INPUT)
+		{
+			close(STDIN_FILENO); // 0
+			open(current_node->next->argv[0], O_RDONLY);
+		}
+		else
+		{
+			close(STDOUT_FILENO); // 1
+			if (current_node->operator == RDR_OUT_APPEND)
+				open(current_node->next->argv[0], O_WRONLY|O_APPEND, 0777);
+			else if (current_node->operator == RDR_OUT_REPLACE)
+				open(current_node->next->argv[0], O_WRONLY|O_TRUNC|O_CREAT, 0777);
+		}
 		current_node->operator = NONE;
 		exec_cmd(current_node, envp);
 	} 
