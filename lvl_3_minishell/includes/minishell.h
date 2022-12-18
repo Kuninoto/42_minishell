@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/17 19:25:23 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:33:38 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,18 @@ t_statement *parse_input(char *input);
 // COMMANDS
 /* Returns true if it has sucessfully executed an
 implemented command or printed an env variable*/
-bool	cmd_check(t_statement *statement, char **envp);
+bool		cmd_check(t_statement *statement, char **envp);
 /* Returns true if it has sucessfully 
 executed a binary from /usr/bin */
-bool		cmd_binaries(t_statement *statement, char **envp);
+void		cmd_binaries(t_statement *statement, char **envp);
 // Wannabe echo
-void		cmd_echo(t_statement *statement);
+void			cmd_echo(t_statement *statement);
 // Wannabe pwd
-void		cmd_pwd(void);
+void			cmd_pwd(void);
 // Wannabe cd
-void		cmd_cd(char *path);
+void			cmd_cd(char *path);
 // Wannabe env
-void		cmd_env(char **envp);
+void			cmd_env(char **envp);
 // Expands the environment variable passed as parameter
 void		print_env_variables(char *variable_name);
 
@@ -88,6 +88,6 @@ size_t		lstsize(t_statement *head);
 // Frees the linked list which head is passed as parameter
 void		lstclear(t_statement **head);
 
-void	exec_cmd(t_statement *current_node, char **envp);
+int	exec_cmd(t_statement *current_node, char **envp);
 
 #endif

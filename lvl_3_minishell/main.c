@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/17 19:35:47 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:32:28 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	exec_pipe(t_statement *node, char **envp)
 void	exec_cmd(t_statement *current_node, char **envp)
 {
 	//	bytes written on pipedes[1] can be read on pipedes[0]
-	//ls -a | wc -l 
+	//ls -a | wc -l
 	if (current_node->operator == PIPE)
 		exec_pipe(current_node, envp);
 	else if (current_node->operator == NONE)
@@ -93,7 +93,7 @@ void	exec_cmd(t_statement *current_node, char **envp)
 		}
 		current_node->operator = NONE;
 		exec_cmd(current_node, envp);
-	} 
+	}
 	exit(EXIT_SUCCESS);
 }
 
@@ -126,7 +126,7 @@ int	main(int argc, char **argv, char **envp)
 		}
 		statement_list = parse_input(input);
 		free(input);
-		
+
 		/* for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
 		{
 			printf("ARGC: %d\n", temp->argc);
@@ -136,7 +136,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("\nOPERATOR: %d\n", temp->operator);
 			printf("\n");
 		}
-		printf("\n"); */	
+		printf("\n"); */
 
 
 		// cd is not working because it must be applied without forking
@@ -145,7 +145,7 @@ int	main(int argc, char **argv, char **envp)
 			if (streq(statement_list->argv[0], "cd"))
 				cmd_cd(statement_list->argv[1]);
 			else if (fork() == 0)
-			{		
+			{
 				exec_cmd(statement_list, envp);
 				exit(EXIT_SUCCESS);
 			}
