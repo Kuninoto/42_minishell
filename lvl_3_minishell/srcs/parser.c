@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/17 19:11:23 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/18 19:30:06 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,16 @@ size_t	get_nr_statements(char **splitted)
 	return (counter);
 }
 
+char *is_var(char *splitted)
+{
+	char	*dollar;
+
+	dollar = ft_strchr(splitted, '$');
+	if (!dollar || splitted[1] == '?')
+		return (splitted);
+	return (join_freev2("", getenv(++splitted)));
+}
+
 t_statement	*parse_input(char *input)
 {
 	char		**splitted;
@@ -69,7 +79,7 @@ t_statement	*parse_input(char *input)
 	{
 		j = 0;
 		while (splitted[i] && !ft_strchr(OPERATORS, splitted[i][0]))
-			temp->argv[j++] = splitted[i++];
+			temp->argv[j++] = is_var(splitted[i++]);
 		temp->argv[j] = NULL;
 		if (!splitted[i])
 			break ;
