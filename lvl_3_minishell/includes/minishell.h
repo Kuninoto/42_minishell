@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/18 19:33:38 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/20 18:31:48 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # define FAILURE -1
 
 # include "../libft/libft.h"
-# include "../includes/utils.h"
 
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -27,6 +26,7 @@
 # include <signal.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <errno.h>
 
 // CONSTANTS
 # define OPERATORS "|<>&()"
@@ -58,7 +58,6 @@ typedef struct s_statement {
 
 // Prints the minishell gradient ASCII art
 void		welcome_art(void);
-t_statement *parse_input(char *input);
 
 // COMMANDS
 /* Returns true if it has sucessfully executed an
@@ -79,7 +78,7 @@ void			cmd_env(char **envp);
 void		print_env_variables(char *variable_name);
 
 // Utils
-// LINKED LISTS
+// LINKED LISTS ---------------------------------
 
 t_statement	*new_node(int argc);
 /* Returns the size of the linked list 
@@ -88,6 +87,41 @@ size_t		lstsize(t_statement *head);
 // Frees the linked list which head is passed as parameter
 void		lstclear(t_statement **head);
 
-int	exec_cmd(t_statement *current_node, char **envp);
+void		exec_cmd(t_statement *current_node, char **envp);
+
+// VECTOR ---------------------------------------
+
+typedef struct s_vector {
+	size_t	count;
+	size_t	capacity;
+	char	**storage;
+}				t_vector;
+
+t_statement	*parse_input(char *input, t_vector *var_vec);
+
+// VECTOR UTILS ---------------------------------
+
+// Returns an empty vector with the capacity of 1
+static inline t_vector	vec_new(void)
+{
+	return ((t_vector){
+		.count = 0,
+		.capacity = 1,
+		.storage = malloc(sizeof(char *))
+	});
+}
+
+// Push an env variable to the vector
+void	vec_push(t_vector *vector, char	*env_variable);
+// Pop an env varible from the vector
+char	*vec_pop(t_vector *vector);
+// Doubles vector storage capacity
+void	vec_realloc(t_vector *vector);
+// Frees vector and all its inside fields
+void	free_vec(t_vector *vector);
+// Checks if user_var is on vector
+char	*is_onvec(char *user_var, t_vector *vector);
+// Saves user defined environment variables
+void	save_user_vars(char *user_var, t_vector *var_vec);
 
 #endif

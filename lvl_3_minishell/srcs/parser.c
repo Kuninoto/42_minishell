@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/18 19:30:06 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/20 18:24:31 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,21 @@ size_t	get_nr_statements(char **splitted)
 	return (counter);
 }
 
-char *is_var(char *splitted)
+char *is_var(char *splitted, t_vector *var_vec)
 {
 	char	*dollar;
+	char	*var;
 
 	dollar = ft_strchr(splitted, '$');
 	if (!dollar || splitted[1] == '?')
 		return (splitted);
-	return (join_freev2("", getenv(++splitted)));
+	var = getenv(++splitted);
+	if (var == NULL)
+		var = is_onvec(splitted, var_vec);
+	return (join_freev2("", var));
 }
 
-t_statement	*parse_input(char *input)
+t_statement	*parse_input(char *input, t_vector *var_vec)
 {
 	char		**splitted;
 	t_statement	*temp;
@@ -79,7 +83,7 @@ t_statement	*parse_input(char *input)
 	{
 		j = 0;
 		while (splitted[i] && !ft_strchr(OPERATORS, splitted[i][0]))
-			temp->argv[j++] = is_var(splitted[i++]);
+			temp->argv[j++] = is_var(splitted[i++], var_vec);
 		temp->argv[j] = NULL;
 		if (!splitted[i])
 			break ;

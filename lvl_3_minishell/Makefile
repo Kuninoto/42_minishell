@@ -6,7 +6,7 @@
 #    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/17 19:26:54 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2022/12/20 17:48:31 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,16 @@ LIBFT = ./libft/libft.a
 RM = rm -rf
 
 NAME = minishell
-SRCS =  srcs/commands/check.c\
-		srcs/commands/binaries.c\
+SRCS =  srcs/commands/binaries.c\
 		srcs/commands/cd.c\
+		srcs/commands/check.c\
 		srcs/commands/echo.c\
-		srcs/commands/pwd.c\
 		srcs/commands/env.c\
 		srcs/commands/print_env_variables.c\
+		srcs/commands/pwd.c\
+		srcs/commands/save_user_vars.c\
 		srcs/utils/linked_lists/linked_lists_utils.c\
+		srcs/utils/vector/vector_utils.c\
 	   	srcs/utils/welcome_art.c\
 	   	srcs/parser.c\
 	   	main.c
