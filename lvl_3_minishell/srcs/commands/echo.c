@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/18 19:32:19 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/20 20:24:04 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	cmd_echo(t_statement *statement)
 	char	*line;
 
 	// echo with no message
-	if (!statement->argv[1])
-		return ;
 	has_n = streq(statement->argv[1], "-n");
 	i = 1;
 	if (has_n)
@@ -39,6 +37,7 @@ void	cmd_echo(t_statement *statement)
 			return ;
 		i = 2;
 	}
+		printf("tumae\n");
 	while (i != statement->argc)
 	{
 		if (has_quotes(statement->argv[i]))
@@ -63,5 +62,7 @@ void	cmd_echo(t_statement *statement)
 		free(line);
 	}
 	if (!has_n)
-		write(STDOUT_FILENO, "\n", 1);
+	{
+		write(STDOUT_FILENO, "\n", 2);
+	}
 }

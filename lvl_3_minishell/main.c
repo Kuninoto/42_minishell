@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/18 19:32:28 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/20 18:34:37 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,16 @@ void	config_signals(void)
 
 void	exec_pipe(t_statement *node, char **envp)
 {
+	pid_t mshell_pid;
 	int	pipedes[2];
+	int	status;
 
 	node->operator = NONE;
 	if (pipe(pipedes) == -1)
 		panic("Failed to pipe");
 	// left side
-	if (fork() == 0)
+	mshell_pid = fork();
+	if (mshell_pid == 0)
 	{
 		close(STDOUT_FILENO); // fd 1
 		dup(pipedes[1]);	// fd output
@@ -48,8 +51,9 @@ void	exec_pipe(t_statement *node, char **envp)
 		close(pipedes[1]);
 		exec_cmd(node, envp);
 	}
+	mshell_pid = fork();
 	// right side
-	if (fork() == 0)
+	if (mshell_pid == 0)
 	{
 		close(STDIN_FILENO); // fd 0
 		dup(pipedes[0]);	// input
@@ -59,8 +63,9 @@ void	exec_pipe(t_statement *node, char **envp)
 	}
 	close(pipedes[0]);
 	close(pipedes[1]);
-	wait(NULL);
-	wait(NULL);
+	waitpid(mshell_pid, &status, 0);
+	waitpid(mshell_pid, &status, 0);
+	printf("EXIT STATUS OF CHILD = %d\n", WEXITSTATUS(status));
 }
 
 void	exec_cmd(t_statement *current_node, char **envp)
@@ -99,11 +104,13 @@ void	exec_cmd(t_statement *current_node, char **envp)
 
 int	main(int argc, char **argv, char **envp)
 {
+	t_vector	var_vec;
 	char		*input;
 	t_statement	*statement_list;
 
 	(void)argc;
 	(void)argv;
+	var_vec = vec_new();
 	config_signals();
 	welcome_art();
 	while (1)
@@ -113,6 +120,8 @@ int	main(int argc, char **argv, char **envp)
 		if (input == NULL)
 		{
 			write(STDOUT_FILENO, "\n", 1);
+			rl_clear_history();
+			free_vec(&var_vec);
 			exit(EXIT_SUCCESS);
 		}
 		if (input[0] == '\0')
@@ -122,9 +131,10 @@ int	main(int argc, char **argv, char **envp)
 		if (streq(input, "exit"))
 		{
 			rl_clear_history();
+			free_vec(&var_vec);
 			exit(EXIT_SUCCESS);
 		}
-		statement_list = parse_input(input);
+		statement_list = parse_input(input, &var_vec);
 		free(input);
 
 		/* for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
@@ -138,12 +148,13 @@ int	main(int argc, char **argv, char **envp)
 		}
 		printf("\n"); */
 
-
 		// cd is not working because it must be applied without forking
 		if (lstsize(statement_list) == 1)
 		{
 			if (streq(statement_list->argv[0], "cd"))
 				cmd_cd(statement_list->argv[1]);
+			else if (ft_strchr(statement_list->argv[0], '='))
+				save_user_vars(statement_list->argv[0], &var_vec);
 			else if (fork() == 0)
 			{
 				exec_cmd(statement_list, envp);
