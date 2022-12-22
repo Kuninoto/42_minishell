@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 15:58:02 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/22 22:17:16 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,5 +115,7 @@ void		free_matrix(char **matrix);
 bool		streq(char *str1, char *str2);
 // Return a literal copy of to_copy (useful when you want to free to_copy)
 char		*ft_strcpy(char *to_copy);
+// Returns true if str is only composed by white spaces
+bool	only_isspaces(const char *str);
 
 #endif
