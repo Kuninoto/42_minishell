@@ -6,7 +6,7 @@
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:58:39 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/22 15:59:55 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/22 19:33:08 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,4 @@ void	exec_pipe(t_statement *node, char **envp, t_vector *envp_vec)
 	close(pipedes[1]);
 	waitpid(mshell_pid, &status, 0);
 	waitpid(mshell_pid, &status, 0);
-	printf("EXIT STATUS OF CHILD = %d\n", WEXITSTATUS(status));
 }

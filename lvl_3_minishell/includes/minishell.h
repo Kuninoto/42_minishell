@@ -6,7 +6,7 @@
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 17:35:19 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/22 19:43:02 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,5 +133,7 @@ char	*is_onvec(char *user_var, t_vector *vector);
 void	vec_pop_at(char *user_var, t_vector *vector);
 // Saves user defined environment variables
 void	save_user_vars(char *user_var, t_vector *var_vec);
+
+int			g_exit_status;
 
 #endif
