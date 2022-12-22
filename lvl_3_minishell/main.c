@@ -6,7 +6,7 @@
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 18:41:04 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/22 19:57:39 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	config_signals(void)
 	// Ignore CTRL+backslash
 	signal(SIGQUIT, SIG_IGN);
 }
-
 
 char	**copy_envs(char **envp)
 {
@@ -104,7 +103,7 @@ int	main(int argc, char **argv, char **envp)
 		statement_list = parse_input(input, &var_vec, &envp_vec);
 		free(input);
 
-		/* for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
+/* 		for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
 		{
 			printf("ARGC: %d\n", temp->argc);
 			printf("ARGV: ");
@@ -133,17 +132,21 @@ int	main(int argc, char **argv, char **envp)
 				exec_cmd(statement_list, envp, &envp_vec);
 				exit(EXIT_SUCCESS);
 			}
-			wait(NULL);
+			wait(&g_exit_status);
+			if (WIFEXITED(g_exit_status))
+				g_exit_status = WEXITSTATUS(g_exit_status);
 		}
 		else
 		{
 			if (fork() == 0)
 				exec_cmd(statement_list, envp, &envp_vec);
-			wait(NULL);
+			wait(&g_exit_status);
+			if (WIFEXITED(g_exit_status))
+				g_exit_status = WEXITSTATUS(g_exit_status);
 		}
 		lstclear(&statement_list);
 	}
 	return (EXIT_SUCCESS);
 }
 
-// WEXITSTATUS(returnValue);
+// FALTA EXIT CODE DE 1, cat ficheiro_que_nao_existe.txt retorna 1, deve dar para conseguir esse numero atraves do errno do execve

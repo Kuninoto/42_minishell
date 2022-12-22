@@ -6,7 +6,7 @@
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/21 17:18:16 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/22 19:52:22 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,14 @@ size_t	get_nr_statements(char **splitted)
 
 char *is_var(char *splitted, t_vector *var_vec, t_vector *envp_vec)
 {
-	char	*dollar;
+	bool	dollar;
 	char	*var;
 
-	dollar = ft_strchr(splitted, '$');
-	if (!dollar || splitted[1] == '?')
+	dollar = ft_strchr(splitted, '$') != NULL;
+	if (!dollar)
 		return (splitted);
+	if (dollar && splitted[1] == '?')
+		return (ft_itoa(g_exit_status));
 	var = getenv(++splitted);
 	if (var == NULL)
 		var = is_onvec(splitted, envp_vec);
