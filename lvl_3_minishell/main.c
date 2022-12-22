@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 19:57:39 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/22 23:44:54 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	dismiss_signal(int signum)
 {
 	if (signum == SIGINT)
-		write(STDOUT_FILENO, "\n$ ", 3);
+	{
+		rl_replace_line("", 1);
+		write(STDIN_FILENO, "\n$ ", 3);
+	}
 }
 
 void	config_signals(void)
@@ -66,6 +69,8 @@ char	**set_envs(char ***envp, char *var)
 	free(*envp);
 	return (temp);
 }
+
+//TODO handle "", parsing should recognize that the text between dquotes is only 1 argument and trim them
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -148,5 +153,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (EXIT_SUCCESS);
 }
-
-// FALTA EXIT CODE DE 1, cat ficheiro_que_nao_existe.txt retorna 1, deve dar para conseguir esse numero atraves do errno do execve

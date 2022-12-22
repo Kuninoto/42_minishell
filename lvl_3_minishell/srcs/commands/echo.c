@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/20 20:24:04 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/22 23:36:12 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ void	cmd_echo(t_statement *statement)
 			return ;
 		i = 2;
 	}
-		printf("tumae\n");
 	while (i != statement->argc)
 	{
 		if (has_quotes(statement->argv[i]))
 		{
 			line = ft_strtrim(statement->argv[i], "\"'");
+			printf("tumae\n");
 			ft_putstr_fd(line, STDOUT_FILENO);
 		}
 		else
