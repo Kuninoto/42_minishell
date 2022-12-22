@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   executables.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 23:29:50 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 16:01:37 by roramos          ###   ########.fr       */
+/*   Created: 2022/12/21 15:02:09 by roramos           #+#    #+#             */
+/*   Updated: 2022/12/22 15:15:59 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	cmd_env(char **envp, t_vector *envp_vec)
+void	exec_executables(t_statement *node, char **envp, t_vector *envp_vec)
 {
-	int	i;
-
-	i = -1;
-	while (envp[++i])
-		printf("%s\n", envp[i]);
-	i = -1;
-	while (envp_vec->storage[++i])
-		printf("%s\n", envp_vec->storage[i]);		
+	if (cmd_check(node, envp, envp_vec))
+			return ;
+	cmd_binaries(node, envp);
+	exit(EXIT_SUCCESS);
 }

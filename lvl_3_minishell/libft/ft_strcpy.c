@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 23:29:50 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 16:01:37 by roramos          ###   ########.fr       */
+/*   Created: 2022/12/22 15:54:35 by roramos           #+#    #+#             */
+/*   Updated: 2022/12/22 15:57:00 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-void	cmd_env(char **envp, t_vector *envp_vec)
+char	*ft_strcpy(char *to_copy)
 {
-	int	i;
+	char		*copy;
+	size_t		i;
 
-	i = -1;
-	while (envp[++i])
-		printf("%s\n", envp[i]);
-	i = -1;
-	while (envp_vec->storage[++i])
-		printf("%s\n", envp_vec->storage[i]);		
+	copy = malloc((ft_strlen(to_copy) + 1) * sizeof(char));
+	i = 0;
+	while (to_copy[i])
+	{
+		copy[i] = to_copy[i];
+		i++;
+	}
+	copy[i] = '\0';
+	return (copy);
 }
