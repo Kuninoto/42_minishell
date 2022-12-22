@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 22:24:21 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:58:02 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,5 +113,7 @@ void		panic(char *error_msg);
 void		free_matrix(char **matrix);
 // Checks if both strings passed as parameters are absolutely equal
 bool		streq(char *str1, char *str2);
+// Return a literal copy of to_copy (useful when you want to free to_copy)
+char		*ft_strcpy(char *to_copy);
 
 #endif

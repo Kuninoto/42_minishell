@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
+#    By: roramos <roramos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/22 19:35:50 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/14 22:23:57 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2022/12/22 15:58:13 by roramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ LIB_SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_s
 		   free_matrix.c\
 		   panic.c\
 		   streq.c\
+		   ft_strcpy.c\
 		   
 LIB_OBJS =  $(LIB_SRCS:.c=.o)
 

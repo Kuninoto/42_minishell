@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:12:43 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/20 18:29:43 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/22 18:50:31 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	*vec_pop(t_vector *vector)
 
 	instruction = vector->storage[vector->count - 1];
 	free(vector->storage[vector->count - 1]);
+	vector->storage[vector->count - 1] = NULL;
 	vector->count--;
 	return (instruction);
 }
@@ -60,18 +61,45 @@ void	free_vec(t_vector *vector)
 	free(vector->storage);
 }
 
+void	vec_pop_at(char *user_var, t_vector *vector)
+{
+	size_t	i;
+
+	if (vector->count != 1)
+	{
+		i = 0;
+		while (i < vector->count && !ft_strncmp(vector->storage[i], user_var, 
+			ft_strlen(vector->storage[i])))
+		{
+			printf("%s\n", vector->storage[i]);
+			i++;
+		}
+		while (i < vector->count + 1)
+		{
+			vector->storage[i] = vector->storage[i + 1];
+			i++;
+		}
+	}
+	vec_pop(vector);
+}
+
 char	*is_onvec(char *user_var, t_vector *vector)
 {
 	size_t	i;
 	char	**splitted;
+	char	*var;
 
 	i = 0;
 	while (i < vector->count)
 	{
 		splitted = ft_split(vector->storage[i], '=');
 		if (streq(splitted[0], user_var))
-			return (splitted[1]);
-		free(splitted);
+		{
+			var = ft_strcpy(splitted[1]);
+			free_matrix(splitted);
+			return (var);
+		}
+		free_matrix(splitted);
 		i++;
 	}
 	return (NULL);
