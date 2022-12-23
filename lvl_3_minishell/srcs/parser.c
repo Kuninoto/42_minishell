@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/23 15:15:39 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/23 17:34:01 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,29 @@ char *is_var(char *splitted, t_vector *var_vec, t_vector *envp_vec)
 	return (ft_strcpy( var));
 }
 
+bool	has_quotes(char *line)
+{
+	int		dquotes;
+	int		quotes;
+	size_t	i;
+	
+	dquotes = 0;
+	quotes = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\"')
+			dquotes++;
+		else if (line[i] == '\'')
+			quotes++;
+		i++;
+	}
+	if (dquotes == 2 || quotes == 2)
+		return (true);
+	else
+		return (false);
+}
+
 t_statement	*parse_input(char *input, t_vector *var_vec, t_vector *envp_vec)
 {
 	char		**splitted;
@@ -87,7 +110,10 @@ t_statement	*parse_input(char *input, t_vector *var_vec, t_vector *envp_vec)
 	{
 		j = 0;
 		while (splitted[i] && !ft_strchr(OPERATORS, splitted[i][0]))
+		{
+			if ()
 			temp->argv[j++] = is_var(splitted[i++], var_vec, envp_vec);
+		}
 		temp->argv[j] = NULL;
 		if (!splitted[i])
 			break ;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 23:36:12 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/23 17:32:12 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-bool	has_quotes(char *line)
+bool	has_quotesv2(char *line)
 {
 	if (ft_strchr(line, '\"') || ft_strchr(line, '\''))
 		return (true);
@@ -39,7 +39,7 @@ void	cmd_echo(t_statement *statement)
 	}
 	while (i != statement->argc)
 	{
-		if (has_quotes(statement->argv[i]))
+		if (has_quotesv2(statement->argv[i]))
 		{
 			line = ft_strtrim(statement->argv[i], "\"'");
 			printf("tumae\n");
