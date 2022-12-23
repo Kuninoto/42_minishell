@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/23 17:20:35 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/23 20:23:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,9 @@ char	**set_envs(char ***envp, char *var)
 	return (temp);
 }
 
-//TODO handle "", parsing should recognize that the text between dquotes is only 1 argument and trim them
+//TODO 
+//		handle "", parsing should recognize that the text between dquotes is only 1 argument and trim them
+//		exit with 1 paramater
 
 int	main(int argc, char **argv, char **envp)
 {
