@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 23:44:54 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/23 15:05:55 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	main(int argc, char **argv, char **envp)
 	t_vector	var_vec;
 	t_vector	envp_vec; //exported vars
 	char		*input;
+	char		*raw_input;
 	t_statement	*statement_list;
 
 	(void)argc;
@@ -87,7 +88,9 @@ int	main(int argc, char **argv, char **envp)
 	welcome_art();
 	while (1)
 	{
-		input = readline("$ ");
+		raw_input = readline("$ ");
+		input = ft_strtrim(raw_input, " \t");
+		free(raw_input);
 		// CTRL+D
 		if (input == NULL)
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 22:40:39 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/23 15:15:39 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char *is_var(char *splitted, t_vector *var_vec, t_vector *envp_vec)
 		var = is_onvec(splitted, envp_vec);
 	if (var == NULL)
 		var = is_onvec(splitted, var_vec);
-	return (join_freev2("", var));
+	return (ft_strcpy( var));
 }
 
 t_statement	*parse_input(char *input, t_vector *var_vec, t_vector *envp_vec)
