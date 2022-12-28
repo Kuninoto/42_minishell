@@ -6,7 +6,7 @@
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 19:43:02 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/28 20:01:53 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void		welcome_art(void);
 /* Returns true if it has sucessfully executed an
 implemented command or printed an env variable*/
 bool			cmd_check(t_statement *statement, char **envp, t_vector *envp_vec);
+bool			cmd_check_singles(t_statement *statement, t_vector *envp_vec, t_vector *var_vec);
 /* Returns true if it has sucessfully 
 executed a binary from /usr/bin */
 void			cmd_binaries(t_statement *statement, char **envp);
@@ -105,7 +106,7 @@ void		exec_redirects(t_statement *node, char **envp, t_vector *envp_vec);
 
 // VECTOR ---------------------------------------
 
-t_statement	*parse_input(char *input, t_vector *var_vec, t_vector *envp_vec);
+t_statement	*parse_input(char *input, t_vector *var_vec, t_vector *envp_vec, int g_exit_status);
 
 // VECTOR UTILS ---------------------------------
 
@@ -134,6 +135,6 @@ void	vec_pop_at(char *user_var, t_vector *vector);
 // Saves user defined environment variables
 void	save_user_vars(char *user_var, t_vector *var_vec);
 
-int			g_exit_status;
+
 
 #endif
