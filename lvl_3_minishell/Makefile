@@ -6,7 +6,7 @@
 #    By: roramos <roramos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/22 19:06:47 by roramos          ###   ########.fr        #
+#    Updated: 2022/12/28 19:58:26 by roramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ RM = rm -rf
 NAME = minishell
 SRCS =  srcs/commands/binaries.c\
 		srcs/commands/cd.c\
-		srcs/commands/check.c\
+		srcs/commands/checks.c\
 		srcs/commands/echo.c\
 		srcs/commands/env.c\
 		srcs/commands/export.c\

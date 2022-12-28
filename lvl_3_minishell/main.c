@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/23 20:23:33 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/28 20:09:59 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
+int			g_exit_status = 0;
+
 
 void	dismiss_signal(int signum)
 {
 	if (signum == SIGINT)
 	{
 		rl_replace_line("", 1);
-		write(STDIN_FILENO, "\n$ ", 3);
+			write(STDIN_FILENO, "\n$ ", 3);
 	}
 }
 
@@ -78,12 +80,14 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_vector	var_vec;
 	t_vector	envp_vec; //exported vars
+	int			g_exit_status;
 	char		*raw_input;
 	char		*input;
 	t_statement	*statement_list;
 
 	(void)argc;
 	(void)argv;
+	g_exit_status = 0;
 	var_vec = vec_new();
 	envp_vec = vec_new();
 	config_signals();
@@ -110,50 +114,22 @@ int	main(int argc, char **argv, char **envp)
 			free_vec(&var_vec);
 			exit(EXIT_SUCCESS);
 		}
-		statement_list = parse_input(input, &var_vec, &envp_vec);
-		free(input);
-
-/* 		for (t_statement *temp = statement_list; temp != NULL; temp = temp->next)
-		{
-			printf("ARGC: %d\n", temp->argc);
-			printf("ARGV: ");
-			for (size_t i = 0; temp->argv[i] != NULL; i++)
-				printf("%s ", temp->argv[i]);
-			printf("\nOPERATOR: %d\n", temp->operator);
-			printf("\n");
-		}
-		printf("\n"); */
-		
+		statement_list = parse_input(input, &var_vec, &envp_vec, g_exit_status);
+		free(input);		
 		if (lstsize(statement_list) == 1)
 		{
-			if (streq(statement_list->argv[0], "unset"))
-			{
-				if (is_onvec(statement_list->argv[1], &envp_vec))
-					vec_pop_at(statement_list->argv[1], &envp_vec);
-			}
-			else if (streq(statement_list->argv[0], "export"))
-				cmd_export(&envp_vec, &var_vec, statement_list->argv[1]);
-			else if (streq(statement_list->argv[0], "cd"))
-				cmd_cd(statement_list->argv[1]);
-			else if (ft_strchr(statement_list->argv[0], '='))
-				save_user_vars(statement_list->argv[0], &var_vec);
-			else if (fork() == 0)
+			if (!cmd_check_singles(statement_list, &envp_vec, &var_vec) && fork() == 0)
 			{
 				exec_cmd(statement_list, envp, &envp_vec);
 				exit(EXIT_SUCCESS);
 			}
-			wait(&g_exit_status);
-			if (WIFEXITED(g_exit_status))
-				g_exit_status = WEXITSTATUS(g_exit_status);
 		}
 		else
-		{
 			if (fork() == 0)
-				exec_cmd(statement_list, envp, &envp_vec);
-			wait(&g_exit_status);
-			if (WIFEXITED(g_exit_status))
-				g_exit_status = WEXITSTATUS(g_exit_status);
-		}
+				exec_cmd(statement_list , envp, &envp_vec);
+		wait(&g_exit_status);
+		if (WIFEXITED(g_exit_status))
+			g_exit_status = WEXITSTATUS(g_exit_status);
 		lstclear(&statement_list);
 	}
 	return (EXIT_SUCCESS);
