@@ -6,7 +6,7 @@
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:03:10 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/22 18:06:01 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/29 17:48:12 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	cmd_export(t_vector *envp_vec, t_vector *var_vec, char *var_name)
 {
 	char	*var_value;
 	char	**splitted;
-	
+
 	splitted = ft_split(var_name, '=');
 	var_value = is_onvec(splitted[0], envp_vec);
 	if (var_value)

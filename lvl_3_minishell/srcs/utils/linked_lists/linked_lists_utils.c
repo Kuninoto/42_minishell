@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_lists_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 17:23:01 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/14 23:47:56 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:34:46 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ size_t	lstsize(t_statement *head)
 
 t_statement	*new_node(int argc)
 {
-	t_statement *new_node;
+	t_statement	*new_node;
 
 	new_node = malloc(sizeof(t_statement));
 	new_node->argc = argc;

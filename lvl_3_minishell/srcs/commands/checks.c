@@ -6,7 +6,7 @@
 /*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 21:53:21 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/28 20:04:12 by roramos          ###   ########.fr       */
+/*   Updated: 2022/12/29 17:49:38 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ bool	cmd_check(t_statement *statement, char **envp, t_vector *envp_vec)
 	return (true);
 }
 
-bool	cmd_check_singles(t_statement *statement, t_vector *envp_vec, t_vector *var_vec)
+bool	cmd_check_singles(t_statement *statement,
+	t_vector *envp_vec, t_vector *var_vec)
 {
 	if (streq(statement->argv[0], "unset"))
 	{

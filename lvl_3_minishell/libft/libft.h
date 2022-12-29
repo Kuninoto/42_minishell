@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/22 22:17:16 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:03:14 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,6 @@ bool		streq(char *str1, char *str2);
 // Return a literal copy of to_copy (useful when you want to free to_copy)
 char		*ft_strcpy(char *to_copy);
 // Returns true if str is only composed by white spaces
-bool	only_isspaces(const char *str);
+bool		only_isspaces(const char *str);
 
 #endif
