@@ -6,7 +6,7 @@
 #    By: roramos <roramos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/28 19:58:26 by roramos          ###   ########.fr        #
+#    Updated: 2022/12/29 17:34:21 by roramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS =  srcs/commands/binaries.c\
 		srcs/commands/checks.c\
 		srcs/commands/echo.c\
 		srcs/commands/env.c\
+		srcs/commands/exit.c\
 		srcs/commands/export.c\
 		srcs/commands/pwd.c\
 		srcs/commands/save_user_vars.c\
@@ -29,9 +30,11 @@ SRCS =  srcs/commands/binaries.c\
 		srcs/executes/pipe.c\
 		srcs/executes/redirects.c\
 		srcs/utils/linked_lists/linked_lists_utils.c\
+		srcs/utils/vector/vector_actions.c\
 		srcs/utils/vector/vector_utils.c\
 	   	srcs/utils/welcome_art.c\
 	   	srcs/parser.c\
+	   	srcs/config_signals.c\
 	   	main.c
 		
 OBJS = $(SRCS:.c=.o)

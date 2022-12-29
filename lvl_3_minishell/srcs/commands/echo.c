@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/23 17:32:12 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:19:32 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,49 @@ bool	has_quotesv2(char *line)
 		return (false);
 }
 
+void	print(t_statement *statement, int i)
+{
+	int		j;
+	char	*line;
+
+	if (has_quotesv2(statement->argv[i]))
+	{
+		line = ft_strtrim(statement->argv[i], "\"'");
+		ft_putstr_fd(line, STDOUT_FILENO);
+	}
+	else
+	{
+		line = statement->argv[i];
+		j = -1;
+		while (line[++j])
+		{
+			if (line[j] == '\\')
+				continue ;
+			ft_putchar_fd(line[j], STDOUT_FILENO);
+		}
+	}
+	free(line);
+}
+
 void	cmd_echo(t_statement *statement)
 {
 	bool	has_n;
 	int		i;
-	int		j;
-	char	*line;
 
-	// echo with no message
 	has_n = streq(statement->argv[1], "-n");
-	i = 1;
+	i = 0;
 	if (has_n)
 	{
-		// echo -n with no message
 		if (!statement->argv[2])
 			return ;
-		i = 2;
+		i = 1;
 	}
-	while (i != statement->argc)
+	while (++i != statement->argc)
 	{
-		if (has_quotesv2(statement->argv[i]))
-		{
-			line = ft_strtrim(statement->argv[i], "\"'");
-			printf("tumae\n");
-			ft_putstr_fd(line, STDOUT_FILENO);
-		}
-		else
-		{
-			line = statement->argv[i];
-			j = -1;
-			while (line[++j])
-			{
-				if (line[j] == '\\')
-					continue ;
-				ft_putchar_fd(line[j], STDOUT_FILENO);
-			}
-		}
+		print(statement, i);
 		if (statement->argv[i + 1])
 			write(STDOUT_FILENO, " ", 1);
-		i++;
-		free(line);
 	}
 	if (!has_n)
-	{
 		write(STDOUT_FILENO, "\n", 2);
-	}
 }
