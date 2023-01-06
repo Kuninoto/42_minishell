@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/29 17:55:24 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/06 20:19:59 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include <sys/wait.h>
 # include <errno.h>
 
-// CONSTANTS
+/* CONSTANTS */
+
 # define OPERATORS "|<>&()"
 
 /* typedef enum s_token {
@@ -66,21 +67,22 @@ typedef struct s_statement {
 	struct s_statement	*next;
 }				t_statement;
 
-// VECTOR ---------------------------------------
-
+/* Vector data structure */
 typedef struct s_vector {
 	size_t	count;
 	size_t	capacity;
 	char	**storage;
 }				t_vector;
 
-// Prints the minishell gradient ASCII art
+/* Prints Minishell gradient ASCII art */
 void		welcome_art(void);
 
 // COMMANDS
 /* Returns true if it has sucessfully executed an
-implemented command or printed an env variable*/
+implemented command or printed an env variable */
 bool		cmd_check(t_statement *statement, char **envp, t_vector *envp_vec);
+/* Returns true if it has sucessfully executed an
+implemented command that doesn't need a fork */
 bool		cmd_check_singles(t_statement *statement,
 				t_vector *envp_vec, t_vector *var_vec);
 /* Returns true if it has sucessfully 
@@ -108,7 +110,7 @@ t_statement	*new_node(int argc);
 /* Returns the size of the linked list 
 which head is passed as a parameter */
 size_t		lstsize(t_statement *head);
-// Frees the linked list which head is passed as parameter
+/* Frees the linked list which head is passed as parameter */
 void		lstclear(t_statement **head);
 
 void		config_signals(void);
@@ -124,14 +126,12 @@ void		exec_pipe(t_statement *node, char **envp,
 void		exec_redirects(t_statement *node, char **envp,
 				t_vector *envp_vec);
 
-// VECTOR ---------------------------------------
-
 t_statement	*parse_input(char *input, t_vector *var_vec,
 				t_vector *envp_vec, int g_exit_status);
 
 // VECTOR UTILS ---------------------------------
 
-// Returns an empty vector with the capacity of 1
+/* Returns an empty vector with the capacity of 1 */
 static inline t_vector	vec_new(void)
 {
 	return ((t_vector){
@@ -141,13 +141,13 @@ static inline t_vector	vec_new(void)
 	});
 }
 
-// Push an env variable to the vector
+/* Push an env variable to the vector */
 void		vec_push(t_vector *vector, char	*env_variable);
-// Pop an env varible from the vector
+/* Pop an env varible from the vector */
 char		*vec_pop(t_vector *vector);
-// Doubles vector storage capacity
+/* Doubles vector storage capacity */
 void		vec_realloc(t_vector *vector);
-// Frees vector and all its inside fields
+/* Frees all vector's intern fields */
 void		free_vec(t_vector *vector);
 // Checks if user_var is on vector
 char		*is_onvec(char *user_var, t_vector *vector);

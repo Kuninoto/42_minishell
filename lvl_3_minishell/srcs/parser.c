@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/28 19:41:27 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/06 20:10:24 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+#define debug_args for (int i = 0; i < head->argc; i += 1) \
+						printf("%s -> ", head->argv[i]); \
+				   printf("\n")
 
 t_operator	get_operator(char *operator)
 {
@@ -47,8 +51,8 @@ size_t	get_nr_statements(char **splitted)
 	counter = 0;
 	while (splitted[i] && !ft_strchr(OPERATORS, splitted[i][0]))
 	{
-		counter++;
-		i++;
+		counter += 1;
+		i += 1;
 	}
 	return (counter);
 }
@@ -68,7 +72,7 @@ char *is_var(char *splitted, t_vector *var_vec, t_vector *envp_vec, int g_exit_s
 		var = is_onvec(splitted, envp_vec);
 	if (var == NULL)
 		var = is_onvec(splitted, var_vec);
-	return (ft_strcpy( var));
+	return (ft_strcpy(var));
 }
 
 bool	has_quotes(char *line)
@@ -83,10 +87,10 @@ bool	has_quotes(char *line)
 	while (line[i])
 	{
 		if (line[i] == '\"')
-			dquotes++;
+			dquotes += 1;
 		else if (line[i] == '\'')
-			quotes++;
-		i++;
+			quotes += 1;
+		i += 1;
 	}
 	if (dquotes == 2 || quotes == 2)
 		return (true);
@@ -120,6 +124,8 @@ t_statement	*parse_input(char *input, t_vector *var_vec, t_vector *envp_vec, int
 	}
 	temp->next = NULL;
 	free(splitted);
+	free(input);
+//	debug_args;
 	return (head);
 }
 
