@@ -1,6 +1,6 @@
 # minishell (42Porto - 42Cursus) <img src="https://github.com/devicons/devicon/blob/master/icons/linux/linux-original.svg" title="Linux" alt="Linux Logo" width="50" height="60" align="right" />&nbsp; <img src="https://github.com/devicons/devicon/blob/master/icons/c/c-original.svg" title="C" alt="C Logo" width="55" height="55" align="right" />&nbsp;  
 
-##### Project done in collaboration with [ramos21rodrigo](https://github.com/ramos21rodrigo)
+#### Project done in collaboration with [ramos21rodrigo](https://github.com/ramos21rodrigo)
 
 ## Grade: ?/100
 
@@ -8,15 +8,10 @@
 
 ### Installing and running the project:
 
-###  Subject:
-[minishell en_subject](./extras/en.subject_minishell.pdf)
+###  Subject: [minishell en_subject](./extras/en.subject_minishell.pdf)
 
 #### Makefile Available Targets:  
 
-### Useful links:  
-
-## Disclaimer
-> At [42School](https://en.wikipedia.org/wiki/42_(school)), almost every project must be written in accordance to the [Norm](./extras/en_norm.pdf), the schools' coding standard. As a result, the implementation of certain parts may appear strange and for sure had room for improvement.
 
 ## Useful links
 Understanding Bash/Shell behavior:
@@ -53,6 +48,8 @@ AST:
 - https://stackoverflow.com/questions/1721553/how-to-construct-an-abstract-syntax-tree
 - https://www.twilio.com/blog/abstract-syntax-trees
 
+## Disclaimer
+> At [42School](https://en.wikipedia.org/wiki/42_(school)), almost every project must be written in accordance to the [Norm](./extras/en_norm.pdf), the schools' coding standard. As a result, the implementation of certain parts may appear strange and for sure had room for improvement.
 
 ---
 Made by Nuno Carvalho (Kuninoto) | nnuno-ca@student.42porto.com  
