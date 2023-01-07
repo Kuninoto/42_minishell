@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roramos <roramos@student.42.fr>            +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2022/12/29 17:34:21 by roramos          ###   ########.fr        #
+#    Updated: 2023/01/07 15:08:31 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-LIBFT = ./libft/libft.a
 RM = rm -rf
+LIBFT = ./libft/libft.a
 
 NAME = minishell
 SRCS =  srcs/commands/binaries.c\

@@ -3,19 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/06 21:22:47 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/07 21:04:12 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
 /*	TODO 
-handle "", parsing should recognize that the text between
+* handle "", parsing should recognize that the text between
 	dquotes is only 1 argument and trim them
-exit with 1 paramater*/
+* exit with 1 paramater
+* search for the binary in all the PATH env variable, not only on /usr/bin
+	char	**get_paths(char **envp)
+	{
+		size_t	i;
+
+		i = 0;
+		while (ft_strncmp("PATH", envp[i], 4) != 0)
+			i += 1;
+		return (ft_split(envp[i], ':'));
+	}
+
+	char	*get_bin_path(char *cmd, char **paths)
+	{
+		size_t	i;
+		char	*tmp;
+		char	*bin_path;
+
+		i = 0;
+		while (paths[i])
+		{
+			tmp = ft_strjoin(paths[i], "/");
+			bin_path = join_free(tmp, cmd);
+			if (access(bin_path, F_OK) == 0)
+				return (bin_path);
+			free(bin_path);
+			i += 1;
+		}
+		return (bin_path);
+	}
+
+*/
 char	*get_input(void)
 {
 	char	*raw_input;
