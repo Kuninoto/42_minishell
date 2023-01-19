@@ -15,38 +15,38 @@
 
 ## Useful links
 Understanding Bash/Shell behavior:
-- https://indradhanush.github.io/blog/writing-a-unix-shell-part-1/
-- https://indradhanush.github.io/blog/writing-a-unix-shell-part-2/
-- https://indradhanush.github.io/blog/writing-a-unix-shell-part-3/
-- https://www.gnu.org/software/bash/manual/html_node/Redirections.html
-- https://www.youtube.com/watch?v=ubt-UjcQUYg
-- https://www.youtube.com/watch?v=ZjzMdsTWF0U
-- https://www.youtube.com/watch?v=k6TTj4C0LF0
-- https://www.tutorialspoint.com/unix_system_calls/execve.htm
-- https://www.geeksforgeeks.org/signals-and-traps-in-unix/
-- https://www.tutorialspoint.com/unix/unix-signals-traps.htm
-- https://unix.stackexchange.com/questions/362559/list-of-terminal-generated-signals-eg-ctrl-c-sigint#362566
-- https://www.computerhope.com/jargon/r/relapath.htm
-- https://www.techopedia.com/definition/5817/absolute-path
-- https://www.ibm.com/docs/en/informix-servers/12.10?topic=products-term-environment-variable-unix
-- https://kinsta.com/knowledgebase/what-is-an-environment-variable/
-- https://linuxconfig.org/term-environment-variable-not-set-solution
-- https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf
-- http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/index.html
-- https://www.rozmichelle.com/pipes-forks-dups/
-- https://velog.io/@sham/minishell%EA%B3%BC-readline
-- https://github.com/Swoorup/mysh
+- https://indradhanush.github.io/blog/writing-a-unix-shell-part-1/  
+- https://indradhanush.github.io/blog/writing-a-unix-shell-part-2/  
+- https://indradhanush.github.io/blog/writing-a-unix-shell-part-3/  
+- https://www.gnu.org/software/bash/manual/html_node/Redirections.html  
+- https://www.youtube.com/watch?v=ubt-UjcQUYg  
+- https://www.youtube.com/watch?v=ZjzMdsTWF0U  
+- https://www.youtube.com/watch?v=k6TTj4C0LF0  
+- https://www.tutorialspoint.com/unix_system_calls/execve.htm  
+- https://www.geeksforgeeks.org/signals-and-traps-in-unix/  
+- https://www.tutorialspoint.com/unix/unix-signals-traps.htm  
+- https://unix.stackexchange.com/questions/362559/list-of-terminal-generated-signals-eg-ctrl-c-sigint#362566  
+- https://www.computerhope.com/jargon/r/relapath.htm  
+- https://www.techopedia.com/definition/5817/absolute-path  
+- https://www.ibm.com/docs/en/informix-servers/12.10?topic=products-term-environment-variable-unix  
+- https://kinsta.com/knowledgebase/what-is-an-environment-variable/  
+- https://linuxconfig.org/term-environment-variable-not-set-solution  
+- https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf  
+- http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/index.html  
+- https://www.rozmichelle.com/pipes-forks-dups/  
+- https://velog.io/@sham/minishell%EA%B3%BC-readline  
+- https://github.com/Swoorup/mysh  
 Parsing:
-- https://youtu.be/bxpc9Pp5pZM
-- https://youtu.be/r6vNthpQtSI
-- https://www.youtube.com/watch?v=dDtZLm7HIJs
-- https://www.youtube.com/watch?v=SToUyjAsaFk
-- https://github.com/mit-pdos/xv6-public/blob/master/sh.c
-- https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html
+- https://youtu.be/bxpc9Pp5pZM  
+- https://youtu.be/r6vNthpQtSI  
+- https://www.youtube.com/watch?v=dDtZLm7HIJs  
+- https://www.youtube.com/watch?v=SToUyjAsaFk  
+- https://github.com/mit-pdos/xv6-public/blob/master/sh.c  
+- https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html  
 AST:
-- https://en.wikipedia.org/wiki/Abstract_syntax_tree
-- https://stackoverflow.com/questions/1721553/how-to-construct-an-abstract-syntax-tree
-- https://www.twilio.com/blog/abstract-syntax-trees
+- https://en.wikipedia.org/wiki/Abstract_syntax_tree  
+- https://stackoverflow.com/questions/1721553/how-to-construct-an-abstract-syntax-tree  
+- https://www.twilio.com/blog/abstract-syntax-trees  
 
 ## Disclaimer
 > At [42School](https://en.wikipedia.org/wiki/42_(school)), almost every project must be written in accordance to the [Norm](./extras/en_norm.pdf), the schools' coding standard. As a result, the implementation of certain parts may appear strange and for sure had room for improvement.
