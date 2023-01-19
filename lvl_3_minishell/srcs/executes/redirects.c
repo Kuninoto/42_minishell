@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/29 17:41:06 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/19 15:38:01 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	redirect_output(t_statement *node)
 		open (node->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0777);
 }
 
-void	exec_redirects(t_statement *node, char **envp, t_vector *envp_vec)
+void	exec_redirects(t_statement *node, t_data *data)
 {
 	if (node->operator == RDR_INPUT)
 	{
@@ -52,5 +52,5 @@ void	exec_redirects(t_statement *node, char **envp, t_vector *envp_vec)
 	else
 		redirect_output(node);
 	node->operator = NONE;
-	exec_cmd(node, envp, envp_vec);
+	exec_cmd(node, data);
 }

@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_user_vars.c                                   :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 17:33:28 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/29 17:47:45 by roramos          ###   ########.fr       */
+/*   Created: 2023/01/19 15:09:59 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2023/01/19 15:12:39 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	save_user_vars(char *user_var, t_vector *var_vec)
+void	destroy(t_data *data)
 {
-	char	*trimmed;
-
-	trimmed = ft_strtrim(user_var, " ");
-	vec_push(var_vec, trimmed);
+	rl_clear_history();
+	free_matrix(data->paths);
+	free_vec(&data->var_vec);
+	free_vec(&data->envp_vec);
 }
