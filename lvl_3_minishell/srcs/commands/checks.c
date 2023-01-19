@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 21:53:21 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/19 18:31:54 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:17:04 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ bool	builtin(t_statement *statement, t_data *data)
 		cmd_pwd();
 	else if (streq(statement->argv[0], "env"))
 		cmd_env(data);
+	/* Must check for valid */
+	else if (streq(statement->argv[0], "exit"))
+		cmd_exit(&statement, ft_atoi(statement->argv[1]), data);
 	else
 		return (false);
 	return (true);

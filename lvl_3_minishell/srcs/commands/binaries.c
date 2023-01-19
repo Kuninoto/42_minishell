@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/19 18:34:53 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:00:10 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 			g_exit_status = 127;
 			exit(127);
 		}
+		g_exit_status = EXIT_SUCCESS;
 	}
 	else
 	{	
@@ -59,6 +60,7 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 			g_exit_status = 127;
 			exit(127);
 		}
+		g_exit_status = EXIT_SUCCESS;
 		free(binary_path);
 	}
 }

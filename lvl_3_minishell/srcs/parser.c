@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/19 15:18:11 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:07:02 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ char *is_var(char *splitted, t_data *data, int g_exit_status)
 	if (!dollar)
 		return (splitted);
 	if (dollar && splitted[1] == '?')
+	{
+		printf("exit_status = %d\n", g_exit_status);
 		return (ft_itoa(g_exit_status));
+	}
 	var = getenv(++splitted);
 	if (var == NULL)
 		var = is_onvec(splitted, &data->envp_vec);
@@ -125,7 +128,7 @@ t_statement	*parse_input(char *input, t_data *data, int g_exit_status)
 	temp->next = NULL;
 	free(splitted);
 	free(input);
-//	debug_args;
+	debug_args;
 	return (head);
 }
 

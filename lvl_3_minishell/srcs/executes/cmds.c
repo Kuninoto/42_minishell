@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/19 18:38:49 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:06:03 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ void	exec_type(t_statement *statement_list, t_data *data)
 {
 	if (lstsize(statement_list) == 1)
 	{
-		if (ft_strncmp(statement_list->argv[0], "exit", 4) == 0)
+		if (streq("exit", statement_list->argv[1]))
 		{
+			printf("tumae = %s\n", statement_list->argv[1]);
 			if (is_all_digits(statement_list->argv[1]))
 				cmd_exit(&statement_list, ft_atoi(statement_list->argv[1]), data);
 			else
