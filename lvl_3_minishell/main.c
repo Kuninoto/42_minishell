@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/19 18:30:08 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:10:04 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,8 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		input = get_input();
-		if (input == NULL || ft_strncmp(input, "exit", 4) == 0)
-		{
+		if (input == NULL)
 			free(input);
-			cmd_exit(&statement_list, EXIT_SUCCESS, &data);
-		}
 		if (input[0] == '\0')
 			continue ;
 		add_history(input);

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/19 18:42:52 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 23:12:19 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ typedef struct s_data {
 /* Prints Minishell gradient ASCII art */
 void		welcome_art(void);
 
-// COMMANDS
+/* COMMANDS */
+
 /* Returns true if it has sucessfully executed an
 implemented command or printed an env variable */
 bool		builtin(t_statement *statement, t_data *data);
