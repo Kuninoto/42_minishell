@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/06 20:19:59 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 01:48:51 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,12 @@ void		welcome_art(void);
 /* Returns true if it has sucessfully executed an
 implemented command or printed an env variable */
 bool		cmd_check(t_statement *statement, char **envp, t_vector *envp_vec);
+
 /* Returns true if it has sucessfully executed an
 implemented command that doesn't need a fork */
 bool		cmd_check_singles(t_statement *statement,
 				t_vector *envp_vec, t_vector *var_vec);
+
 /* Returns true if it has sucessfully 
 executed a binary from /usr/bin */
 void		cmd_binaries(t_statement *statement, char **envp);

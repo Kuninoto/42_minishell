@@ -6,12 +6,15 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/22 22:04:25 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 01:50:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+
+/* TO DO: search for binary path on the whole PATH env variable not just on /usr/bin 
+split ':' acess  in every possible path until it finds a possible path */
 void	cmd_binaries(t_statement *statement, char **envp)
 {
 	char	*binary_path;
