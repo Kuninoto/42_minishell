@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executables.c                                      :+:      :+:    :+:   */
+/*   is_all_digits.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 15:02:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/19 18:32:02 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2023/01/19 18:06:31 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2023/01/19 18:16:54 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include <stdbool.h>
 
-void	exec_executables(t_statement *node, t_data *data)
+bool	is_all_digits(char *str)
 {
-	if (builtin(node, data))
-		return ;
-	cmd_binaries(node, data);
-	exit(EXIT_SUCCESS);
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (false);
+		i += 1;
+	}
+	return (true);
 }

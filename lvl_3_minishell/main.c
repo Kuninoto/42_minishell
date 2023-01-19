@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/07 21:04:12 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:30:08 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,10 @@
 * handle "", parsing should recognize that the text between
 	dquotes is only 1 argument and trim them
 * exit with 1 paramater
-* search for the binary in all the PATH env variable, not only on /usr/bin
-	char	**get_paths(char **envp)
-	{
-		size_t	i;
-
-		i = 0;
-		while (ft_strncmp("PATH", envp[i], 4) != 0)
-			i += 1;
-		return (ft_split(envp[i], ':'));
-	}
-
-	char	*get_bin_path(char *cmd, char **paths)
-	{
-		size_t	i;
-		char	*tmp;
-		char	*bin_path;
-
-		i = 0;
-		while (paths[i])
-		{
-			tmp = ft_strjoin(paths[i], "/");
-			bin_path = join_free(tmp, cmd);
-			if (access(bin_path, F_OK) == 0)
-				return (bin_path);
-			free(bin_path);
-			i += 1;
-		}
-		return (bin_path);
-	}
-
 */
+
+int	g_exit_status = 0;
+
 char	*get_input(void)
 {
 	char	*raw_input;
@@ -58,42 +31,51 @@ char	*get_input(void)
 	return (input);
 }
 
-void	setup_shell(int ac, char **av, t_vector *var_vec, t_vector *envp_vec)
+char	**get_paths(char **envp)
+{
+	size_t	i;
+
+	i = 0;
+	while (ft_strncmp("PATH", envp[i], 4) != 0)
+		i += 1;
+	return (ft_split(envp[i], ':'));
+}
+
+void	setup_shell(int ac, char **av, char **envp, t_data *data)
 {
 	(void)ac;
 	(void)av;
-	*var_vec = vec_new();
-	*envp_vec = vec_new();
+	data->envp = envp;
+	data->paths = get_paths(envp);
+	data->var_vec = vec_new();
+	data->envp_vec = vec_new();
 	config_signals();
 	welcome_art();
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int			exit_status;
-	t_vector	var_vec;
-	t_vector	envp_vec;
+	t_data		data;
 	char		*input;
 	t_statement	*statement_list;
 
-	exit_status = 0;
-	setup_shell(argc, argv, &var_vec, &envp_vec);
+	setup_shell(argc, argv, envp, &data);
 	while (1)
 	{
 		input = get_input();
-		if (input == NULL || streq(input, "exit"))
+		if (input == NULL || ft_strncmp(input, "exit", 4) == 0)
 		{
 			free(input);
-			cmd_exit(true, &var_vec, &envp_vec);
+			cmd_exit(&statement_list, EXIT_SUCCESS, &data);
 		}
 		if (input[0] == '\0')
 			continue ;
 		add_history(input);
-		statement_list = parse_input(input, &var_vec, &envp_vec, exit_status);
-		exec_type(statement_list, envp, &envp_vec, &var_vec);
-		wait(&exit_status);
-		if (WIFEXITED(exit_status))
-			exit_status = WEXITSTATUS(exit_status);
+		statement_list = parse_input(input, &data, g_exit_status);
+		exec_type(statement_list, &data);
+		wait(&g_exit_status);
+		if (WIFEXITED(g_exit_status))
+			g_exit_status = WEXITSTATUS(g_exit_status);
 		lstclear(&statement_list);
 	}
 	return (EXIT_SUCCESS);

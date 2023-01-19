@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/19 01:48:51 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 18:42:52 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 
 # define OPERATORS "|<>&()"
 
+/* ERROR MESSAGES */
+# define PIPE_ERR "pipe() failed"
+# define FORK_ERR "fork() failed"
+
 /* typedef enum s_token {
 	NOTHING,
 	COMMAND,
@@ -49,6 +53,7 @@
 	RDR_INPUT_UNTIL, // <<
 	PIPE, // |
 */
+
 typedef enum e_operator {
 	NONE,
 	AND,
@@ -74,22 +79,29 @@ typedef struct s_vector {
 	char	**storage;
 }				t_vector;
 
+typedef struct s_data {
+	char	**envp;
+	char	**paths;
+	t_vector	var_vec;
+	t_vector	envp_vec;
+}				t_data;
+
+
 /* Prints Minishell gradient ASCII art */
 void		welcome_art(void);
 
 // COMMANDS
 /* Returns true if it has sucessfully executed an
 implemented command or printed an env variable */
-bool		cmd_check(t_statement *statement, char **envp, t_vector *envp_vec);
+bool		builtin(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully executed an
 implemented command that doesn't need a fork */
-bool		cmd_check_singles(t_statement *statement,
-				t_vector *envp_vec, t_vector *var_vec);
+bool		cmd_check_singles(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully 
 executed a binary from /usr/bin */
-void		cmd_binaries(t_statement *statement, char **envp);
+void		cmd_binaries(t_statement *statement, t_data *data);
 // Wannabe echo
 void		cmd_echo(t_statement *statement);
 // Wannabe pwd
@@ -97,13 +109,11 @@ void		cmd_pwd(void);
 // Wannabe cd
 void		cmd_cd(char *path);
 // Wannabe env
-void		cmd_env(char **envp, t_vector *envp_vec);
+void		cmd_env(t_data *data);
 // Wannabe export
-void		cmd_export(t_vector *envp_vec, t_vector *var_vec, char *var_name);
+void		cmd_export(t_data *data, char *var_name);
 // Wannabe exit
-void		cmd_exit(bool newline, t_vector *var_vec, t_vector *envp_vec);
-// Expands the environment variable passed as parameter
-void		print_env_variables(char *variable_name);
+void		cmd_exit(t_statement **head, int exit_status, t_data *data);
 
 // Utils
 // LINKED LISTS ---------------------------------
@@ -117,19 +127,13 @@ void		lstclear(t_statement **head);
 
 void		config_signals(void);
 
-void		exec_cmd(t_statement *current_node,
-				char **envp, t_vector *envp_vec);
-void		exec_type(t_statement *statement_list, char **envp,
-				t_vector *envp_vec, t_vector *ver_vec);
-void		exec_executables(t_statement *node, char **envp,
-				t_vector *envp_vec);
-void		exec_pipe(t_statement *node, char **envp,
-				t_vector *envp_vec);
-void		exec_redirects(t_statement *node, char **envp,
-				t_vector *envp_vec);
+void		exec_cmd(t_statement *current_node, t_data *data);
+void		exec_type(t_statement *statement_list, t_data *data);
+void		exec_executables(t_statement *node, t_data *data);
+void		exec_pipe(t_statement *node, t_data *data);
+void		exec_redirects(t_statement *node, t_data *data);
 
-t_statement	*parse_input(char *input, t_vector *var_vec,
-				t_vector *envp_vec, int g_exit_status);
+t_statement	*parse_input(char *input, t_data *data, int g_exit_status);
 
 // VECTOR UTILS ---------------------------------
 
@@ -156,6 +160,14 @@ char		*is_onvec(char *user_var, t_vector *vector);
 // Idk
 void		vec_pop_at(char *user_var, t_vector *vector);
 // Saves user defined environment variables
-void		save_user_vars(char *user_var, t_vector *var_vec);
+static inline void	save_user_vars(char *user_var, t_vector *var_vec)
+{
+	vec_push(var_vec, ft_strtrim(user_var, " "));
+}
+
+
+bool		is_all_digits(char *str);
+
+void		destroy(t_data *data);
 
 #endif

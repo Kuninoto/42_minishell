@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_signals.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:54:55 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/29 17:01:17 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/19 17:56:21 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	dismiss_signal(int signum)
 	if (signum == SIGINT)
 	{
 		rl_replace_line("", 1);
-		write(STDIN_FILENO, "\n$ ", 3);
+		write(STDOUT_FILENO, "\n$ ", 3);
 	}
 }
 

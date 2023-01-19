@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/01/07 15:08:31 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/01/19 18:16:38 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,16 @@ SRCS =  srcs/commands/binaries.c\
 		srcs/commands/exit.c\
 		srcs/commands/export.c\
 		srcs/commands/pwd.c\
-		srcs/commands/save_user_vars.c\
 		srcs/executes/cmds.c\
 		srcs/executes/executables.c\
 		srcs/executes/pipe.c\
 		srcs/executes/redirects.c\
+	   	srcs/utils/welcome_art.c\
 		srcs/utils/linked_lists/linked_lists_utils.c\
 		srcs/utils/vector/vector_actions.c\
 		srcs/utils/vector/vector_utils.c\
-	   	srcs/utils/welcome_art.c\
+		srcs/utils/is_all_digits.c\
+		srcs/utils/destroy.c\
 	   	srcs/parser.c\
 	   	srcs/config_signals.c\
 	   	main.c
