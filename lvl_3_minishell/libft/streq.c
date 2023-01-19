@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   streq.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 22:18:00 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/20 19:32:02 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/19 01:47:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,14 @@ bool	streq(char *str1, char *str2)
 {
 	size_t	i;
 
+	if ((str1 && !str2) || (!str1 && str2))
+		return (false);
 	i = 0;
-	if (str1 && !str2)
-		return (false);
-	if (!str1 && str2)
-		return (false);
 	while (str1[i] || str2[i])
 	{
 		if (str1[i] != str2[i])
 			return (false);
-		i++;
+		i += 1;
 	}
 	return (true);
 }

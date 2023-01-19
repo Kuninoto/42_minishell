@@ -85,7 +85,7 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 #  define BUFFER_SIZE 20
 # endif 
 
-/* Returns a line, ending in newline,
+/* Returns a line, ending in newline if any,
    read from the file descriptor passed as a parameter */
 char		*get_next_line(int fd);
 bool		gnl_strchr(const char *str, int ch);
@@ -106,15 +106,24 @@ int			prt_hexa(unsigned int nbr, bool upper_case);
 char		*join_free(char *to_free, char *to_append);
 // Returns s1+s2, creating a new string, and frees s2
 char		*join_freev2(char *s1, char *s2);
-/* Prints error_msg, followed by a newline, 
-   to STDERR and exits the program on failure */
+/* Prints Error: <error_msg>\n to STDERR 
+and exits the program on failure */
 void		panic(char *error_msg);
-// Frees all elements in the matrix and its pointer
+/* Frees all elements in the matrix and its pointer */
 void		free_matrix(char **matrix);
 // Checks if both strings passed as parameters are absolutely equal
 bool		streq(char *str1, char *str2);
 // Return a literal copy of to_copy (useful when you want to free to_copy)
 char		*ft_strcpy(char *to_copy);
+
+static inline bool	is_spaces(char c)
+{
+	if (c == '\t' || c == '\n' || c == '\v'
+		|| c == '\f' || c == '\r' || c == ' ')
+		return (true);
+	return (false);
+}
+
 // Returns true if str is only composed by white spaces
 bool		only_isspaces(const char *str);
 
