@@ -6,7 +6,7 @@
 #    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/01/19 18:16:38 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/01/20 15:25:11 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIBFT = ./libft/libft.a
 NAME = minishell
 SRCS =  srcs/commands/binaries.c\
 		srcs/commands/cd.c\
-		srcs/commands/checks.c\
+		srcs/commands/builtins.c\
 		srcs/commands/echo.c\
 		srcs/commands/env.c\
 		srcs/commands/exit.c\
@@ -34,8 +34,9 @@ SRCS =  srcs/commands/binaries.c\
 		srcs/utils/vector/vector_utils.c\
 		srcs/utils/is_all_digits.c\
 		srcs/utils/destroy.c\
-	   	srcs/parser.c\
 	   	srcs/config_signals.c\
+		srcs/setup_shell.c\
+	   	srcs/parser.c\
 	   	main.c
 		
 OBJS = $(SRCS:.c=.o)

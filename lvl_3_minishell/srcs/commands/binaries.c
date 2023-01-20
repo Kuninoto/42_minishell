@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/19 23:00:10 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 15:06:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ char	*get_bin_path(char *cmd, char **paths)
 	return (NULL);
 }
 
-/* TO DO: search for binary path on the whole PATH env variable not just on /usr/bin 
-split ':' acess  in every possible path until it finds a possible path */
 void	cmd_binaries(t_statement *statement, t_data *data)
 {
 	char	*binary_path;

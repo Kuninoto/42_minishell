@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/29 17:03:14 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/20 19:28:07 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ static inline bool	is_spaces(char c)
 	return (false);
 }
 
-// Returns true if str is only composed by white spaces
+/* Returns true if str is only composed by white spaces */
 bool		only_isspaces(const char *str);
+
+/* Returns true if str is only composed by digits */
+bool		is_all_digits(char *str);
 
 #endif

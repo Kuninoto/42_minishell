@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:54:55 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/19 17:56:21 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:22:41 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	dismiss_signal(int signum)
 	if (signum == SIGINT)
 	{
 		rl_replace_line("", 1);
-		write(STDOUT_FILENO, "\n$ ", 3);
+		write(STDOUT_FILENO, "\nminishell$ ", 12);
 	}
 }
 
