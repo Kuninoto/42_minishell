@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/19 23:10:04 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:31:32 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,46 +25,28 @@ char	*get_input(void)
 	char	*raw_input;
 	char	*input;
 
-	raw_input = readline("$ ");
+	raw_input = readline("minishell$ ");
 	input = ft_strtrim(raw_input, " \t");
 	free(raw_input);
 	return (input);
 }
 
-char	**get_paths(char **envp)
-{
-	size_t	i;
-
-	i = 0;
-	while (ft_strncmp("PATH", envp[i], 4) != 0)
-		i += 1;
-	return (ft_split(envp[i], ':'));
-}
-
-void	setup_shell(int ac, char **av, char **envp, t_data *data)
-{
-	(void)ac;
-	(void)av;
-	data->envp = envp;
-	data->paths = get_paths(envp);
-	data->var_vec = vec_new();
-	data->envp_vec = vec_new();
-	config_signals();
-	welcome_art();
-}
-
-int	main(int argc, char **argv, char **envp)
+int	main(int ac, char **av, char **envp)
 {
 	t_data		data;
-	char		*input;
 	t_statement	*statement_list;
+	char		*input;
 
-	setup_shell(argc, argv, envp, &data);
+	setup_shell(ac, av, envp, &data, &statement_list);
 	while (1)
 	{
 		input = get_input();
+		// CTRL + D 
 		if (input == NULL)
+		{
 			free(input);
+			cmd_exit(&statement_list, EXIT_SUCCESS, &data);
+		}
 		if (input[0] == '\0')
 			continue ;
 		add_history(input);
@@ -77,9 +59,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (EXIT_SUCCESS);
 }
-
-/* 
-Currently trying to handle exit command with paramaters.
-The only issue is that exit should free all malloced stuff (vectors and list)
-Thinking on creating a structure to carry around those variables
-*/

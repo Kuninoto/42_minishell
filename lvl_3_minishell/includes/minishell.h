@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/19 23:12:19 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 18:29:27 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ typedef struct s_vector {
 }				t_vector;
 
 typedef struct s_data {
-	char	**envp;
-	char	**paths;
+	char		**envp;
+	char		**paths;
 	t_vector	var_vec;
 	t_vector	envp_vec;
 }				t_data;
@@ -90,15 +90,25 @@ typedef struct s_data {
 /* Prints Minishell gradient ASCII art */
 void		welcome_art(void);
 
+/* Setups Minishell. 
+Casts argc and argv to void
+Saves envp
+Initializes Vecs
+Configs Signals
+Prints Welcome Art
+*/
+void		setup_shell(int ac, char **av, char **envp, 
+								t_data *data, t_statement **statement_list);
+
 /* COMMANDS */
 
 /* Returns true if it has sucessfully executed an
 implemented command or printed an env variable */
-bool		builtin(t_statement *statement, t_data *data);
+bool		builtin_with_fork(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully executed an
 implemented command that doesn't need a fork */
-bool		cmd_check_singles(t_statement *statement, t_data *data);
+bool		builtin_without_fork(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully 
 executed a binary from /usr/bin */
