@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vector_actions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <roramos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:33:46 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/29 17:34:30 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/20 22:11:13 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "minishell.h"
 
 void	vec_push(t_vector *vector, char	*instruction)
 {

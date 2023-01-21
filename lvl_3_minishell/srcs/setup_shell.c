@@ -6,11 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:17:06 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 18:36:52 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:58:17 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 char	**get_paths(char **envp)
 {
@@ -32,5 +32,4 @@ void	setup_shell(int ac, char **av, char **envp, t_data *data, t_statement **sta
 	data->envp_vec = vec_new();
 	*statement_list = NULL;
 	config_signals();
-	welcome_art();
 }

@@ -6,11 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:09:59 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 19:37:08 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:11:23 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	destroy(t_data *data)
 {

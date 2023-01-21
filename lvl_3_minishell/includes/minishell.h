@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 18:29:27 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/21 00:12:48 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define SUCESS 0
 # define FAILURE -1
 
-# include "../libft/libft.h"
+# include "libft.h"
 
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -86,10 +86,6 @@ typedef struct s_data {
 	t_vector	envp_vec;
 }				t_data;
 
-
-/* Prints Minishell gradient ASCII art */
-void		welcome_art(void);
-
 /* Setups Minishell. 
 Casts argc and argv to void
 Saves envp
@@ -101,10 +97,6 @@ void		setup_shell(int ac, char **av, char **envp,
 								t_data *data, t_statement **statement_list);
 
 /* COMMANDS */
-
-/* Returns true if it has sucessfully executed an
-implemented command or printed an env variable */
-bool		builtin_with_fork(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully executed an
 implemented command that doesn't need a fork */

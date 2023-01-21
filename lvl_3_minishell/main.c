@@ -6,11 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 18:31:32 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/21 00:14:36 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "minishell.h"
 
 /*	TODO 
 * handle "", parsing should recognize that the text between
@@ -59,3 +59,6 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (EXIT_SUCCESS);
 }
+
+
+/* executable permissions */
