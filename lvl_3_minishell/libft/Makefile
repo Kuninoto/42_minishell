@@ -6,12 +6,12 @@
 #    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/22 19:35:50 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/01/20 19:27:17 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/01/20 22:13:45 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -I../includes
 RM = rm -rf
 NAME = libft.a
 

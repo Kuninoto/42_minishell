@@ -6,11 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/19 23:07:02 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:11:37 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 #define debug_args for (int i = 0; i < head->argc; i += 1) \
 						printf("%s -> ", head->argv[i]); \

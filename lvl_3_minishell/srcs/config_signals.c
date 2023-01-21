@@ -6,18 +6,20 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:54:55 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/20 18:22:41 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:51:51 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 void	dismiss_signal(int signum)
 {
 	if (signum == SIGINT)
 	{
-		rl_replace_line("", 1);
-		write(STDOUT_FILENO, "\nminishell$ ", 12);
+		write(STDOUT_FILENO, "\n", 1);
+        rl_on_new_line();
+        rl_replace_line("", 0);
+        rl_redisplay();
 	}
 }
 

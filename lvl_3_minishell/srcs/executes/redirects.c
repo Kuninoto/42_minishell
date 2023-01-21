@@ -6,11 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/19 15:38:01 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:11:02 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 static void	redirect_input_until(t_statement *node)
 {
@@ -20,7 +20,7 @@ static void	redirect_input_until(t_statement *node)
 	pipe(fd);
 	while (1)
 	{
-		buff = readline("> ");
+		buff = readline("minishell$ ");
 		if (streq(buff, node->next->argv[0]))
 			break ;
 		ft_putendl_fd(buff, fd[1]);
@@ -35,9 +35,9 @@ static void	redirect_output(t_statement *node)
 {
 	close(STDOUT_FILENO);
 	if (node->operator == RDR_OUT_APPEND)
-		open (node->next->argv[0], O_WRONLY | O_APPEND, 0777);
+		open(node->next->argv[0], O_WRONLY | O_APPEND, 0777);
 	else if (node->operator == RDR_OUT_REPLACE)
-		open (node->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0777);
+		open(node->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0777);
 }
 
 void	exec_redirects(t_statement *node, t_data *data)

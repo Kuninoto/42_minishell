@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 20:20:58 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/12 00:39:11 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2022/12/11 23:29:50 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2023/01/20 22:10:25 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
-void	cmd_cd(char *path)
+void	cmd_env(t_data *data)
 {
-	if (path == NULL)
-		return ;
-	if (chdir(path) == SUCESS)
-		return ;
-	perror("Failed to execute cd");
+	int	i;
+
+	i = -1;
+	while (data->envp[++i])
+		printf("%s\n", data->envp[i]);
+	i = -1;
+	while (data->envp_vec.storage[++i])
+		printf("%s\n", data->envp_vec.storage[i]);
 }

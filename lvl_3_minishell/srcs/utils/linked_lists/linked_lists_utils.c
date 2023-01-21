@@ -6,11 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 17:23:01 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 19:36:04 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/20 22:11:08 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
+#include "minishell.h"
 
 void	lstclear(t_statement **head)
 {

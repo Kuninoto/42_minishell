@@ -6,24 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 19:41:43 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/21 00:13:31 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-bool	builtin_with_fork(t_statement *statement, t_data *data)
-{
-	if (streq(statement->argv[0], "echo"))
-		cmd_echo(statement);
-	else if (streq(statement->argv[0], "pwd"))
-		cmd_pwd();
-	else if (streq(statement->argv[0], "env"))
-		cmd_env(data);
-	else
-		return (false);
-	return (true);
-}
+#include "minishell.h"
 
 bool	builtin_without_fork(t_statement *statement, t_data *data)
 {
@@ -48,6 +35,16 @@ bool	builtin_without_fork(t_statement *statement, t_data *data)
 		cmd_cd(statement->argv[1]);
 	else if (ft_strchr(statement->argv[0], '='))
 		save_user_vars(statement->argv[0], &data->var_vec);
+	else if (streq(statement->argv[0], "echo"))
+		cmd_echo(statement);
+	else if (streq(statement->argv[0], "pwd"))
+	{
+		if (statement->argc > 1)
+			ft_putendl_fd("pwd: too many arguments", STDERR_FILENO);
+		cmd_pwd();
+	}
+	else if (streq(statement->argv[0], "env"))
+		cmd_env(data);
 	else
 		return (false);
 	return (true);
