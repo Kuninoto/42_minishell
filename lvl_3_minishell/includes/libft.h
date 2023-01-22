@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 03:02:06 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 14:16:34 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@
 
 int					ft_isalpha(int c);
 
-static inline int	ft_isdigit(int c)
+static inline bool	is_digit(int c)
 {
 	if ((c >= '0' && c <= '9'))
-		return (1);
-	return (0);
+		return (true);
+	return (false);
 }
 
 int					ft_isalnum(int c);
@@ -75,11 +75,14 @@ int					ft_atoi(const char *str);
 /* Converts a string to a ssize_t */
 ssize_t				ft_atol(const char *str);
 
-void				*ft_calloc(size_t nitems, size_t size);
+void				*ft_calloc(size_t nmemb, size_t size);
 char				*ft_strdup(const char *s);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
+
 char				*ft_strtrim(char const *s1, char const *set);
+char				*trim_free(char *s1, char const *set);
+
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
@@ -175,10 +178,12 @@ int					prt_hexa(unsigned int nbr, bool upper_case);
 
 // UTILS -------------------------------------------
 
-// Appends to_append on to_free, creating a new string, and frees to_free 
-char				*join_free(char *to_free, char *to_append);
+// Returns s1+s2, creating a new string, and frees s1 
+char				*join_free(char *s1, char *s2);
 // Returns s1+s2, creating a new string, and frees s2
 char				*join_freev2(char *s1, char *s2);
+
+char				*join_free_both(char *s1, char *s2);
 
 /* Prints Error: <error_msg>\n to STDERR 
 and exits the program on failure */

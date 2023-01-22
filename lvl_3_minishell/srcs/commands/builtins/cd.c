@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:20:58 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 02:51:48 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 14:26:28 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	cmd_cd(char *path)
 		chdir(getenv("HOME"));
 		return ;
 	}
-	if (chdir(path) == SUCESS)
+	if (chdir(path) == SUCCESS)
 		return ;
 	error_msg = ft_strjoin("minishell: cd: ", path);
 	perror(error_msg);

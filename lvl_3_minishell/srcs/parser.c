@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 02:27:46 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 14:47:31 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ size_t	get_nr_statements(char **splitted)
 
 	i = 0;
 	counter = 0;
-	while (splitted[i] && !ft_strchr(OPERATORS, splitted[i][0]))
+	while (splitted[i] && !is_onstr(OPERATORS, splitted[i][0]))
 	{
 		counter += 1;
 		i += 1;
@@ -76,18 +76,22 @@ size_t	get_nr_statements(char **splitted)
 char *is_var(char *splitted, t_data *data)
 {
 	bool	dollar;
+	char	*temp;
 	char	*var;
 
-	dollar = ft_strchr(splitted, '$') != NULL;
+	dollar = is_onstr(splitted, '$');
 	if (!dollar)
 		return (splitted);
 	if (dollar && splitted[1] == '?')
 		return (ft_itoa(g_exit_status));
-	var = getenv(&splitted[1]);
-	if (var == NULL)
-		var = is_onvec(&splitted[1], &data->envp_vec);
-	if (var == NULL)
-		var = is_onvec(&splitted[1], &data->var_vec);
+	temp = getenv(&splitted[1]);
+	if (temp == NULL)
+		temp = is_onvec(&splitted[1], &data->envp_vec);
+	if (temp == NULL)
+		temp = is_onvec(&splitted[1], &data->var_vec);
+	if (temp == NULL)
+		temp = " ";
+	var = temp;
 	return (ft_strcpy(var));
 }
 

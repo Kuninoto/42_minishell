@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 02:07:42 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 15:14:48 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int ac, char **av, char **envp)
 		if (input == NULL)
 		{
 			free(input);
-			cmd_exit(&statement_list, EXIT_SUCCESS, &data);
+			cmd_exit(&statement_list, 127, &data);
 		}
 		if (input[0] == '\0')
 			continue ;
@@ -63,3 +63,10 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (EXIT_SUCCESS);
 }
+
+
+/* 
+   Trying to access an user-defined-env_variable that doesn't exist is segfaulting
+   	E.g echo $4
+
+*/

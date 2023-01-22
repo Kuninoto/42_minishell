@@ -6,13 +6,15 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/22 03:04:19 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 15:22:07 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern int	g_exit_status;
+
+#define NOT_FOUND NULL
 
 char	*get_bin_path(char *cmd, char **paths)
 {
@@ -49,8 +51,14 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 		g_exit_status = EXIT_SUCCESS;
 	}
 	else
-	{	
+	{
 		binary_path = get_bin_path(statement->argv[0], data->paths);
+		if (binary_path == NOT_FOUND)
+		{
+			cmd_not_found(statement->argv[0]);
+			g_exit_status = 127;
+			exit(127);
+		}
 		if (execve(binary_path, statement->argv, data->envp) == -1)
 		{
 			perror(statement->argv[0]);
