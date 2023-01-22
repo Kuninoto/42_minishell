@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   gnl_strchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/14 01:05:55 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/08/21 19:16:18 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2022/11/15 00:37:16 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2023/01/22 02:18:34 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putchar_fd(char c, int fd)
+bool	is_onstr(const char *str, int ch)
 {
-	if (fd < 0)
-		return ;
-	write(fd, &c, 1);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == ch)
+			return (true);
+		i += 1;
+	}
+	return (false);
 }

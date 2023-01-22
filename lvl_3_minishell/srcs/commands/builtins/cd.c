@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:20:58 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 22:10:15 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 02:51:48 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,16 @@
 
 void	cmd_cd(char *path)
 {
-	if (path == NULL)
+	char	*error_msg;
+
+	if (path == NULL || streq(path, "~"))
+	{
+		chdir(getenv("HOME"));
 		return ;
+	}
 	if (chdir(path) == SUCESS)
 		return ;
-	perror("Failed to execute cd");
+	error_msg = ft_strjoin("minishell: cd: ", path);
+	perror(error_msg);
+	free(error_msg);
 }
