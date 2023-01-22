@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/21 00:13:31 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 03:04:02 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 bool	builtin_without_fork(t_statement *statement, t_data *data)
 {
-	/* Must check for valid */
 	if (streq(statement->argv[0], "exit"))
 	{
 		if (statement->argc > 1)
@@ -27,7 +26,8 @@ bool	builtin_without_fork(t_statement *statement, t_data *data)
 		else
 			cmd_exit(&statement, EXIT_SUCCESS, data);
 	}
-	else if (streq(statement->argv[0], "unset") && is_onvec(statement->argv[1], &data->envp_vec))
+	else if (streq(statement->argv[0], "unset")
+		&& is_onvec(statement->argv[1], &data->envp_vec))
 		vec_pop_at(statement->argv[1], &data->envp_vec);
 	else if (streq(statement->argv[0], "export"))
 		cmd_export(data, statement->argv[1]);
@@ -38,11 +38,7 @@ bool	builtin_without_fork(t_statement *statement, t_data *data)
 	else if (streq(statement->argv[0], "echo"))
 		cmd_echo(statement);
 	else if (streq(statement->argv[0], "pwd"))
-	{
-		if (statement->argc > 1)
-			ft_putendl_fd("pwd: too many arguments", STDERR_FILENO);
 		cmd_pwd();
-	}
 	else if (streq(statement->argv[0], "env"))
 		cmd_env(data);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/21 00:12:48 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 03:06:47 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@
 
 /*
 	NONE,
-	AND, // &&
-	OR,	// ||
 	RDR_OUT_REPLACE, // >
 	RDR_OUT_APPEND, // >>
 	RDR_INPUT,	// <
@@ -56,8 +54,6 @@
 
 typedef enum e_operator {
 	NONE,
-	AND,
-	OR,
 	RDR_OUT_REPLACE,
 	RDR_OUT_APPEND,
 	RDR_INPUT,
@@ -91,7 +87,6 @@ Casts argc and argv to void
 Saves envp
 Initializes Vecs
 Configs Signals
-Prints Welcome Art
 */
 void		setup_shell(int ac, char **av, char **envp, 
 								t_data *data, t_statement **statement_list);
@@ -100,43 +95,55 @@ void		setup_shell(int ac, char **av, char **envp,
 
 /* Returns true if it has sucessfully executed an
 implemented command that doesn't need a fork */
-bool		builtin_without_fork(t_statement *statement, t_data *data);
+bool				builtin_without_fork(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully 
 executed a binary from /usr/bin */
-void		cmd_binaries(t_statement *statement, t_data *data);
+void				cmd_binaries(t_statement *statement, t_data *data);
 // Wannabe echo
-void		cmd_echo(t_statement *statement);
+void				cmd_echo(t_statement *statement);
 // Wannabe pwd
-void		cmd_pwd(void);
+void				cmd_pwd(void);
 // Wannabe cd
-void		cmd_cd(char *path);
+void				cmd_cd(char *path);
 // Wannabe env
-void		cmd_env(t_data *data);
+void				cmd_env(t_data *data);
 // Wannabe export
-void		cmd_export(t_data *data, char *var_name);
+void				cmd_export(t_data *data, char *var_name);
 // Wannabe exit
-void		cmd_exit(t_statement **head, int exit_status, t_data *data);
+void				cmd_exit(t_statement **head, int exit_status, t_data *data);
 
 // Utils
+
+static inline bool	is_absolute_path(t_statement *statement)
+{
+	if (statement->argv[0][0] == '.' || statement->argv[0][0] == '/')
+		return (true);
+	return (false);
+}
+
+bool				is_all_digits(char *str);
+
+void				destroy(t_data *data);
+
 // LINKED LISTS ---------------------------------
 
-t_statement	*new_node(int argc);
+t_statement			*new_node(int argc);
 /* Returns the size of the linked list 
 which head is passed as a parameter */
-size_t		lstsize(t_statement *head);
+size_t				lstsize(t_statement *head);
 /* Frees the linked list which head is passed as parameter */
-void		lstclear(t_statement **head);
+void				lstclear(t_statement **head);
 
-void		config_signals(void);
+void				config_signals(void);
 
-void		exec_cmd(t_statement *current_node, t_data *data);
-void		exec_type(t_statement *statement_list, t_data *data);
-void		exec_executables(t_statement *node, t_data *data);
-void		exec_pipe(t_statement *node, t_data *data);
-void		exec_redirects(t_statement *node, t_data *data);
+void					exec_cmd(t_statement *current_node, t_data *data);
+void					exec_type(t_statement *statement_list, t_data *data);
+void					exec_executables(t_statement *node, t_data *data);
+void					exec_pipe(t_statement *node, t_data *data);
+void					exec_redirects(t_statement *node, t_data *data);
 
-t_statement	*parse_input(char *input, t_data *data, int g_exit_status);
+t_statement				*parse_input(char *input, t_data *data);
 
 // VECTOR UTILS ---------------------------------
 
@@ -167,10 +174,5 @@ static inline void	save_user_vars(char *user_var, t_vector *var_vec)
 {
 	vec_push(var_vec, ft_strtrim(user_var, " "));
 }
-
-
-bool		is_all_digits(char *str);
-
-void		destroy(t_data *data);
 
 #endif

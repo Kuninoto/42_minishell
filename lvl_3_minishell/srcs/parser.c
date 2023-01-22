@@ -3,18 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 22:11:37 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 02:27:46 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-#define debug_args for (int i = 0; i < head->argc; i += 1) \
-						printf("%s -> ", head->argv[i]); \
-				   printf("\n")
+extern int g_exit_status;
+
+void	print_operator(t_operator operator)
+{
+	const char *operators[6] = {"NONE", ">", ">>", "<", "<<", "|"};
+	printf("OPERATOR = %s", operators[operator]);
+}
+
+void	debug_args(t_statement *head)
+{
+	for (t_statement *temp = head; temp != NULL; temp = temp->next)
+	{
+		printf("ARGC = %d\n", temp->argc);
+		printf("ARGV = ");
+		for (int i = 0; i < temp->argc; i += 1)
+			printf("%s -> ", temp->argv[i]);
+		printf("\n");
+		print_operator(temp->operator);
+		printf("\n\n");
+	}
+	printf("OUTPUT: \n");
+}
+
 
 t_operator	get_operator(char *operator)
 {
@@ -22,8 +42,6 @@ t_operator	get_operator(char *operator)
 		return (NONE);
 	if (streq(operator, "|"))
 		return (PIPE);
-	if (streq(operator, "&&"))
-		return (AND);
 	if (streq(operator, ">>"))
 		return (RDR_OUT_APPEND);
 	if (streq(operator, ">"))
@@ -32,8 +50,6 @@ t_operator	get_operator(char *operator)
 		return (RDR_INPUT_UNTIL);
 	if (streq(operator, "<"))
 		return (RDR_INPUT);
-	if (streq(operator, "||"))
-		return (OR);
 	return (NONE);
 	// TODO
 /* 	else if (operator[0] == ')')
@@ -57,7 +73,7 @@ size_t	get_nr_statements(char **splitted)
 	return (counter);
 }
 
-char *is_var(char *splitted, t_data *data, int g_exit_status)
+char *is_var(char *splitted, t_data *data)
 {
 	bool	dollar;
 	char	*var;
@@ -66,15 +82,12 @@ char *is_var(char *splitted, t_data *data, int g_exit_status)
 	if (!dollar)
 		return (splitted);
 	if (dollar && splitted[1] == '?')
-	{
-		printf("exit_status = %d\n", g_exit_status);
 		return (ft_itoa(g_exit_status));
-	}
-	var = getenv(++splitted);
+	var = getenv(&splitted[1]);
 	if (var == NULL)
-		var = is_onvec(splitted, &data->envp_vec);
+		var = is_onvec(&splitted[1], &data->envp_vec);
 	if (var == NULL)
-		var = is_onvec(splitted, &data->var_vec);
+		var = is_onvec(&splitted[1], &data->var_vec);
 	return (ft_strcpy(var));
 }
 
@@ -101,7 +114,7 @@ bool	has_quotes(char *line)
 		return (false);
 }
 
-t_statement	*parse_input(char *input, t_data *data, int g_exit_status)
+t_statement	*parse_input(char *input, t_data *data)
 {
 	char		**splitted;
 	t_statement	*temp;
@@ -116,8 +129,8 @@ t_statement	*parse_input(char *input, t_data *data, int g_exit_status)
 	while (splitted[i])
 	{
 		j = 0;
-		while (splitted[i] && !ft_strchr(OPERATORS, splitted[i][0]))
-			temp->argv[j++] = is_var(splitted[i++], data, g_exit_status);
+		while (splitted[i] && !is_onstr(OPERATORS, splitted[i][0]))
+			temp->argv[j++] = is_var(splitted[i++], data);
 		temp->argv[j] = NULL;
 		if (!splitted[i])
 			break ;
@@ -128,7 +141,7 @@ t_statement	*parse_input(char *input, t_data *data, int g_exit_status)
 	temp->next = NULL;
 	free(splitted);
 	free(input);
-	debug_args;
+	debug_args(head);
 	return (head);
 }
 

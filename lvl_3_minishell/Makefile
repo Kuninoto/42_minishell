@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/01/21 00:18:28 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/01/22 01:06:26 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,5 +57,9 @@ fclean: clean
 	$(RM) $(NAME)
 	
 re: fclean all
+
+run: all clean
+
+.PHONY: all clean fclean re run
 
 .SILENT:

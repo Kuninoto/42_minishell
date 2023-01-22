@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   only_isspaces.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/14 21:49:15 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/08/14 21:51:56 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2022/12/22 22:13:53 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2023/01/22 01:06:54 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_tolower(int c)
+bool	only_spaces(const char *str)
 {
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
-	return (c);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!is_spaces(str[i]))
+			return (false);
+		i += 1;
+	}
+	return (true);
 }

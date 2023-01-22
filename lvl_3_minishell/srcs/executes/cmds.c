@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/20 22:10:40 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 02:50:49 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 //	bytes written on pipedes[1] can be read on pipedes[0]
 void	exec_cmd(t_statement *current_node, t_data *data)
@@ -29,7 +29,6 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 
 void	exec_type(t_statement *statement_list, t_data *data)
 {
-	// Single command
 	if (lstsize(statement_list) == 1)
 	{
 		if (!builtin_without_fork(statement_list, data)

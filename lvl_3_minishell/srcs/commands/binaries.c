@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   binaries.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/20 22:10:04 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 03:04:19 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 char	*get_bin_path(char *cmd, char **paths)
 {
@@ -38,11 +38,11 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 	char	*binary_path;
 
 	binary_path = statement->argv[0];
-	if (statement->argv[0][0] == '.' || statement->argv[0][0] == '/')
+	if (is_absolute_path(statement))
 	{
 		if (execve(binary_path, statement->argv, data->envp) == -1)
 		{
-			printf("%s: command not found\n", statement->argv[0]);
+			perror(statement->argv[0]);
 			g_exit_status = 127;
 			exit(127);
 		}
@@ -51,9 +51,9 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 	else
 	{	
 		binary_path = get_bin_path(statement->argv[0], data->paths);
-		if (binary_path == NULL || execve(binary_path, statement->argv, data->envp) == -1)
+		if (execve(binary_path, statement->argv, data->envp) == -1)
 		{
-			printf("%s: command not found\n", statement->argv[0]);
+			perror(statement->argv[0]);
 			free(binary_path);
 			g_exit_status = 127;
 			exit(127);
