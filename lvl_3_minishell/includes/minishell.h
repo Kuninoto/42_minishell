@@ -6,15 +6,12 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 03:06:47 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 15:22:25 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-# define SUCESS 0
-# define FAILURE -1
 
 # include "libft.h"
 
@@ -30,11 +27,13 @@
 
 /* CONSTANTS */
 
+# define SUCCESS 0
+# define FAILURE -1
 # define OPERATORS "|<>&()"
 
 /* ERROR MESSAGES */
-# define PIPE_ERR "pipe() failed"
-# define FORK_ERR "fork() failed"
+# define PIPE_ERR "minishell: pipe() failed"
+# define FORK_ERR "minishell: fork() failed"
 
 /* typedef enum s_token {
 	NOTHING,
@@ -113,6 +112,13 @@ void				cmd_export(t_data *data, char *var_name);
 // Wannabe exit
 void				cmd_exit(t_statement **head, int exit_status, t_data *data);
 
+static inline void	cmd_not_found(char *cmd_name)
+{
+	ft_putstr_fd("minishell: command '", STDERR_FILENO);
+	ft_putstr_fd(cmd_name, STDERR_FILENO);
+	ft_putendl_fd("' not found", STDERR_FILENO);
+}
+
 // Utils
 
 static inline bool	is_absolute_path(t_statement *statement)
@@ -142,6 +148,8 @@ void					exec_type(t_statement *statement_list, t_data *data);
 void					exec_executables(t_statement *node, t_data *data);
 void					exec_pipe(t_statement *node, t_data *data);
 void					exec_redirects(t_statement *node, t_data *data);
+
+size_t					get_nr_statements(char **splitted);
 
 t_statement				*parse_input(char *input, t_data *data);
 
@@ -174,5 +182,12 @@ static inline void	save_user_vars(char *user_var, t_vector *var_vec)
 {
 	vec_push(var_vec, ft_strtrim(user_var, " "));
 }
+
+
+
+
+void	print_operator(t_operator operator);
+
+void	debug_args(t_statement *head);
 
 #endif
