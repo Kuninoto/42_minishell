@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 18:21:49 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 20:50:06 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define FAILURE -1
 # define OPERATORS "|<>"
 # define QUOTES "\"\'"
+# define DELIMS "|<>\"\' "
 
 /* ERROR MESSAGES */
 # define PIPE_ERR "minishell: pipe() failed"
@@ -149,7 +150,7 @@ void					exec_executables(t_statement *node, t_data *data);
 void					exec_pipe(t_statement *node, t_data *data);
 void					exec_redirects(t_statement *node, t_data *data);
 
-size_t					get_nr_statements(char **splitted);
+size_t					get_nr_statements(char *input);
 
 t_statement				*parser(char *input, t_data *data);
 
