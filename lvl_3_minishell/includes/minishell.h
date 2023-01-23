@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 15:22:25 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 00:42:09 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,16 +114,15 @@ void				cmd_exit(t_statement **head, int exit_status, t_data *data);
 
 static inline void	cmd_not_found(char *cmd_name)
 {
-	ft_putstr_fd("minishell: command '", STDERR_FILENO);
 	ft_putstr_fd(cmd_name, STDERR_FILENO);
-	ft_putendl_fd("' not found", STDERR_FILENO);
+	ft_putendl_fd(": command not found", STDERR_FILENO);
 }
 
 // Utils
 
 static inline bool	is_absolute_path(t_statement *statement)
 {
-	if (statement->argv[0][0] == '.' || statement->argv[0][0] == '/')
+	if (is_onstr(statement->argv[0], '/'))
 		return (true);
 	return (false);
 }

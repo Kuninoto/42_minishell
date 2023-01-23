@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linked_lists_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 17:23:01 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 22:11:08 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 21:17:31 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	lstclear(t_statement **head)
 	while (temp != NULL)
 	{
 		next_node = temp->next;
+	//	printf("tupai\n");
 		free_matrix(temp->argv);
+	//	printf("tumae2\n");
 		free(temp);
 		temp = next_node;
 	}
