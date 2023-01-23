@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 14:16:34 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 01:12:56 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,11 +178,11 @@ int					prt_hexa(unsigned int nbr, bool upper_case);
 
 // UTILS -------------------------------------------
 
-// Returns s1+s2, creating a new string, and frees s1 
+/* Returns s1+s2, creating a new string, and frees s1  */
 char				*join_free(char *s1, char *s2);
-// Returns s1+s2, creating a new string, and frees s2
+/* Returns s1+s2, creating a new string, and frees s2 */
 char				*join_freev2(char *s1, char *s2);
-
+/* Returns s1+s2, creating a new string and frees both s1 and s2 */
 char				*join_free_both(char *s1, char *s2);
 
 /* Prints Error: <error_msg>\n to STDERR 
