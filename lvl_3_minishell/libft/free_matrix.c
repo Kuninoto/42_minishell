@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:57:16 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/12/11 23:06:15 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/22 21:08:29 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,7 @@ void	free_matrix(char **matrix)
 	i = -1;
 	while (matrix[++i])
 		free(matrix[i]);
-	free(matrix);
+	if (i > 0)
+		free(matrix);
+	matrix = NULL;
 }

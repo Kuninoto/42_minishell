@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 15:14:48 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 00:46:07 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 
  * ls -la |      must wait for input, for the user to provide the right
 				 side of the pipe
+
+ * Trying to access an user-defined-env_variable is segfaulting
+	E.g echo $USER or echo $4
+
+ * lexer -> parser -> expander -> executor https://github.com/Swoorup/mysh
 
 */
 
@@ -63,10 +68,3 @@ int	main(int ac, char **av, char **envp)
 	}
 	return (EXIT_SUCCESS);
 }
-
-
-/* 
-   Trying to access an user-defined-env_variable that doesn't exist is segfaulting
-   	E.g echo $4
-
-*/
