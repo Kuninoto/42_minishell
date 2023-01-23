@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 00:57:35 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 19:00:44 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av, char **envp)
 		if (input[0] == '\0')
 			continue ;
 		add_history(input);
-		statement_list = parse_input(input, &data);
+		statement_list = parser(input, &data);
 		exec_type(statement_list, &data);
 		wait(&g_exit_status);
 		if (WIFEXITED(g_exit_status))

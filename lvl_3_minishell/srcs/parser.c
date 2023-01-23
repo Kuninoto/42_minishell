@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 20:45:52 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 19:03:05 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,11 @@ t_operator	get_operator(char *operator)
 size_t	get_nr_statements(char **splitted)
 {
 	size_t	i;
-	size_t	counter;
 
 	i = 0;
-	counter = 0;
 	while (splitted[i] && !is_onstr(OPERATORS, splitted[i][0]))
-	{
-		counter += 1;
 		i += 1;
-	}
-	return (counter);
+	return (i);
 }
 
 char *get_arg(char *field, t_data *data)
@@ -94,55 +89,89 @@ char *get_arg(char *field, t_data *data)
 	return (ft_strcpy(var));
 }
 
-bool	has_quotes(char *line)
+size_t	get_token_len(char	*input_at_i)
 {
-	int		dquotes;
-	int		quotes;
 	size_t	i;
-	
-	dquotes = 0;
-	quotes = 0;
+
 	i = 0;
-	while (line[i])
+	if (is_onstr(QUOTES, input_at_i[i]))
 	{
-		if (line[i] == '\"')
-			dquotes += 1;
-		else if (line[i] == '\'')
-			quotes += 1;
-		i += 1;
+		while (input_at_i[i] && !is_onstr(QUOTES, input_at_i[i]))
+			i += 1;
 	}
-	if (dquotes == 2 || quotes == 2)
-		return (true);
 	else
-		return (false);
+	{
+		while (input_at_i[i] && !is_onstr(QUOTES, input_at_i[i])
+				&& !is_onstr(OPERATORS, input_at_i[i]))
+			i += 1;
+	}
+	printf("Token Len = %zu\n", i);
+	return (i);
 }
 
-t_statement	*parse_input(char *input, t_data *data)
+t_vector	parse_input(char *input)
 {
-	char		**splitted;
+	int			i;
+	int			j;
+	bool		has_quotes;
+	t_vector 	parsed;
+	size_t		len;
+	char		*token;
+
+	i = -1;
+	has_quotes = false;
+	parsed = vec_new();
+	/* ls -la | wc -l */
+	while (input[++i])
+	{
+		len = get_token_len(&input[i]);
+		token = malloc((len + 1) * sizeof(char));
+		j = 0;
+		while (len-- >= 0)
+		{
+			if (is_onstr(QUOTES, input[i]))
+			{
+				has_quotes = !has_quotes;
+				i += 1;
+			}
+			if (is_onstr(OPERATORS, input[i]) && !has_quotes)
+				token[j++] = input[i++];
+			if (input[i] == ' ' && !has_quotes)
+				i += 1;
+			token[j] = input[i];
+		}
+		vec_push(&parsed, token);
+	}
+	return (parsed);
+}
+
+t_statement	*parser(char *input, t_data *data)
+{
+	t_vector	parsed;
 	t_statement	*temp;
 	t_statement	*head;
 	size_t		i;
 	size_t		j;
 
-	splitted = ft_split(input, ' ');
-	temp = new_node(get_nr_statements(&splitted[0]));
+	//splitted = ft_split(input, ' '); 
+	parsed = parse_input(input);
+	temp = new_node(get_nr_statements(&parsed.storage[0]));
 	head = temp;
 	i = 0;
-	while (splitted[i])
+	while (parsed.storage[i])
 	{
 		j = 0;
-		while (splitted[i] && !is_onstr(OPERATORS, splitted[i][0]))
-			temp->argv[j++] = get_arg(splitted[i++], data);
+		while (parsed.storage[i] && !is_onstr(OPERATORS, parsed.storage[i][0]))
+			temp->argv[j++] = get_arg(parsed.storage[i++], data);
 		temp->argv[j] = NULL;
-		if (!splitted[i])
+		if (!parsed.storage[i])
 			break ;
-		temp->operator = get_operator(splitted[i++]);
-		temp->next = new_node(get_nr_statements(&splitted[i]));
+		temp->operator = get_operator(parsed.storage[i++]);
+		temp->next = new_node(get_nr_statements(&parsed.storage[i]));
 		temp = temp->next;
 	}
 	temp->next = NULL;
-	free(splitted);
+	free(parsed.storage);
 	free(input);
 	debug_args(head);
 	return (head);

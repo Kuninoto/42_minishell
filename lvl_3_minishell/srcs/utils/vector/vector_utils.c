@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:12:43 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 22:11:19 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 18:22:23 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 void	vec_realloc(t_vector *vector)
 {
-	size_t	i;
 	char	**buf;
+	size_t	i;
 
 	if (vector->capacity == 1)
 		vector->capacity = 8;
 	else
 		vector->capacity *= 2;
-	i = 0;
 	buf = malloc(vector->capacity * sizeof(char *));
+	i = 0;
 	while (i < vector->count)
 	{
 		buf[i] = vector->storage[i];

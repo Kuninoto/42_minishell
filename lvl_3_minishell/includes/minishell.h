@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 00:42:09 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 18:21:49 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 
 # define SUCCESS 0
 # define FAILURE -1
-# define OPERATORS "|<>&()"
+# define OPERATORS "|<>"
+# define QUOTES "\"\'"
 
 /* ERROR MESSAGES */
 # define PIPE_ERR "minishell: pipe() failed"
@@ -150,7 +151,7 @@ void					exec_redirects(t_statement *node, t_data *data);
 
 size_t					get_nr_statements(char **splitted);
 
-t_statement				*parse_input(char *input, t_data *data);
+t_statement				*parser(char *input, t_data *data);
 
 // VECTOR UTILS ---------------------------------
 
@@ -164,18 +165,18 @@ static inline t_vector	vec_new(void)
 	});
 }
 
-/* Push an env variable to the vector */
-void		vec_push(t_vector *vector, char	*env_variable);
-/* Pop an env varible from the vector */
+/* Push a str to the vector */
+void		vec_push(t_vector *vector, char	*str);
+/* Pop a str from the vector */
 char		*vec_pop(t_vector *vector);
 /* Doubles vector storage capacity */
 void		vec_realloc(t_vector *vector);
 /* Frees all vector's intern fields */
 void		free_vec(t_vector *vector);
-// Checks if user_var is on vector
-char		*is_onvec(char *user_var, t_vector *vector);
+// Checks if str is on vector
+char		*is_onvec(char *str, t_vector *vector);
 // Idk
-void		vec_pop_at(char *user_var, t_vector *vector);
+void		vec_pop_at(char *str, t_vector *vector);
 // Saves user defined environment variables
 static inline void	save_user_vars(char *user_var, t_vector *var_vec)
 {
