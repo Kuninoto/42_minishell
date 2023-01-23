@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prt_unsigned.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:10:56 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2022/11/17 21:36:11 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 18:28:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static unsigned	int	unsigned_digits(unsigned int n)
 	while (n != 0)
 	{
 		n = n / 10;
-		digits++;
+		digits += 1;
 	}
 	return (digits);
 }
