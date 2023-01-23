@@ -6,26 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 00:46:07 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/23 00:57:35 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*	TODO 
-
- * handle "", parsing should recognize that the text between
-	dquotes is only 1 argument and trim them
-
- * ls -la |      must wait for input, for the user to provide the right
-				 side of the pipe
-
- * Trying to access an user-defined-env_variable is segfaulting
-	E.g echo $USER or echo $4
-
- * lexer -> parser -> expander -> executor https://github.com/Swoorup/mysh
-
-*/
 
 int	g_exit_status = 0;
 
