@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 22:10:21 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:15:06 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,14 @@ void	print(t_statement *statement, int i)
 	int		j;
 	char	*line;
 
-	if (has_quotesv2(statement->argv[i]))
+	line = statement->argv[i];
+	j = -1;
+	while (line[++j])
 	{
-		line = ft_strtrim(statement->argv[i], "\"'");
-		ft_putstr_fd(line, STDOUT_FILENO);
+		if (line[j] == '\\')
+			continue ;
+		ft_putchar_fd(line[j], STDOUT_FILENO);
 	}
-	else
-	{
-		line = statement->argv[i];
-		j = -1;
-		while (line[++j])
-		{
-			if (line[j] == '\\')
-				continue ;
-			ft_putchar_fd(line[j], STDOUT_FILENO);
-		}
-	}
-	free(line);
 }
 
 void	cmd_echo(t_statement *statement)

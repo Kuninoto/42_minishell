@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 20:50:06 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/25 19:07:57 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define FAILURE -1
 # define OPERATORS "|<>"
 # define QUOTES "\"\'"
-# define DELIMS "|<>\"\' "
+# define DELIMS "\"\' "
 
 /* ERROR MESSAGES */
 # define PIPE_ERR "minishell: pipe() failed"
@@ -181,6 +181,9 @@ void		vec_pop_at(char *str, t_vector *vector);
 // Saves user defined environment variables
 static inline void	save_user_vars(char *user_var, t_vector *var_vec)
 {
+	
+	is_onvec(user_var, var_vec);
+	if ()
 	vec_push(var_vec, ft_strtrim(user_var, " "));
 }
 
