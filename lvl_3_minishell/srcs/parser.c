@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/25 18:58:59 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/25 19:31:48 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,17 @@ size_t	get_argc(char **parsed)
 	return (i);
 }
 
-char *get_arg(char *parsed, t_data *data)
+char *expand(char *parsed, t_data *data)
 {
-	bool	dollar;
 	char	*var;
 
-	dollar = is_onstr(parsed, '$');
-	if (!dollar)
-		return (parsed);
-	if (streq(parsed, "$"))
-		return (ft_strcpy("$"));
-	if (dollar && parsed[1] == '?')
+	if (parsed[1] == '?')
 		return (ft_itoa(g_exit_status));
 	var = getenv(&parsed[1]);
 	if (var == NULL)
-		var = is_onvec(&parsed[1], &data->envp_vec);
+		var = get_fromvec(&parsed[1], &data->envp_vec);
 	if (var == NULL)
-		var = is_onvec(&parsed[1], &data->var_vec);
+		var = get_fromvec(&parsed[1], &data->var_vec);
 	if (var == NULL)
 		var = "";
 	free(parsed);
@@ -183,7 +177,8 @@ char	**parse_input(char *input, t_data *data)
 				parsed[k][j++] = input[i++];
 		}
 		parsed[k][j] = '\0';
-		parsed[k] = get_arg(parsed[k], data);
+		if (is_onstr(parsed[k], '$') && !streq(parsed[k], "$"))
+			parsed[k] = expand(parsed[k], data);
 		k += 1;
 	}
 	parsed[k] = NULL;
@@ -223,8 +218,3 @@ t_statement	*parser(char *input, t_data *data)
 	//debug_args(head);
 	return (head);
 }
-
-/*
-	ls -a | wc -l
-	<command> <arguments> <operator> <command> <arguments>
-*/

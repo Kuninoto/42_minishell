@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:58:39 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/20 22:10:49 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/25 19:11:55 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ static void	right_side(t_statement *nd, t_data *data, int pdes[2])
 
 void	exec_pipe(t_statement *node, t_data *data)
 {
-	pid_t	pid;
+	pid_t	child_pid;
 	int		pipedes[2];
 	int		status;
 
 	node->operator = NONE;
 	if (pipe(pipedes) == -1)
 		panic(PIPE_ERR);
-	pid = fork();
-	if (pid == 0)
+	child_pid = fork();
+	if (child_pid == 0)
 		left_side(node, data, pipedes);
-	pid = fork();
-	if (pid == 0)
+	child_pid = fork();
+	if (child_pid == 0)
 		right_side(node, data, pipedes);
 	close(pipedes[0]);
 	close(pipedes[1]);
-	waitpid(pid, &status, 0);
-	waitpid(pid, &status, 0);
+	waitpid(child_pid, &status, 0);
+	waitpid(child_pid, &status, 0);
 }
