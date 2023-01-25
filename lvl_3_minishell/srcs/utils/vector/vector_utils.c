@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:12:43 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 18:22:23 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/25 19:38:23 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,27 @@ void	vec_pop_at(char *user_var, t_vector *vector)
 	vec_pop(vector);
 }
 
-char	*is_onvec(char *user_var, t_vector *vector)
+char	*is_onvec(char *to_search, t_vector *vector)
+{
+	size_t	i;
+	char	**splitted;
+
+	i = 0;
+	while (i < vector->count)
+	{
+		splitted = ft_split(vector->storage[i], '=');
+		if (streq(splitted[0], to_search))
+		{
+			free_matrix(splitted);
+			return (vector->storage[i]);
+		}
+		free_matrix(splitted);
+		i += 1;
+	}
+	return (NULL);
+}
+
+char	*get_fromvec(char *user_var, t_vector *vector)
 {
 	size_t	i;
 	char	**splitted;

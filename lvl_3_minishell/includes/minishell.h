@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/25 19:07:57 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/25 19:37:53 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,16 +174,16 @@ char		*vec_pop(t_vector *vector);
 void		vec_realloc(t_vector *vector);
 /* Frees all vector's intern fields */
 void		free_vec(t_vector *vector);
-// Checks if str is on vector
-char		*is_onvec(char *str, t_vector *vector);
+/* Checks if to_search is on vector and returns a pointer to it else NULL */
+char		*is_onvec(char *to_search, t_vector *vector);
+/* Get  user_var from vec if it exists, else returns NULL */
+char		*get_fromvec(char *user_var, t_vector *vector);
 // Idk
 void		vec_pop_at(char *str, t_vector *vector);
 // Saves user defined environment variables
 static inline void	save_user_vars(char *user_var, t_vector *var_vec)
 {
-	
-	is_onvec(user_var, var_vec);
-	if ()
+	// if (is_onvec(user_var, var_vec))
 	vec_push(var_vec, ft_strtrim(user_var, " "));
 }
 
