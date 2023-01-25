@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 19:00:44 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/25 19:01:10 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int ac, char **av, char **envp)
 	char		*input;
 
 	setup_shell(ac, av, envp, &data, &statement_list);
-	while (1)
+	while (!false)
 	{
 		input = get_input();
 		// CTRL + D 
@@ -45,6 +45,12 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		add_history(input);
 		statement_list = parser(input, &data);
+		if (statement_list == NULL)
+		{
+			free(input);
+			ft_putstr_fd("minishell: unclosed quotes. My devs didn't want to develop dquote prompt\n", STDERR_FILENO);
+			continue ;
+		}
 		exec_type(statement_list, &data);
 		wait(&g_exit_status);
 		if (WIFEXITED(g_exit_status))

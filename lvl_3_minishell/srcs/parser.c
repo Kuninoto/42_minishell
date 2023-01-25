@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 23:23:10 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/25 18:58:59 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,42 +51,38 @@ t_operator	get_operator(char *operator)
 	if (streq(operator, "<"))
 		return (RDR_INPUT);
 	return (NONE);
-	// TODO
-/* 	else if (operator[0] == ')')
-		return ('(');
-	else if (operator[0] == '(')
-		return (')'); */
 }
 
-size_t	get_nr_args(char **parsed)
+size_t	get_argc(char **parsed)
 {
 	size_t	i;
 
 	i = 0;
-	while (parsed[i] && !is_onstr(OPERATORS, parsed[i][0]))
+	while (parsed[i])
 		i += 1;
-	printf("nr_args = %ld\n", i);
 	return (i);
 }
 
-char *get_arg(char *field, t_data *data)
+char *get_arg(char *parsed, t_data *data)
 {
 	bool	dollar;
 	char	*var;
 
-	dollar = is_onstr(field, '$');
+	dollar = is_onstr(parsed, '$');
 	if (!dollar)
-		return (field);
-	if (dollar && field[1] == '?')
+		return (parsed);
+	if (streq(parsed, "$"))
+		return (ft_strcpy("$"));
+	if (dollar && parsed[1] == '?')
 		return (ft_itoa(g_exit_status));
-	var = getenv(&field[1]);
+	var = getenv(&parsed[1]);
 	if (var == NULL)
-		var = is_onvec(&field[1], &data->envp_vec);
+		var = is_onvec(&parsed[1], &data->envp_vec);
 	if (var == NULL)
-		var = is_onvec(&field[1], &data->var_vec);
+		var = is_onvec(&parsed[1], &data->var_vec);
 	if (var == NULL)
 		var = "";
-	free(field);
+	free(parsed);
 	return (ft_strcpy(var));
 }
 
@@ -97,17 +93,15 @@ size_t	get_token_len(char *input_at_i)
 	i = 0;
 	if (is_onstr(QUOTES, input_at_i[i]))
 	{
+		i += 1;
 		while (input_at_i[i] && !is_onstr(QUOTES, input_at_i[i]))
 			i += 1;
+		return (i);
 	}
-	else
-	{
-		while (input_at_i[i] 
-				&& !is_spaces(input_at_i[i]) 
-				&& !is_onstr(QUOTES, input_at_i[i])
-				&& !is_onstr(OPERATORS, input_at_i[i]))
-			i += 1;
-	}
+	while (input_at_i[i] 
+			&& !is_spaces(input_at_i[i]) 
+			&& !is_onstr(QUOTES, input_at_i[i]))
+	i += 1;
 	return (i);
 }
 
@@ -116,73 +110,86 @@ size_t	get_nr_statements(char *input)
 	size_t	count;
 	size_t	i;
 	bool	flag;
+	bool	has_quotes;
 
 	count = 0;
 	i = 0;
 	flag = false;
+	has_quotes = false;
 	while (input[i])
 	{
-		if (!is_onstr(DELIMS, input[i]) && flag == false)
+		if (is_onstr(QUOTES, input[i]))
+			has_quotes = !has_quotes;
+		if (input[i] != ' ' && !flag && !has_quotes)
 		{
 			flag = true;
 			count += 1;
 		}
-		else if (is_onstr(DELIMS, input[i]))
+		else if (input[i] == ' ')
 			flag = false;
 		i += 1;
 	}
-	printf("statements count = %ld\n", count);
-	//exit(EXIT_SUCCESS);
 	return (count);
 }
 
-char	**parse_input(char *input)
+bool	check_quotes(char *input)
+{
+	int	s_quotes;
+	int	d_quotes;
+	int i;
+
+	s_quotes = 0;
+	d_quotes = 0;
+	i = 0;
+	while (input[i])
+	{
+		if (input[i] == '\'')
+			s_quotes += 1;
+		else if (input[i] == '\"')
+			d_quotes += 1;
+		i += 1;
+	}
+	if (s_quotes % 2 == 0 && d_quotes % 2 == 0)
+		return (true);
+	return (false);
+}
+
+char	**parse_input(char *input, t_data *data)
 {
 	size_t		i;
 	size_t		k;
-	size_t		j;
-	bool		has_quotes;
 	char		**parsed;
 	size_t		len;
+	size_t		j;
 
 	i = 0;
-	has_quotes = false;
-	parsed = malloc(get_nr_statements(input) + 1);
-	/* ls -la | wc -l */
 	k = 0;
+	parsed = malloc((get_nr_statements(input) + 1) * sizeof(char *));
 	while (input[i])
 	{
 		len = get_token_len(&input[i]);
-		printf("len = %ld\n", len);
+		if (len == 0)
+		{
+			i += 1;
+			continue;
+		}
 		parsed[k] = malloc((len + 1) * sizeof(char));
 		j = 0;
-		while (j < len)
+		while (input[i] && j < len)
 		{
 			if (is_onstr(QUOTES, input[i]))
-			{
-				has_quotes = !has_quotes;
 				i += 1;
-			}
-			if (is_onstr(OPERATORS, input[i]) && !has_quotes)
+			else
 				parsed[k][j++] = input[i++];
-			if (input[i] == ' ' && !has_quotes)
-			{
-				i += 1;
-				break ;
-			}
-			parsed[k][j++] = input[i++];
 		}
-		printf("input index = %ld\n", i);
 		parsed[k][j] = '\0';
-		printf("token = %s\n", parsed[k]);
+		parsed[k] = get_arg(parsed[k], data);
 		k += 1;
 	}
 	parsed[k] = NULL;
 	return (parsed);
 }
 
-
-/* A cada espaço ou operador ou EOF é mais um espaco */
 t_statement	*parser(char *input, t_data *data)
 {
 	char		**parsed;
@@ -191,27 +198,29 @@ t_statement	*parser(char *input, t_data *data)
 	size_t		i;
 	size_t		j;
 
-	//splitted = ft_split(input, ' '); 
-	parsed = parse_input(input);
-	temp = new_node(get_nr_args(&parsed[0]));
+	//parsed = ft_split(input, ' '); 
+	if (!check_quotes(input))
+		return (NULL);
+	parsed = parse_input(input, data);
+	temp = new_node(get_argc(&parsed[0]));
 	head = temp;
 	i = 0;
 	while (parsed[i])
 	{
 		j = 0;
 		while (parsed[i] && !is_onstr(OPERATORS, parsed[i][0]))
-			temp->argv[j++] = get_arg(parsed[i++], data);
+			temp->argv[j++] = parsed[i++];
 		temp->argv[j] = NULL;
 		if (!parsed[i])
 			break ;
 		temp->operator = get_operator(parsed[i++]);
-		temp->next = new_node(get_nr_args(&parsed[i]));
+		temp->next = new_node(get_argc(&parsed[i]));
 		temp = temp->next;
 	}
 	temp->next = NULL;
 	free(parsed);
 	free(input);
-	debug_args(head);
+	//debug_args(head);
 	return (head);
 }
 
