@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 18:17:34 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/22 02:57:01 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:04:07 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ extern int	g_exit_status;
 void	cmd_exit(t_statement **head, int exit_status, t_data *data)
 {
 	ft_putstr_fd("exit\n", STDOUT_FILENO);
-	lstclear(head);
+	p_lstclear(head);
 	destroy(data);
 	g_exit_status = exit_status;
 	if (exit_status == 2)

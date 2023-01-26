@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/25 19:37:53 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:57:14 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef enum e_operator {
 	PIPE,
 }				t_operator;
 
+
+/* All functions regarding t_statemnent list are prefixed with p_ referring to parser */
 typedef struct s_statement {
 	int					argc;
 	char				**argv;
@@ -69,24 +71,24 @@ typedef struct s_statement {
 	struct s_statement	*next;
 }				t_statement;
 
-/* Vector data structure */
-typedef struct s_vector {
-	size_t	count;
-	size_t	capacity;
-	char	**storage;
-}				t_vector;
+/* All functions regarding t_vars are prefixed with v_ referring to variables */
+typedef struct s_vlst {
+	char			*var_name;
+	char			*var_value;
+	bool			is_exported;
+	struct s_vlst	*next;
+}				t_vlst;
 
 typedef struct s_data {
-	char		**envp;
 	char		**paths;
-	t_vector	var_vec;
-	t_vector	envp_vec;
+	char		**envp;
+	t_vlst		*envp_lst;
 }				t_data;
 
 /* Setups Minishell. 
 Casts argc and argv to void
 Saves envp
-Initializes Vecs
+Initializes lsts
 Configs Signals
 */
 void		setup_shell(int ac, char **av, char **envp, 
@@ -110,9 +112,11 @@ void				cmd_cd(char *path);
 // Wannabe env
 void				cmd_env(t_data *data);
 // Wannabe export
-void				cmd_export(t_data *data, char *var_name);
+void				cmd_export(char *var_name, t_data *data);
 // Wannabe exit
 void				cmd_exit(t_statement **head, int exit_status, t_data *data);
+// Wannabe unset
+void				cmd_unset(char *var_name, t_vlst **head);
 
 static inline void	cmd_not_found(char *cmd_name)
 {
@@ -133,61 +137,39 @@ bool				is_all_digits(char *str);
 
 void				destroy(t_data *data);
 
-// LINKED LISTS ---------------------------------
-
-t_statement			*new_node(int argc);
-/* Returns the size of the linked list 
-which head is passed as a parameter */
-size_t				lstsize(t_statement *head);
-/* Frees the linked list which head is passed as parameter */
-void				lstclear(t_statement **head);
-
 void				config_signals(void);
 
-void					exec_cmd(t_statement *current_node, t_data *data);
-void					exec_type(t_statement *statement_list, t_data *data);
-void					exec_executables(t_statement *node, t_data *data);
-void					exec_pipe(t_statement *node, t_data *data);
-void					exec_redirects(t_statement *node, t_data *data);
+void				exec_cmd(t_statement *current_node, t_data *data);
+void				exec_type(t_statement *statement_list, t_data *data);
+void				exec_executables(t_statement *node, t_data *data);
+void				exec_pipe(t_statement *node, t_data *data);
+void				exec_redirects(t_statement *node, t_data *data);
 
-size_t					get_nr_statements(char *input);
+// LINKED LISTS ---------------------------------
 
-t_statement				*parser(char *input, t_data *data);
-
-// VECTOR UTILS ---------------------------------
-
-/* Returns an empty vector with the capacity of 1 */
-static inline t_vector	vec_new(void)
-{
-	return ((t_vector){
-		.count = 0,
-		.capacity = 1,
-		.storage = malloc(sizeof(char *))
-	});
-}
-
-/* Push a str to the vector */
-void		vec_push(t_vector *vector, char	*str);
-/* Pop a str from the vector */
-char		*vec_pop(t_vector *vector);
-/* Doubles vector storage capacity */
-void		vec_realloc(t_vector *vector);
-/* Frees all vector's intern fields */
-void		free_vec(t_vector *vector);
-/* Checks if to_search is on vector and returns a pointer to it else NULL */
-char		*is_onvec(char *to_search, t_vector *vector);
-/* Get  user_var from vec if it exists, else returns NULL */
-char		*get_fromvec(char *user_var, t_vector *vector);
-// Idk
-void		vec_pop_at(char *str, t_vector *vector);
-// Saves user defined environment variables
-static inline void	save_user_vars(char *user_var, t_vector *var_vec)
-{
-	// if (is_onvec(user_var, var_vec))
-	vec_push(var_vec, ft_strtrim(user_var, " "));
-}
+t_statement			*p_new_node(int argc);
+/* Returns the size of the linked list 
+which head is passed as a parameter */
+size_t				p_lstsize(t_statement *head);
+/* Frees the linked list which head is passed as parameter */
+void				p_lstclear(t_statement **head);
 
 
+t_vlst				*v_new_node(char *var_name, char *var_value, bool is_exported);
+void				v_lstadd_back(t_vlst **head, t_vlst *new);
+t_vlst				*v_lstlast(t_vlst *node);
+void				v_lstclear(t_vlst **head);
+
+char				*get_fromvlst(char *var_name, t_vlst **head);
+
+void				save_user_vars(char *statement, t_vlst **head, bool is_exported);
+
+t_vlst				*init_vars_lst(void);
+t_vlst				*init_envp_lst(char **envp);
+
+size_t				get_nr_statements(char *input);
+
+t_statement			*parser(char *input, t_data *data);
 
 
 void	print_operator(t_operator operator);

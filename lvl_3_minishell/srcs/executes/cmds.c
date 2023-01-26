@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/22 13:58:40 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/26 17:00:27 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	exec_type(t_statement *statement_list, t_data *data)
 //  Add error handling for a fork() fail i.e pid = -1
 //	pid_t	child_pid;
 
-	if (lstsize(statement_list) == 1)
+	if (p_lstsize(statement_list) == 1)
 	{
 		if (!builtin_without_fork(statement_list, data)
 			&& fork() == 0)
