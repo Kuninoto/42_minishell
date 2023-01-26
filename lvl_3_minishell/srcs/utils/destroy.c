@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:09:59 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 01:11:09 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/26 18:08:29 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@ void	destroy(t_data *data)
 {
 	rl_clear_history();
 	free_matrix(data->paths);
-	free_vec(&data->var_vec);
-	free_vec(&data->envp_vec);
+	v_lstclear(&data->envp_lst);
 }

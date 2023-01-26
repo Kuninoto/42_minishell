@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                           :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 16:03:10 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/26 19:04:14 by roramos          ###   ########.fr       */
+/*   Created: 2023/01/26 18:29:09 by roramos           #+#    #+#             */
+/*   Updated: 2023/01/26 19:09:16 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cmd_export(char *var_name, t_data *data)
+void	cmd_unset(char *var_name, t_vlst **head)
 {
-	t_vlst *temp;
+	t_vlst	*temp;
+	t_vlst	*next_node;
 
-	if (is_onstr(var_name, '='))
+	temp = *head;
+	while (temp && temp->next != NULL)
 	{
-		save_user_vars(var_name, &data->envp_lst, true);
-		return ;
-	}
-	temp = data->envp_lst;
-	while (temp != NULL)
-	{
-		if (streq(var_name, temp->var_name))
+		if (streq(var_name, temp->next->var_name))
 		{
-			temp->is_exported = true;
-			return ;
+			next_node = temp->next->next;
+			free(temp->next->var_name);
+			free(temp->next->var_value);
+			free(temp->next);
+			temp->next = next_node;
 		}
 		temp = temp->next;
 	}

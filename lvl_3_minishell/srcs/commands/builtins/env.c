@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 23:29:50 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/20 22:10:25 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/26 18:21:35 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 void	cmd_env(t_data *data)
 {
-	int	i;
+	t_vlst	*temp;
 
-	i = -1;
-	while (data->envp[++i])
-		printf("%s\n", data->envp[i]);
-	i = -1;
-	while (data->envp_vec.storage[++i])
-		printf("%s\n", data->envp_vec.storage[i]);
+	temp = data->envp_lst;
+	while (temp != NULL)
+	{
+		if (temp->is_exported)
+			printf("%s=%s\n", temp->var_name, temp->var_value);
+		temp = temp->next;
+	}
 }

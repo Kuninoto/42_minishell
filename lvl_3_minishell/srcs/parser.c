@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/25 19:31:48 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:22:08 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_operator	get_operator(char *operator)
 	return (NONE);
 }
 
-size_t	get_argc(char **parsed)
+size_t get_argc(char **parsed)
 {
 	size_t	i;
 
@@ -71,9 +71,7 @@ char *expand(char *parsed, t_data *data)
 		return (ft_itoa(g_exit_status));
 	var = getenv(&parsed[1]);
 	if (var == NULL)
-		var = get_fromvec(&parsed[1], &data->envp_vec);
-	if (var == NULL)
-		var = get_fromvec(&parsed[1], &data->var_vec);
+		var = get_fromvlst(&parsed[1], &data->envp_lst);
 	if (var == NULL)
 		var = "";
 	free(parsed);
@@ -197,7 +195,7 @@ t_statement	*parser(char *input, t_data *data)
 	if (!check_quotes(input))
 		return (NULL);
 	parsed = parse_input(input, data);
-	temp = new_node(get_argc(&parsed[0]));
+	temp = p_new_node(get_argc(&parsed[0]));
 	head = temp;
 	i = 0;
 	while (parsed[i])
@@ -209,7 +207,7 @@ t_statement	*parser(char *input, t_data *data)
 		if (!parsed[i])
 			break ;
 		temp->operator = get_operator(parsed[i++]);
-		temp->next = new_node(get_argc(&parsed[i]));
+		temp->next = p_new_node(get_argc(&parsed[i]));
 		temp = temp->next;
 	}
 	temp->next = NULL;

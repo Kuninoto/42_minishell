@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/25 19:15:15 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/26 18:53:47 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ int	main(int ac, char **av, char **envp)
 		if (statement_list == NULL)
 		{
 			free(input);
-			ft_putstr_fd("minishell: unclosed quotes. My devs didn't want to develop quote nor dquote prompt\n", STDERR_FILENO);
+			ft_putendl_fd("minishell: unclosed quotes. My devs didn't want to develop quote nor dquote prompt", STDERR_FILENO);
 			continue ;
 		}
 		exec_type(statement_list, &data);
 		wait(&g_exit_status);
 		if (WIFEXITED(g_exit_status))
 			g_exit_status = WEXITSTATUS(g_exit_status);
-		lstclear(&statement_list);
+		p_lstclear(&statement_list);
 	}
 	return (EXIT_SUCCESS);
 }
