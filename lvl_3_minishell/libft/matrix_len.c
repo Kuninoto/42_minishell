@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   matrix_len.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/19 15:09:59 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 13:56:52 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2023/01/27 16:21:59 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2023/01/27 16:22:57 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	destroy(t_data *data)
+size_t	matrix_len(char **matrix)
 {
-	rl_clear_history();
-	v_lstclear(&data->envp_lst);
+	size_t	i;
+
+	if (!matrix)
+		return (0);
+	while (matrix[i])
+		i += 1;
+	return (i);
 }

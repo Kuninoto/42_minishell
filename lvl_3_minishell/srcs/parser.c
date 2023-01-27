@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/26 18:22:08 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/27 16:31:36 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ size_t get_argc(char **parsed)
 char *expand(char *parsed, t_data *data)
 {
 	char	*var;
-
+	
 	if (parsed[1] == '?')
 		return (ft_itoa(g_exit_status));
 	var = getenv(&parsed[1]);
@@ -83,17 +83,26 @@ size_t	get_token_len(char *input_at_i)
 	size_t	i;
 
 	i = 0;
-	if (is_onstr(QUOTES, input_at_i[i]))
+	if (input_at_i[i] == '\"')
 	{
 		i += 1;
-		while (input_at_i[i] && !is_onstr(QUOTES, input_at_i[i]))
+		while (input_at_i[i] && input_at_i[i] != '\"')
 			i += 1;
-		return (i);
+		i -= 1;
 	}
-	while (input_at_i[i] 
-			&& !is_spaces(input_at_i[i]) 
-			&& !is_onstr(QUOTES, input_at_i[i]))
-	i += 1;
+	else if(input_at_i[i] == '\'')
+	{
+		i += 1;
+		while (input_at_i[i] && input_at_i[i] != '\'')
+			i += 1;
+		i -= 1;
+	}
+	else
+	{
+		while (input_at_i[i] 
+				&& !is_spaces(input_at_i[i]))
+			i += 1;
+	}
 	return (i);
 }
 
@@ -126,19 +135,29 @@ size_t	get_nr_statements(char *input)
 
 bool	check_quotes(char *input)
 {
-	int	s_quotes;
-	int	d_quotes;
-	int i;
+	int		s_quotes;
+	int		d_quotes;
+	int		i;
+	bool	in_dquotes;
+	bool	in_squotes;
 
 	s_quotes = 0;
 	d_quotes = 0;
+	in_dquotes = false;
+	in_squotes = false;
 	i = 0;
 	while (input[i])
 	{
-		if (input[i] == '\'')
-			s_quotes += 1;
-		else if (input[i] == '\"')
+		if (input[i] == '\"' && !in_squotes)
+		{
+			in_dquotes = !in_dquotes;
 			d_quotes += 1;
+		}
+		if (input[i] == '\'' && !in_dquotes)
+		{
+			in_squotes = !in_squotes;
+			s_quotes += 1;
+		}
 		i += 1;
 	}
 	if (s_quotes % 2 == 0 && d_quotes % 2 == 0)
@@ -153,6 +172,9 @@ char	**parse_input(char *input, t_data *data)
 	char		**parsed;
 	size_t		len;
 	size_t		j;
+	bool		in_dquotes;
+	bool		in_quotes;
+	char		**line;
 
 	i = 0;
 	k = 0;
@@ -160,23 +182,35 @@ char	**parse_input(char *input, t_data *data)
 	while (input[i])
 	{
 		len = get_token_len(&input[i]);
-		if (len == 0)
+		if (!len)
 		{
 			i += 1;
 			continue;
 		}
+		printf("len_%zu\n", len);
 		parsed[k] = malloc((len + 1) * sizeof(char));
 		j = 0;
+		in_dquotes = false;
+		in_quotes = false;
 		while (input[i] && j < len)
 		{
-			if (is_onstr(QUOTES, input[i]))
+			if (is_onstr(QUOTES, input[i]) && !in_dquotes && !in_quotes)
+			{
+				if (input[i] == '\"')
+					in_dquotes = true;
+				else
+					in_quotes = true;
 				i += 1;
+			}
 			else
 				parsed[k][j++] = input[i++];
 		}
 		parsed[k][j] = '\0';
 		if (is_onstr(parsed[k], '$') && !streq(parsed[k], "$"))
-			parsed[k] = expand(parsed[k], data);
+		{
+			if (!in_quotes)
+				parsed[k] = expand(parsed[k], data);
+		}
 		k += 1;
 	}
 	parsed[k] = NULL;
@@ -191,7 +225,6 @@ t_statement	*parser(char *input, t_data *data)
 	size_t		i;
 	size_t		j;
 
-	//parsed = ft_split(input, ' '); 
 	if (!check_quotes(input))
 		return (NULL);
 	parsed = parse_input(input, data);
@@ -213,6 +246,6 @@ t_statement	*parser(char *input, t_data *data)
 	temp->next = NULL;
 	free(parsed);
 	free(input);
-	//debug_args(head);
+	debug_args(head);
 	return (head);
 }
