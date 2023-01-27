@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prt_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:44:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 23:17:27 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:10:25 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_digits(int n)
 
 static void	put_int(int n)
 {
-	char	digits[] = "0123456789";
+	static char	digits[10] = "0123456789";
 
 	if (n == INT_MIN)
 		write (STDOUT_FILENO, "-2147483648", 11);

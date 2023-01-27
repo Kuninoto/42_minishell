@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/26 17:00:27 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/27 18:11:51 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 
 void	exec_type(t_statement *statement_list, t_data *data)
 {
-//  Add error handling for a fork() fail i.e pid = -1
-//	pid_t	child_pid;
-
 	if (p_lstsize(statement_list) == 1)
 	{
 		if (!builtin_without_fork(statement_list, data)

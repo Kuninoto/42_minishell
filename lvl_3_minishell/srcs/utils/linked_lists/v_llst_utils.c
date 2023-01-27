@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v_llst_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/26 19:06:38 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/27 20:22:22 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,88 +31,48 @@ void	v_lstclear(t_vlst **head)
 	*head = NULL;
 }
 
-t_vlst	*v_new_node(char *var_name, char *var_value, bool is_exported)
+char	**split_envp(char *env)
 {
-	t_vlst	*new_node;
+	char	**splitted;
+	size_t	indexof_equal;
 
-	new_node = malloc(sizeof(t_vlst));
-	new_node->var_name = var_name;
-	new_node->var_value = var_value;
-	new_node->is_exported = is_exported;
-	new_node->next = NULL;
-	return (new_node);
-}
-
-t_vlst	*v_lstlast(t_vlst *node)
-{
-	while (node)
-	{
-		if (!node->next)
-			break ;
-		node = node->next;
-	}
-	return (node);
-}
-
-void	v_lstadd_back(t_vlst **head, t_vlst *new)
-{
-	t_vlst	*temp;
-
-	if (head)
-	{
-		if (!*head)
-			*head = new;
-		else
-		{
-			temp = v_lstlast(*(head));
-			temp->next = new;
-		}
-	}
+	splitted = malloc(2 * sizeof(char *));
+	indexof_equal = ft_strchr(env, '=') - env;
+	splitted[0] = ft_substr(env, 0, indexof_equal);
+	splitted[1] = ft_substr(env, indexof_equal + 1,
+			ft_strlen(&env[indexof_equal]));
+	return (splitted);
 }
 
 t_vlst	*init_envp_lst(char **envp)
 {
 	t_vlst	*head;
+	t_vlst	*temp;
 	char	**line;
 	size_t	i;
-	t_vlst	*temp;
 
-	line = ft_split(envp[0], '=');
-head = v_new_node(line[0], line[1], true);
-	free(line[2]);
+	line = split_envp(envp[0]);
+	head = v_new_node(line[0], line[1], true);
+	free(line);
 	i = 1;
 	temp = head;
 	while (envp[i])
 	{
-		line = ft_split(envp[i], '=');
+		line = split_envp(envp[i]);
 		temp->next = v_new_node(line[0], line[1], true);
-		free(line[2]);
+		free(line);
 		temp = temp->next;
 		i += 1;
 	}
 	return (head);
 }
 
-char	*get_fromvlst(char *var_name, t_vlst **head)
-{
-	t_vlst	*temp;
-
-	temp = *head;
-	while (temp != NULL)
-	{
-		if (streq(var_name, temp->var_name))
-			return (temp->var_value);
-		temp = temp->next;
-	}
-	return (NULL);
-}
-
 void	save_user_vars(char *statement, t_vlst **head, bool is_exported)
 {
 	char	**line;
-	
-	line = ft_split(statement, '=');
+
+	line = split_envp(statement);
 	cmd_unset(line[0], head);
 	v_lstadd_back(head, v_new_node(line[0], line[1], is_exported));
-	free(line[2]);
+	free(line);
 }

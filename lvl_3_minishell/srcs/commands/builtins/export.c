@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:03:10 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/26 19:04:14 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/27 18:16:32 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	cmd_export(char *var_name, t_data *data)
 {
-	t_vlst *temp;
+	t_vlst	*temp;
 
 	if (is_onstr(var_name, '='))
 	{

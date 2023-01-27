@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 15:59:20 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:57:09 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ char				*ft_strrchr(const char *str, int c);
 int					ft_strncmp(const char *str1, const char *str2, size_t n);
 void				*ft_memchr(const void *str, int c, size_t n);
 int					ft_memcmp(const void *str1, const void *str2, size_t n);
-char				*ft_strnstr(const char *big, const char *little, size_t len);
+char				*ft_strnstr(const char *big, const char *little,
+						size_t len);
 
 /* Converts a string to an integer */
 int					ft_atoi(const char *str);
@@ -151,7 +152,8 @@ void				ft_lstadd_back(t_list **head, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
-t_list				*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
+						void (*del)(void *));
 
 // GET_NEXT_LINE ---------------------------------
 # ifndef BUFFER_SIZE
@@ -196,7 +198,8 @@ void				free_matrix(char **matrix);
 /* Checks if both strings passed as parameters are absolutely equal */
 bool				streq(char *str1, char *str2);
 
-/* Return a literal copy of to_copy (useful when you want to free to_copy for some reason) */
+/* Return a literal copy of to_copy (useful when 
+you want to free to_copy for some reason) */
 char				*ft_strcpy(char *to_copy);
 
 static inline bool	is_spaces(char c)

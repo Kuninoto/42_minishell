@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roramos <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/01/26 18:29:05 by roramos          ###   ########.fr        #
+#    Updated: 2023/01/27 19:49:12 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS =  srcs/commands/binaries.c\
 		srcs/executes/redirects.c\
 		srcs/utils/linked_lists/p_llst_utils.c\
 		srcs/utils/linked_lists/v_llst_utils.c\
+		srcs/utils/linked_lists/v_llst_utils_v2.c\
 		srcs/utils/is_all_digits.c\
 		srcs/utils/destroy.c\
 	   	srcs/config_signals.c\

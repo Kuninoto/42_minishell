@@ -3,35 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/26 16:58:46 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/27 17:36:28 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	has_quotesv2(char *line)
-{
-	if (ft_strchr(line, '\"') || ft_strchr(line, '\''))
-		return (true);
-	else
-		return (false);
-}
-
 void	print(t_statement *statement, int i)
 {
-	int		j;
 	char	*line;
+	size_t	j;
 
 	line = statement->argv[i];
-	j = -1;
-	while (line[++j])
+	j = 0;
+	while (line[j])
 	{
 		if (line[j] == '\\')
+		{
+			j += 1;
 			continue ;
+		}
 		ft_putchar_fd(line[j], STDOUT_FILENO);
+		j += 1;
 	}
 }
 
@@ -41,19 +37,20 @@ void	cmd_echo(t_statement *statement)
 	int		i;
 
 	has_n = streq(statement->argv[1], "-n");
-	i = 0;
+	i = 1;
 	if (has_n)
 	{
 		if (!statement->argv[2])
 			return ;
-		i = 1;
+		i = 2;
 	}
-	while (++i != statement->argc)
+	while (i != statement->argc)
 	{
 		print(statement, i);
 		if (statement->argv[i + 1])
-			write(STDOUT_FILENO, " ", 1);
+			ft_putchar_fd(' ', STDOUT_FILENO);
+		i += 1;
 	}
 	if (!has_n)
-		write(STDOUT_FILENO, "\n", 2);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 }
