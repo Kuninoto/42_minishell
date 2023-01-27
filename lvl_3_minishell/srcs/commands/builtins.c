@@ -3,29 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/26 19:03:35 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/27 18:33:54 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+extern int	g_exit_status;
+
+static void	call_cmd_exit(t_statement *statement, t_data *data)
+{
+	if (statement->argc > 1)
+	{
+		if (is_all_digits(statement->argv[1]))
+			cmd_exit(&statement, ft_atoi(statement->argv[1]), data);
+		else
+			cmd_exit(&statement, 2, data);
+	}
+	else
+		cmd_exit(&statement, EXIT_SUCCESS, data);
+}
+
 bool	builtin_without_fork(t_statement *statement, t_data *data)
 {
 	if (streq(statement->argv[0], "exit"))
-	{
-		if (statement->argc > 1)
-		{
-			if (is_all_digits(statement->argv[1]))
-				cmd_exit(&statement, ft_atoi(statement->argv[1]), data);
-			else
-				cmd_exit(&statement, 2, data);
-		}
-		else
-			cmd_exit(&statement, EXIT_SUCCESS, data);
-	}
+		call_cmd_exit(statement, data);
 	else if (streq(statement->argv[0], "unset"))
 		cmd_unset(statement->argv[1], &data->envp_lst);
 	else if (streq(statement->argv[0], "export"))
@@ -47,6 +52,6 @@ bool	builtin_without_fork(t_statement *statement, t_data *data)
 		cmd_env(data);
 	else
 		return (false);
+	g_exit_status = 0;
 	return (true);
 }
-

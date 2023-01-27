@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/27 14:29:11 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:38:39 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,18 @@ static char	*get_bin_path(char *cmd, char **paths)
 		free(bin_path);
 		i += 1;
 	}
-	printf("aqui!\n");
 	return (NULL);
+}
+
+static void	exit_and_free_matrix(char **paths, char *cmd, int status)
+{
+	if (cmd)
+		perror(cmd);
+	free_matrix(paths);
+	g_exit_status = status;
+	if (status == EXIT_SUCCESS)
+		return ;
+	exit(status);
 }
 
 void	cmd_binaries(t_statement *statement, t_data *data)
@@ -62,33 +72,21 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 	if (is_absolute_path(statement))
 	{
 		if (execve(binary_path, statement->argv, data->envp) == -1)
-		{
-			perror(statement->argv[0]);
-			free_matrix(paths);
-			g_exit_status = 127;
-			exit(127);
-		}
-		g_exit_status = EXIT_SUCCESS;
+			exit_and_free_matrix(paths, statement->argv[0], 127);
+		exit_and_free_matrix(paths, NULL, EXIT_SUCCESS);
+		return ;
 	}
-	else
+	binary_path = get_bin_path(statement->argv[0], paths);
+	if (binary_path == NOT_FOUND)
 	{
-		binary_path = get_bin_path(statement->argv[0], paths);
-		if (binary_path == NOT_FOUND)
-		{
-			cmd_not_found(statement->argv[0]);
-			free_matrix(paths);
-			g_exit_status = 127;
-			exit(127);
-		}
-		if (execve(binary_path, statement->argv, data->envp) == -1)
-		{
-			perror(statement->argv[0]);
-			free(binary_path);
-			free_matrix(paths);
-			g_exit_status = 127;
-			exit(127);
-		}
-		g_exit_status = EXIT_SUCCESS;
-		free(binary_path);
+		cmd_not_found(statement->argv[0]);
+		exit_and_free_matrix(paths, NULL, 127);
 	}
+	if (execve(binary_path, statement->argv, data->envp) == -1)
+	{
+		free(binary_path);
+		exit_and_free_matrix(paths, statement->argv[0], 127);
+	}
+	free(binary_path);
+	exit_and_free_matrix(paths, NULL, EXIT_SUCCESS);
 }

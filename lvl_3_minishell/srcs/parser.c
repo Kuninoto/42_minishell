@@ -6,15 +6,15 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 16:31:36 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/27 20:45:00 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
-void	print_operator(t_operator operator)
+/* void	print_operator(t_operator operator)
 {
 	const char *operators[6] = {"NONE", ">", ">>", "<", "<<", "|"};
 	printf("OPERATOR = %s", operators[operator]);
@@ -34,7 +34,7 @@ void	debug_args(t_statement *head)
 	}
 	printf("OUTPUT: \n");
 }
-
+ */
 
 t_operator	get_operator(char *operator)
 {
@@ -53,7 +53,7 @@ t_operator	get_operator(char *operator)
 	return (NONE);
 }
 
-size_t get_argc(char **parsed)
+size_t	get_argc(char **parsed)
 {
 	size_t	i;
 
@@ -63,12 +63,16 @@ size_t get_argc(char **parsed)
 	return (i);
 }
 
-char *expand(char *parsed, t_data *data)
+char	*expand(char *parsed, t_data *data)
 {
 	char	*var;
 	
 	if (parsed[1] == '?')
+	{
+		free(parsed);
+		// Review the cause of this leak
 		return (ft_itoa(g_exit_status));
+	}
 	var = getenv(&parsed[1]);
 	if (var == NULL)
 		var = get_fromvlst(&parsed[1], &data->envp_lst);
@@ -83,25 +87,23 @@ size_t	get_token_len(char *input_at_i)
 	size_t	i;
 
 	i = 0;
-	if (input_at_i[i] == '\"')
-	{
+	while (input_at_i[i] && !is_spaces(input_at_i[i]))
+	{	
+		if (input_at_i[i] == '\"')
+		{
+			i += 1;
+			while (input_at_i[i] && input_at_i[i] != '\"')
+				i += 1;
+			return (i - 1);
+		}
+		else if (input_at_i[i] == '\'')
+		{
+			i += 1;
+			while (input_at_i[i] && input_at_i[i] != '\'')
+				i += 1;
+			return (i - 1);
+		}
 		i += 1;
-		while (input_at_i[i] && input_at_i[i] != '\"')
-			i += 1;
-		i -= 1;
-	}
-	else if(input_at_i[i] == '\'')
-	{
-		i += 1;
-		while (input_at_i[i] && input_at_i[i] != '\'')
-			i += 1;
-		i -= 1;
-	}
-	else
-	{
-		while (input_at_i[i] 
-				&& !is_spaces(input_at_i[i]))
-			i += 1;
 	}
 	return (i);
 }
@@ -133,7 +135,7 @@ size_t	get_nr_statements(char *input)
 	return (count);
 }
 
-bool	check_quotes(char *input)
+bool	check_quotes(char *input)	
 {
 	int		s_quotes;
 	int		d_quotes;
@@ -174,7 +176,6 @@ char	**parse_input(char *input, t_data *data)
 	size_t		j;
 	bool		in_dquotes;
 	bool		in_quotes;
-	char		**line;
 
 	i = 0;
 	k = 0;
@@ -185,9 +186,8 @@ char	**parse_input(char *input, t_data *data)
 		if (!len)
 		{
 			i += 1;
-			continue;
+			continue ;
 		}
-		printf("len_%zu\n", len);
 		parsed[k] = malloc((len + 1) * sizeof(char));
 		j = 0;
 		in_dquotes = false;
@@ -246,6 +246,5 @@ t_statement	*parser(char *input, t_data *data)
 	temp->next = NULL;
 	free(parsed);
 	free(input);
-	debug_args(head);
 	return (head);
 }

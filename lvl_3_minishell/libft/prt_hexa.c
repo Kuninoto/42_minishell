@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prt_hexa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:34:14 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 23:07:15 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:10:47 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static int	digits_hexa(int n)
 
 static void	put_hexa(unsigned int nbr, bool upper_case)
 {
-	char	upper[] = "0123456789ABCDEF";
-	char	lower[] = "0123456789abcdef";
+	static char	upper[] = "0123456789ABCDEF";
+	static char	lower[] = "0123456789abcdef";
 
 	if (nbr > 16)
 		put_hexa(nbr, upper_case);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/26 18:53:47 by roramos          ###   ########.fr       */
+/*   Updated: 2023/01/27 20:49:15 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,37 +25,46 @@ char	*get_input(void)
 	return (input);
 }
 
+void	wait_clean_parsed(t_statement *statement_list)
+{
+	wait(&g_exit_status);
+	if (WIFEXITED(g_exit_status))
+		g_exit_status = WEXITSTATUS(g_exit_status);
+	p_lstclear(&statement_list);
+}
+
+void	if_ctrld(char *input, t_statement *statement_list, t_data *data)
+{
+	if (input == NULL)
+	{
+		free(input);
+		cmd_exit(&statement_list, 127, data);
+	}
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_data		data;
 	t_statement	*statement_list;
 	char		*input;
 
-	setup_shell(ac, av, envp, &data, &statement_list);
+	(void)ac;
+	setup_shell(av, envp, &data, &statement_list);
 	while (1)
 	{
 		input = get_input();
-		// CTRL + D 
-		if (input == NULL)
-		{
-			free(input);
-			cmd_exit(&statement_list, 127, &data);
-		}
+		if_ctrld(input, statement_list, &data);
 		if (input[0] == '\0')
 			continue ;
 		add_history(input);
 		statement_list = parser(input, &data);
 		if (statement_list == NULL)
 		{
-			free(input);
-			ft_putendl_fd("minishell: unclosed quotes. My devs didn't want to develop quote nor dquote prompt", STDERR_FILENO);
+			unclosed_quotes(input);
 			continue ;
 		}
 		exec_type(statement_list, &data);
-		wait(&g_exit_status);
-		if (WIFEXITED(g_exit_status))
-			g_exit_status = WEXITSTATUS(g_exit_status);
-		p_lstclear(&statement_list);
+		wait_clean_parsed(statement_list);
 	}
 	return (EXIT_SUCCESS);
 }

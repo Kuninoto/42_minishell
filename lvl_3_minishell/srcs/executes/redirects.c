@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/22 14:31:39 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/27 18:16:18 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,28 @@ static void	redirect_input_until(t_statement *node)
 	free(buff);
 }
 
+static void	redirect_input(t_statement *node)
+{
+	int		in_file;
+	char	*error_msg;
+
+	if (node->next->argv[0])
+	{
+		if (access(node->next->argv[0], F_OK) == SUCCESS)
+		{
+			in_file = open(node->next->argv[0], O_RDONLY);
+			dup2(in_file, STDIN_FILENO);
+		}
+		else
+		{
+			error_msg = ft_strjoin("minishell: ", node->next->argv[0]);
+			perror(error_msg);
+			free(error_msg);
+			exit(EXIT_FAILURE);
+		}
+	}
+}
+
 static void	redirect_output(t_statement *node)
 {
 	close(STDOUT_FILENO);
@@ -40,46 +62,10 @@ static void	redirect_output(t_statement *node)
 		open(node->next->argv[0], O_WRONLY | O_APPEND, 0666);
 }
 
-/* static void realloc_argv(t_statement *node)
-{
-	char	**new_argv;
-	int		i;
-
-	new_argv = malloc(get_nr_statements(node->argv) + 2 * sizeof(char *));
-	while (node->argv[i])
-	{
-		new_argv[i] = node->argv[i];
-		i += 1;
-	}
-	new_argv[i] = get_input_from_file(node->next->argv[0]);
-	new_argv[i] = NULL;
-	free(node->argv);
-	node->argv = new_argv;
-} */
-
 void	exec_redirects(t_statement *node, t_data *data)
 {
-	int		in_file;
-	char	*error_msg;
-
 	if (node->operator == RDR_INPUT)
-	{
-		if (node->next->argv[0])
-		{
-			if (access(node->next->argv[0], F_OK) == SUCCESS)
-			{
-				in_file = open(node->next->argv[0], O_RDONLY);
-				dup2(in_file, STDIN_FILENO);
-			}
-			else
-			{
-				error_msg = ft_strjoin("minishell: ", node->next->argv[0]);
-				perror(error_msg);
-				free(error_msg);
-				exit(EXIT_FAILURE);
-			}
-		}
-	}
+		redirect_input(node);
 	else if (node->operator == RDR_INPUT_UNTIL)
 		redirect_input_until(node);
 	else

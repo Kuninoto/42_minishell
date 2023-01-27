@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/11 19:42:18 by roramos           #+#    #+#             */
-/*   Updated: 2022/12/11 23:06:59 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/27 19:05:50 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,21 @@ static int	words_counter(char const *s, char c)
 {
 	int	words;
 	int	flag;
+	int	i;
 
 	words = 0;
 	flag = 0;
-	while (*s)
+	i = 0;
+	while (s[i])
 	{
-		if (*s != c && flag == 0)
+		if (s[i] != c && flag == 0)
 		{
 			flag = 1;
 			words++;
 		}
-		else if (*s == c)
+		else if (s[i] == c)
 			flag = 0;
-		s++;
+		i++;
 	}
 	return (words);
 }
@@ -38,7 +40,7 @@ static int	letters_in_word(char const *s, char c, int i)
 	int	size;
 
 	size = 0;
-	while (s[i] != c && s[i])
+	while (s[i] && s[i] != c)
 	{
 		size++;
 		i++;
@@ -58,7 +60,7 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	j = -1;
 	word = words_counter(s, c);
-	str = (char **)malloc((word + 1) * sizeof(char *));
+	str = malloc((word + 1) * sizeof(char *));
 	if (!str)
 		return (NULL);
 	while (++j < word)

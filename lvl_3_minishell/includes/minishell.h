@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 14:38:55 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/27 20:40:47 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,8 @@
 /* ERROR MESSAGES */
 # define PIPE_ERR "minishell: pipe() failed"
 # define FORK_ERR "minishell: fork() failed"
-
-/* typedef enum s_token {
-	NOTHING,
-	COMMAND,
-	ARGUMENT,
-	OPERATOR,
-}				t_token; */
-
-/*
-	NONE,
-	RDR_OUT_REPLACE, // >
-	RDR_OUT_APPEND, // >>
-	RDR_INPUT,	// <
-	RDR_INPUT_UNTIL, // <<
-	PIPE, // |
-*/
+# define UNCLOSEDQUOTES "minishell: unclosed quotes. My devs didn't \
+						 want to develop quote nor dquote prompt"
 
 typedef enum e_operator {
 	NONE,
@@ -62,8 +48,8 @@ typedef enum e_operator {
 	PIPE,
 }				t_operator;
 
-
-/* All functions regarding t_statemnent list are prefixed with p_ referring to parser */
+/* All functions regarding t_statemnent list are
+prefixed with p_ referring to parser */
 typedef struct s_statement {
 	int					argc;
 	char				**argv;
@@ -71,7 +57,8 @@ typedef struct s_statement {
 	struct s_statement	*next;
 }				t_statement;
 
-/* All functions regarding t_vars are prefixed with v_ referring to variables */
+/* All functions regarding t_vars are prefixed
+with v_ referring to variables */
 typedef struct s_vlst {
 	char			*var_name;
 	char			*var_value;
@@ -90,8 +77,8 @@ Saves envp
 Initializes lsts
 Configs Signals
 */
-void		setup_shell(int ac, char **av, char **envp, 
-								t_data *data, t_statement **statement_list);
+void				setup_shell(char **av, char **envp,
+						t_data *data, t_statement **statement_list);
 
 /* COMMANDS */
 
@@ -121,6 +108,12 @@ static inline void	cmd_not_found(char *cmd_name)
 {
 	ft_putstr_fd(cmd_name, STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
+}
+
+static inline void	unclosed_quotes(char *input)
+{
+	free(input);
+	ft_putendl_fd(UNCLOSEDQUOTES, STDERR_FILENO);
 }
 
 // Utils
@@ -153,15 +146,16 @@ size_t				p_lstsize(t_statement *head);
 /* Frees the linked list which head is passed as parameter */
 void				p_lstclear(t_statement **head);
 
-
-t_vlst				*v_new_node(char *var_name, char *var_value, bool is_exported);
+t_vlst				*v_new_node(char *var_name, char *var_value,
+						bool is_exported);
 void				v_lstadd_back(t_vlst **head, t_vlst *new);
 t_vlst				*v_lstlast(t_vlst *node);
 void				v_lstclear(t_vlst **head);
 
 char				*get_fromvlst(char *var_name, t_vlst **head);
 
-void				save_user_vars(char *statement, t_vlst **head, bool is_exported);
+void				save_user_vars(char *statement, t_vlst **head,
+						bool is_exported);
 
 t_vlst				*init_vars_lst(void);
 t_vlst				*init_envp_lst(char **envp);
@@ -170,9 +164,8 @@ size_t				get_nr_statements(char *input);
 
 t_statement			*parser(char *input, t_data *data);
 
+void				print_operator(t_operator operator);
 
-void	print_operator(t_operator operator);
-
-void	debug_args(t_statement *head);
+void				debug_args(t_statement *head);
 
 #endif
