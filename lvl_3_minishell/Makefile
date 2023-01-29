@@ -6,51 +6,53 @@
 #    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/01/27 19:49:12 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/01/29 13:33:24 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I./includes
+CFLAGS = -Wall -Wextra -Werror
+LINK = -I./includes
+VPATH = srcs srcs/commands srcs/commands/builtins srcs/executes srcs/utils srcs/utils/linked_lists
 RM = rm -rf
 LIBFT = ./libft/libft.a
 
+UTILS = is_all_digits panic destroy valid_input
+UTILS_LL = p_llst_utils v_llst_utils v_llst_utils_v2
+GENERAL = config_signals parser setup_shell
+COMMANDS = binaries builtins 
+BUILTINS = cd echo env exit export pwd unset
+EXECUTES = cmds executables pipe redirects
+
 NAME = minishell
-SRCS =  srcs/commands/binaries.c\
-		srcs/commands/builtins.c\
-		srcs/commands/builtins/cd.c\
-		srcs/commands/builtins/echo.c\
-		srcs/commands/builtins/env.c\
-		srcs/commands/builtins/exit.c\
-		srcs/commands/builtins/export.c\
-		srcs/commands/builtins/pwd.c\
-		srcs/commands/builtins/unset.c\
-		srcs/executes/cmds.c\
-		srcs/executes/executables.c\
-		srcs/executes/pipe.c\
-		srcs/executes/redirects.c\
-		srcs/utils/linked_lists/p_llst_utils.c\
-		srcs/utils/linked_lists/v_llst_utils.c\
-		srcs/utils/linked_lists/v_llst_utils_v2.c\
-		srcs/utils/is_all_digits.c\
-		srcs/utils/destroy.c\
-	   	srcs/config_signals.c\
-		srcs/setup_shell.c\
-	   	srcs/parser.c\
-	   	main.c
+SRCS =	$(addsuffix .c, $(UTILS))\
+		$(addsuffix .c, $(UTILS_LL))\
+		$(addsuffix .c, $(GENERAL))\
+		$(addsuffix .c, $(COMMANDS))\
+		$(addsuffix .c, $(BUILTINS))\
+		$(addsuffix .c, $(EXECUTES))\
+		main.c
 		
-OBJS = $(SRCS:.c=.o)
+OBJ_DIR = obj
+OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)
+
+$(NAME): $(OBJ_DIR) $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -lreadline -o minishell
 
 $(LIBFT):
 	$(MAKE) -C ./libft
 
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(INCLUDES) $(LIBFT) -lreadline -o minishell
+$(OBJ_DIR):
+	mkdir -p obj
+
+$(OBJ_DIR)/%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ $(LINK)
 
 clean:
 	$(MAKE) clean -C ./libft
+	$(RM) $(OBJ_DIR)
 	$(RM) $(OBJS)
 	
 fclean: clean

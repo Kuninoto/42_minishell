@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 20:45:00 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/29 17:33:20 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern int	g_exit_status;
 
-/* void	print_operator(t_operator operator)
+void	print_operator(t_operator operator)
 {
 	const char *operators[6] = {"NONE", ">", ">>", "<", "<<", "|"};
 	printf("OPERATOR = %s", operators[operator]);
@@ -34,7 +34,7 @@ void	debug_args(t_statement *head)
 	}
 	printf("OUTPUT: \n");
 }
- */
+
 
 t_operator	get_operator(char *operator)
 {
@@ -105,6 +105,7 @@ size_t	get_token_len(char *input_at_i)
 		}
 		i += 1;
 	}
+	
 	return (i);
 }
 
@@ -133,38 +134,6 @@ size_t	get_nr_statements(char *input)
 		i += 1;
 	}
 	return (count);
-}
-
-bool	check_quotes(char *input)	
-{
-	int		s_quotes;
-	int		d_quotes;
-	int		i;
-	bool	in_dquotes;
-	bool	in_squotes;
-
-	s_quotes = 0;
-	d_quotes = 0;
-	in_dquotes = false;
-	in_squotes = false;
-	i = 0;
-	while (input[i])
-	{
-		if (input[i] == '\"' && !in_squotes)
-		{
-			in_dquotes = !in_dquotes;
-			d_quotes += 1;
-		}
-		if (input[i] == '\'' && !in_dquotes)
-		{
-			in_squotes = !in_squotes;
-			s_quotes += 1;
-		}
-		i += 1;
-	}
-	if (s_quotes % 2 == 0 && d_quotes % 2 == 0)
-		return (true);
-	return (false);
 }
 
 char	**parse_input(char *input, t_data *data)
@@ -225,8 +194,6 @@ t_statement	*parser(char *input, t_data *data)
 	size_t		i;
 	size_t		j;
 
-	if (!check_quotes(input))
-		return (NULL);
 	parsed = parse_input(input, data);
 	temp = p_new_node(get_argc(&parsed[0]));
 	head = temp;
@@ -244,6 +211,7 @@ t_statement	*parser(char *input, t_data *data)
 		temp = temp->next;
 	}
 	temp->next = NULL;
+	debug_args(head);
 	free(parsed);
 	free(input);
 	return (head);
