@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 20:40:47 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/29 16:27:03 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,16 @@
 # define DELIMS "\"\' "
 
 /* ERROR MESSAGES */
-# define PIPE_ERR "minishell: pipe() failed"
-# define FORK_ERR "minishell: fork() failed"
-# define UNCLOSEDQUOTES "minishell: unclosed quotes. My devs didn't \
-						 want to develop quote nor dquote prompt"
+
+# define CL_ARGUMENTS_ERR "no support for command-line arguments"
+# define UNCLOSED_QUOTES "minishell: unclosed quotes"
+# define STARTS_WITH_PIPE "minishell: syntax error near unexpected token `|'"
+
+# define PIPE_ERR "pipe() failed"
+# define FORK_ERR "fork() failed"
+
+
+# define TOO_MANY_ARGS "exit: too many arguments"
 
 typedef enum e_operator {
 	NONE,
@@ -69,6 +75,7 @@ typedef struct s_vlst {
 typedef struct s_data {
 	char		**envp;
 	t_vlst		*envp_lst;
+	t_statement	*head;
 }				t_data;
 
 /* Setups Minishell. 
@@ -77,8 +84,11 @@ Saves envp
 Initializes lsts
 Configs Signals
 */
-void				setup_shell(char **av, char **envp,
-						t_data *data, t_statement **statement_list);
+void				setup_shell(char **envp, t_data *data, t_statement **statement_list);
+
+static inline bool starts_with_pipe(char *input) {
+	return (input[0] == '|');
+};
 
 /* COMMANDS */
 
@@ -100,7 +110,7 @@ void				cmd_env(t_data *data);
 // Wannabe export
 void				cmd_export(char *var_name, t_data *data);
 // Wannabe exit
-void				cmd_exit(t_statement **head, int exit_status, t_data *data);
+void				cmd_exit(t_statement *head, int exit_status, t_data *data);
 // Wannabe unset
 void				cmd_unset(char *var_name, t_vlst **head);
 
@@ -108,12 +118,6 @@ static inline void	cmd_not_found(char *cmd_name)
 {
 	ft_putstr_fd(cmd_name, STDERR_FILENO);
 	ft_putendl_fd(": command not found", STDERR_FILENO);
-}
-
-static inline void	unclosed_quotes(char *input)
-{
-	free(input);
-	ft_putendl_fd(UNCLOSEDQUOTES, STDERR_FILENO);
 }
 
 // Utils
@@ -124,6 +128,8 @@ static inline bool	is_absolute_path(t_statement *statement)
 		return (true);
 	return (false);
 }
+
+bool	valid_input(char *input, t_statement *statement_list, t_data *data);
 
 bool				is_all_digits(char *str);
 
@@ -144,7 +150,7 @@ t_statement			*p_new_node(int argc);
 which head is passed as a parameter */
 size_t				p_lstsize(t_statement *head);
 /* Frees the linked list which head is passed as parameter */
-void				p_lstclear(t_statement **head);
+void				p_lstclear(t_statement *head);
 
 t_vlst				*v_new_node(char *var_name, char *var_value,
 						bool is_exported);
@@ -167,5 +173,7 @@ t_statement			*parser(char *input, t_data *data);
 void				print_operator(t_operator operator);
 
 void				debug_args(t_statement *head);
+
+void	panic(t_data *data, char *error_msg, int exit_status);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 19:57:09 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/29 12:26:42 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,10 +187,6 @@ char				*join_free(char *s1, char *s2);
 char				*join_freev2(char *s1, char *s2);
 /* Returns s1+s2, creating a new string and frees both s1 and s2 */
 char				*join_free_both(char *s1, char *s2);
-
-/* Prints Error: <error_msg>\n to STDERR 
-and exits the program on failure */
-void				panic(char *error_msg);
 
 /* Frees all elements in the matrix and its pointer */
 void				free_matrix(char **matrix);

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 18:33:54 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/29 15:15:05 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,17 @@ extern int	g_exit_status;
 
 static void	call_cmd_exit(t_statement *statement, t_data *data)
 {
-	if (statement->argc > 1)
+	if (statement->argc == 2)
 	{
 		if (is_all_digits(statement->argv[1]))
-			cmd_exit(&statement, ft_atoi(statement->argv[1]), data);
+			cmd_exit(statement, ft_atoi(statement->argv[1]), data);
 		else
-			cmd_exit(&statement, 2, data);
+			cmd_exit(statement, 2, data);
 	}
+	else if (statement->argc > 2)
+		cmd_exit(statement, EXIT_FAILURE, data);
 	else
-		cmd_exit(&statement, EXIT_SUCCESS, data);
+		cmd_exit(statement, EXIT_SUCCESS, data);
 }
 
 bool	builtin_without_fork(t_statement *statement, t_data *data)
