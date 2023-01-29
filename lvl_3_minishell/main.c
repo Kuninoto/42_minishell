@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/29 16:13:39 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/29 19:11:01 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,94 @@ void	wait_clean_parsed(t_statement *statement_list)
 	p_lstclear(statement_list);
 }
 
+int	lexer_string_size(char *input, t_data *data)
+{
+	size_t 	i;
+	size_t 	size;
+	size_t	var_size;
+	char	*var_name;
+	char	*var_value;
+	bool	in_quotes;
+	
+	i = 0;
+	size = 0;
+	in_quotes = false;
+	while(input[i])
+	{
+		if (input[i] == '\'')
+			in_quotes = !in_quotes;
+		if (input[i] == '$' && !in_quotes)
+		{
+			var_size = 0;
+			i += 1;
+			while (input[i + var_size] && input[i + var_size] != ' ' && input[i + var_size] != '$')
+				var_size += 1;
+			var_name = ft_substr(input, i, var_size);
+			var_value = get_fromvlst(var_name, &data->envp_lst);
+			if(!var_value)
+			{
+				i += 1;
+				continue;
+			}
+			size += ft_strlen(var_value);
+			free(var_name);
+			i += var_size;
+			continue;
+		}
+		size += 1;
+		i += 1;
+	}
+	return (size);
+}
+
+char *lexer(char *input, t_data *data)
+{
+	char	*expanded_input;
+	size_t	i;
+	size_t	j;
+	size_t	k;
+	size_t	size;
+	char	*var_name;
+	char	*var_value;
+	bool	in_quotes;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	size = 0;
+	in_quotes = false;
+	expanded_input = malloc((lexer_string_size(input, data) + 1)* sizeof(char));
+	while(input[i])
+	{
+		if (input[i] == '\'')
+			in_quotes = !in_quotes;
+		if (input[i] == '$' && !in_quotes)
+		{
+			size = 0;
+			i += 1;
+			k = 0;
+			while (input[i + size] && input[i + size] != '$' && input[i + size] != ' ')
+				size += 1;
+			var_name = ft_substr(input, i, size);
+			var_value = get_fromvlst(var_name, &data->envp_lst);
+			while (var_value[k])
+			{
+				expanded_input[j] = var_value[k];
+				j += 1;
+				k += 1;	
+			}
+			free(var_name);
+			i += size;
+		}
+		expanded_input[j] = input[i];
+		i += 1;
+		j += 1;
+	}
+	expanded_input[j] = '\0';
+	free(input);
+	return(expanded_input);
+}
+
 int	main(int ac, char **av, char **envp)
 {
 	t_data		data;
@@ -48,6 +136,8 @@ int	main(int ac, char **av, char **envp)
 		|| input[0] == '\0')
 			continue ;
 		add_history(input);
+		printf("%s\n", lexer(input, &data));
+		exit(1);
 		statement_list = parser(input, &data);
 		exec_type(statement_list, &data);
 		wait_clean_parsed(statement_list);
