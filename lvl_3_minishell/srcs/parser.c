@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/29 17:33:20 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/29 18:08:13 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,3 +216,14 @@ t_statement	*parser(char *input, t_data *data)
 	free(input);
 	return (head);
 }
+/* 
+t_statement	*parser(char *input, t_data *data)
+{
+	t_statement	*temp;
+	t_statement	*head;
+
+	temp = p_new_node();
+
+
+} */
+
