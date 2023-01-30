@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setup_shell.c                                      :+:      :+:    :+:   */
+/*   put_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/20 15:17:06 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/30 22:37:21 by nnuno-ca         ###   ########.fr       */
+/*   Created: 2023/01/30 22:00:47 by nnuno-ca          #+#    #+#             */
+/*   Updated: 2023/01/30 22:20:36 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	setup_shell(char **envp, t_data *data, t_statement **statement_list)
+/* writes minishell: <cmd> : error_msg to STDERR */
+/* If error_msh is null calls perror() to get an error message */
+void	put_error(char *cmd, char *error_msg)
 {
-	data->envp = envp;
-	data->envp_lst = init_envp_lst(envp);
-	*statement_list = NULL;
-	config_signals();
+	ft_putstr_fd("minishell:", STDERR_FILENO);
+	if (cmd)
+		ft_putstr_fd(cmd, STDERR_FILENO);
+	ft_putchar_fd(' ', STDERR_FILENO);
+	if (error_msg)
+		ft_putendl_fd(error_msg, STDERR_FILENO);
+	else
+		perror(NULL);
 }

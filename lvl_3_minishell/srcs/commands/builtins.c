@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/29 15:15:05 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:17:31 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,16 @@ bool	builtin_without_fork(t_statement *statement, t_data *data)
 	else if (streq(statement->argv[0], "unset"))
 		cmd_unset(statement->argv[1], &data->envp_lst);
 	else if (streq(statement->argv[0], "export"))
-		cmd_export(statement->argv[1], data);
+	{
+		if (statement->argc == 1)
+			only_export(data);
+		else
+			cmd_export(statement->argv[1], data);
+	}
 	else if (streq(statement->argv[0], "cd"))
 	{
 		if (statement->argc > 2)
-			ft_putendl_fd("minishell: cd: too many arguments", STDERR_FILENO);
+			put_error("cd", "too many arguments");
 		else
 			cmd_cd(statement->argv[1]);
 	}
