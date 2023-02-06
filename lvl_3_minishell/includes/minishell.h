@@ -44,7 +44,7 @@
 # define FORK_ERR "fork() failed"
 
 
-# define TOO_MANY_ARGS "exit: too many arguments"
+# define TOO_MANY_ARGS "minishell: exit: too many arguments"
 
 typedef enum e_operator {
 	NONE,
@@ -110,6 +110,7 @@ void				cmd_cd(char *path);
 void				cmd_env(t_data *data);
 // Wannabe export
 void				cmd_export(char *var_name, t_data *data);
+void				only_export(t_data *data);
 // Wannabe exit
 void				cmd_exit(t_statement *head, int exit_status, t_data *data);
 // Wannabe unset
@@ -130,10 +131,12 @@ static inline bool	is_absolute_path(t_statement *statement)
 	return (false);
 }
 
-bool	valid_input(char *input, t_statement *statement_list, t_data *data);
+bool				valid_input(char *input, t_statement *statement_list, t_data *data);
 
 bool				is_all_digits(char *str);
 
+void				put_error(char *cmd, char *error_msg);
+void				panic(t_data *data, char *error_msg, int exit_status);
 void				destroy(t_data *data);
 
 void				config_signals(void);
@@ -175,6 +178,5 @@ void				print_operator(t_operator operator);
 
 void				debug_args(t_statement *head);
 
-void	panic(t_data *data, char *error_msg, int exit_status);
 
 #endif

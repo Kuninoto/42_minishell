@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/27 18:16:18 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:20:11 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ static void	redirect_input_until(t_statement *node)
 static void	redirect_input(t_statement *node)
 {
 	int		in_file;
-	char	*error_msg;
 
 	if (node->next->argv[0])
 	{
@@ -45,9 +44,7 @@ static void	redirect_input(t_statement *node)
 		}
 		else
 		{
-			error_msg = ft_strjoin("minishell: ", node->next->argv[0]);
-			perror(error_msg);
-			free(error_msg);
+			put_error(node->next->argv[0], NULL);
 			exit(EXIT_FAILURE);
 		}
 	}

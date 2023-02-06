@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/01/29 13:33:24 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/01/30 22:01:49 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ VPATH = srcs srcs/commands srcs/commands/builtins srcs/executes srcs/utils srcs/
 RM = rm -rf
 LIBFT = ./libft/libft.a
 
-UTILS = is_all_digits panic destroy valid_input
+UTILS = is_all_digits put_error panic destroy valid_input
 UTILS_LL = p_llst_utils v_llst_utils v_llst_utils_v2
 GENERAL = config_signals parser setup_shell
 COMMANDS = binaries builtins 

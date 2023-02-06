@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:31:56 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/29 16:26:51 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/01/30 22:37:25 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ bool	valid_input(char *input, t_statement *statement_list, t_data *data)
 		valid = false;
 	}
 	else if (invalid_syntax(input))
-	{
 		valid = false;
-	}
 	if (!valid)
 		free(input);
 	return (valid);

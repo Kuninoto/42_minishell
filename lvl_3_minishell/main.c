@@ -150,6 +150,7 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		add_history(input);
 		input = lexer(input, &data);
+    // data.head = statement_list;
 		statement_list = parser(input);
 		exec_type(statement_list, &data);
 		wait_clean_parsed(statement_list);
