@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/29 16:27:03 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/06 17:01:41 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define OPERATORS "|<>"
 # define QUOTES "\"\'"
 # define DELIMS "\"\' "
+# define REDIRECTS "><"
 
 /* ERROR MESSAGES */
 
@@ -168,7 +169,7 @@ t_vlst				*init_envp_lst(char **envp);
 
 size_t				get_nr_statements(char *input);
 
-t_statement			*parser(char *input, t_data *data);
+t_statement			*parser(char *input);
 
 void				print_operator(t_operator operator);
 
