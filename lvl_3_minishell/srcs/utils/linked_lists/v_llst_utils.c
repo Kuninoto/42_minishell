@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/06 19:09:32 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/08 14:47:49 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	save_user_vars(char *statement, t_vlst **head, bool is_exported)
 	char	**line;
 
 	line = split_envp(statement);
-	if(!*line[0] || !*line[1])
+	if (!*line[0] || !*line[1])
 	{
-		free (line);
-		return;
+		free(line);
+		return ;
 	}
 	cmd_unset(line[0], head);
 	v_lstadd_back(head, v_new_node(line[0], line[1], is_exported));

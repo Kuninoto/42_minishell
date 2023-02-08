@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
+#    By: roramos <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/01/29 13:33:24 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/02/08 18:51:26 by roramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 LINK = -I./includes
 VPATH = srcs srcs/commands srcs/commands/builtins srcs/executes srcs/utils srcs/utils/linked_lists
 RM = rm -rf
@@ -19,7 +19,7 @@ LIBFT = ./libft/libft.a
 
 UTILS = is_all_digits panic destroy valid_input
 UTILS_LL = p_llst_utils v_llst_utils v_llst_utils_v2
-GENERAL = config_signals parser setup_shell
+GENERAL = config_signals parser setup_shell expander remove_quotes
 COMMANDS = binaries builtins 
 BUILTINS = cd echo env exit export pwd unset
 EXECUTES = cmds executables pipe redirects
@@ -61,7 +61,8 @@ fclean: clean
 	
 re: fclean all
 
-run: all clean
+run: all
+	./minishell
 
 .PHONY: all clean fclean re run
 

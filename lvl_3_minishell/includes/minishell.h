@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/06 17:01:41 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/08 19:13:08 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,11 @@
 # define CL_ARGUMENTS_ERR "no support for command-line arguments"
 # define UNCLOSED_QUOTES "minishell: unclosed quotes"
 # define STARTS_WITH_PIPE "minishell: syntax error near unexpected token `|'"
+# define STARTS_WITH_REDIR "minishell: syntax error near unexpected\
+							token `newline'"
 
 # define PIPE_ERR "pipe() failed"
 # define FORK_ERR "fork() failed"
-
 
 # define TOO_MANY_ARGS "exit: too many arguments"
 
@@ -85,11 +86,8 @@ Saves envp
 Initializes lsts
 Configs Signals
 */
-void				setup_shell(char **envp, t_data *data, t_statement **statement_list);
-
-static inline bool starts_with_pipe(char *input) {
-	return (input[0] == '|');
-};
+void				setup_shell(char **envp, t_data *data,
+						t_statement **statement_list);
 
 /* COMMANDS */
 
@@ -111,7 +109,7 @@ void				cmd_env(t_data *data);
 // Wannabe export
 void				cmd_export(char *var_name, t_data *data);
 // Wannabe exit
-void				cmd_exit(t_statement *head, int exit_status, t_data *data);
+void				cmd_exit(int exit_status, t_data *data);
 // Wannabe unset
 void				cmd_unset(char *var_name, t_vlst **head);
 
@@ -130,7 +128,7 @@ static inline bool	is_absolute_path(t_statement *statement)
 	return (false);
 }
 
-bool	valid_input(char *input, t_statement *statement_list, t_data *data);
+bool				valid_input(char *input, t_data *data);
 
 bool				is_all_digits(char *str);
 
@@ -169,12 +167,16 @@ t_vlst				*init_envp_lst(char **envp);
 
 size_t				get_nr_statements(char *input);
 
+char				*remove_quotes(char	*parsed);
+
+char				*expander(char *input, t_data *data);
+
 t_statement			*parser(char *input);
 
 void				print_operator(t_operator operator);
 
 void				debug_args(t_statement *head);
 
-void	panic(t_data *data, char *error_msg, int exit_status);
+void				panic(t_data *data, char *error_msg, int exit_status);
 
 #endif
