@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:31:56 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/29 16:26:51 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/08 14:53:57 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,28 @@ static int	unclosed_quotes(char *str)
 
 static bool	invalid_syntax(char *input)
 {
-	if (starts_with_pipe(input))
+	if (input[0] == '|')
 	{
 		ft_putendl_fd(STARTS_WITH_PIPE, STDERR_FILENO);
+		return (true);
+	}
+	else if (input[0] == '>' || input[0] == '<')
+	{
+		ft_putendl_fd(STARTS_WITH_REDIR, STDERR_FILENO);
 		return (true);
 	}
 	return (false);
 }
 
-bool	valid_input(char *input, t_statement *statement_list, t_data *data)
+bool	valid_input(char *input, t_data *data)
 {
 	bool	valid;
-	
+
 	valid = true;
 	if (input == NULL)
 	{
 		free(input);
-		cmd_exit(statement_list, 127, data);
+		cmd_exit(127, data);
 	}
 	else if (unclosed_quotes(input))
 	{
@@ -63,9 +68,7 @@ bool	valid_input(char *input, t_statement *statement_list, t_data *data)
 		valid = false;
 	}
 	else if (invalid_syntax(input))
-	{
 		valid = false;
-	}
 	if (!valid)
 		free(input);
 	return (valid);

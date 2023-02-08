@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/29 12:26:42 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/08 19:41:51 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,13 @@
 # include <limits.h>
 # include <fcntl.h>
 
+# include "inlines.h"
+# include "inlines2.h"
+
 int					ft_isalpha(int c);
-
-static inline bool	is_digit(int c)
-{
-	if ((c >= '0' && c <= '9'))
-		return (true);
-	return (false);
-}
-
 int					ft_isalnum(int c);
-
-static inline int	ft_isascii(int c)
-{
-	if (c >= 0 && c <= 127)
-		return (1);
-	return (0);
-}
-
 int					ft_isprint(int c);
+
 size_t				ft_strlen(const char *str);
 void				*ft_memset(void *ptr, int x, size_t n);
 void				ft_bzero(void *ptr, size_t n);
@@ -47,21 +35,6 @@ void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memmove(void *dest, const void *src, size_t n);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 size_t				ft_strlcat(char *dest, char *src, size_t size);
-
-static inline int	ft_toupper(int c)
-{
-	if (c >= 'a' && c <= 'z')
-		return (c - 32);
-	return (c);
-}
-
-static inline int	ft_tolower(int c)
-{
-	if (c >= 'A' && c <= 'Z')
-		return (c + 32);
-	return (c);
-}
-
 char				*ft_strchr(const char *str, int c);
 char				*ft_strrchr(const char *str, int c);
 int					ft_strncmp(const char *str1, const char *str2, size_t n);
@@ -89,44 +62,6 @@ char				**split_per_set(char const *s, const char *set);
 char				*ft_itoa(int n);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char*));
-
-/**
- * @brief Writes a character into fd
- * 
- * @param c  Character to write
- * @param fd File descriptor to write to  
- */
-static inline void	ft_putchar_fd(char c, int fd)
-{
-	if (fd < 0)
-		return ;
-	write(fd, &c, 1);
-}
-
-/**
- * @brief Writes str into fd
- * 
- * @param str String to write
- * @param fd File descriptor to write to
- */
-static inline void	ft_putstr_fd(char *str, int fd)
-{
-	if (!str || fd < 0)
-		return ;
-	write(fd, str, ft_strlen(str));
-}
-
-/**
- * @brief Writes str, followed by a newline, into fd
- * 
- * @param str String to write
- * @param fd  File descriptor to write to
- */
-static inline void	ft_putendl_fd(char *str, int fd)
-{
-	ft_putstr_fd(str, fd);
-	write(fd, "\n", 1);
-}
 
 void				ft_putnbr_fd(int n, int fd);
 
@@ -197,14 +132,6 @@ bool				streq(char *str1, char *str2);
 /* Return a literal copy of to_copy (useful when 
 you want to free to_copy for some reason) */
 char				*ft_strcpy(char *to_copy);
-
-static inline bool	is_spaces(char c)
-{
-	if (c == '\t' || c == '\n' || c == '\v'
-		|| c == '\f' || c == '\r' || c == ' ')
-		return (true);
-	return (false);
-}
 
 /**
  * @brief Checks if a string is only composed by whitespaces

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim_free.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 12:27:41 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 18:11:24 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:40:04 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ static char	*ft_strncpy(char *dest, const char *src, size_t n)
 	size_t	i;
 
 	i = 0;
-	while (src[i] != '\0' && i < n)
+	while (src[i] && i < n)
 	{
 		dest[i] = src[i];
 		i += 1;
 	}
-	if (i < n && src[i] == '\0')
+	if (src[i] && i < n)
 	{
-		while (dest[i] != '\0')
+		while (i < n)
 			dest[i++] = '\0';
 	}
 	dest[i] = '\0';
@@ -46,7 +46,7 @@ char	*trim_free(char *s1, char const *set)
 	while (end > beg && ft_strchr(set, s1[(beg + end) - 1]) != NULL)
 		end -= 1;
 	trimmed_str = malloc((end + 1) * sizeof(char));
-	if (trimmed_str == NULL)
+	if (!trimmed_str)
 		return (NULL);
 	ft_strncpy(trimmed_str, (s1 + beg), end);
 	free(s1);
