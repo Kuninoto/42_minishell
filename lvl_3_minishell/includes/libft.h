@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/08 19:41:51 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/09 14:00:17 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int					ft_isalpha(int c);
 int					ft_isalnum(int c);
 int					ft_isprint(int c);
 
-size_t				ft_strlen(const char *str);
 void				*ft_memset(void *ptr, int x, size_t n);
 void				ft_bzero(void *ptr, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);

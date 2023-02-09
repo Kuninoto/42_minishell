@@ -6,20 +6,22 @@
 #    By: roramos <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/02/08 18:51:26 by roramos          ###   ########.fr        #
+#    Updated: 2023/02/09 18:04:42 by roramos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 LINK = -I./includes
-VPATH = srcs srcs/commands srcs/commands/builtins srcs/executes srcs/utils srcs/utils/linked_lists
+VPATH = srcs srcs/parser srcs/expander srcs/commands srcs/commands/builtins srcs/executes srcs/utils srcs/utils/linked_lists
 RM = rm -rf
 LIBFT = ./libft/libft.a
 
 UTILS = is_all_digits panic destroy valid_input
 UTILS_LL = p_llst_utils v_llst_utils v_llst_utils_v2
-GENERAL = config_signals parser setup_shell expander remove_quotes
+PARSER = parser parser_utils
+EXPANDER = expander expander_utils
+GENERAL = config_signals setup_shell remove_quotes
 COMMANDS = binaries builtins 
 BUILTINS = cd echo env exit export pwd unset
 EXECUTES = cmds executables pipe redirects
@@ -27,6 +29,8 @@ EXECUTES = cmds executables pipe redirects
 NAME = minishell
 SRCS =	$(addsuffix .c, $(UTILS))\
 		$(addsuffix .c, $(UTILS_LL))\
+		$(addsuffix .c, $(PARSER))\
+		$(addsuffix .c, $(EXPANDER))\
 		$(addsuffix .c, $(GENERAL))\
 		$(addsuffix .c, $(COMMANDS))\
 		$(addsuffix .c, $(BUILTINS))\

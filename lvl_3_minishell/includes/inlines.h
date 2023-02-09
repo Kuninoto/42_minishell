@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 19:39:12 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/08 19:41:09 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/09 14:00:22 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define INLINES_H
 
 # include "libft.h"
+
+size_t				ft_strlen(const char *str);
 
 /**
  * @brief Writes a character into fd
