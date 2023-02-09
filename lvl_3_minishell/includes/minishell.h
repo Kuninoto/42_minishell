@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/08 19:13:08 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/09 16:32:50 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,18 @@ size_t				get_nr_statements(char *input);
 
 char				*remove_quotes(char	*parsed);
 
+// EXPANDER UTILS
+size_t				exit_status_size(void);
+size_t				expand_size(char *input, size_t *i, t_data *data);
+int					expanded_size(char *input, t_data *data);
+
 char				*expander(char *input, t_data *data);
+
+// PARSER UTILS
+t_operator			get_operator(char *operator);
+size_t				get_argc(char **parsed);
+size_t				get_token_len(char *input_at_i);
+size_t				get_nr_statements(char *input);
 
 t_statement			*parser(char *input);
 

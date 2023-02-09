@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/08 19:36:39 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/09 17:02:30 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		add_history(input);
 		input = expander(input, &data);
-		if (!input[0])
+		if (!input || !input[0])
 		{
 			free(input);
 			continue ;
