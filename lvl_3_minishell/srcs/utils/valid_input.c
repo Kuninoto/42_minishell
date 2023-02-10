@@ -6,13 +6,13 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:31:56 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 00:11:28 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 01:34:48 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 static int	unclosed_quotes(char *str)
 {
@@ -43,12 +43,12 @@ static bool	invalid_syntax(char *input)
 {
 	if (input[ft_strlen(input) - 1] == '|')
 	{
-		ft_putendl_fd(SYNTAX_ERR_PIPE, STDERR_FILENO);
+		ft_putendl_fd(SYTX_ERR_PIPE, STDERR_FILENO);
 		return (true);
 	}
 	if (is_onstr(REDIRECTS, input[ft_strlen(input) - 1]))
 	{
-		ft_putendl_fd(SYNTAX_ERR_REDIR, STDERR_FILENO);
+		ft_putendl_fd(SYTX_ERR_RDR, STDERR_FILENO);
 		return (true);
 	}
 	return (false);

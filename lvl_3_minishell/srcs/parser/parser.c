@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 00:35:43 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 01:31:02 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	debug_args(t_statement *head)
 		printf("\n\n");
 	}
 	printf("OUTPUT: \n");
-} */
+}
+ */
 
 char	**parse_input(char *input)
 {

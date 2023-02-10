@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:23:00 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 00:51:12 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 01:28:57 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,24 @@
 
 t_operator	get_operator(char *operator)
 {
+	t_operator	op;
+
 	if (!operator)
-		return (NONE);
-	if (streq(operator, "|"))
-		return (PIPE);
-	if (streq(operator, ">>"))
-		return (RDR_OUT_APPEND);
-	if (streq(operator, ">"))
-		return (RDR_OUT_REPLACE);
-	if (streq(operator, "<<"))
-		return (RDR_INPUT_UNTIL);
-	if (streq(operator, "<"))
-		return (RDR_INPUT);
-	return (NONE);
+		op = NONE;
+	else if (streq(operator, "|"))
+		op = PIPE;
+	else if (streq(operator, ">>"))
+		op = RDR_OUT_APPEND;
+	else if (streq(operator, ">"))
+		op = RDR_OUT_REPLACE;
+	else if (streq(operator, "<<"))
+		op = RDR_INPUT_UNTIL;
+	else if (streq(operator, "<"))
+		op = RDR_INPUT;
+	else
+		op = NONE;
+	free(operator);
+	return (op);
 }
 
 size_t	get_argc(char **parsed)

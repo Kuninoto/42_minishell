@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 17:13:35 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 00:34:56 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 01:31:22 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ size_t	expand_variable(char *expanded_input_at_i, char *input,
 	j = 0;
 	k = 0;
 	*i += 1;
-	while (input[*i + size] 
+	while (input[*i + size]
 		&& input[*i + size] != ' '
 		&& input[*i + size] != '$')
 		size += 1;
@@ -55,10 +55,7 @@ size_t	expand_variable(char *expanded_input_at_i, char *input,
 	if (!var_value)
 		return (0);
 	while (var_value[k])
-	{
-		expanded_input_at_i[j] = var_value[k++];
-		j += 1;
-	}
+		expanded_input_at_i[j++] = var_value[k++];
 	return (j);
 }
 

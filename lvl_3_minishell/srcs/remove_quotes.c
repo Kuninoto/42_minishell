@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 18:19:32 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/08 18:21:53 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/10 01:14:04 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static size_t	remove_quotes_size(char	*parsed)
 		}
 		quotes = 0;
 	}
+	printf("size = %ld\n", size);
 	return (size);
 }
 
