@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v_llst_utils_v2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 18:12:42 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/09 16:53:29 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/10 02:10:43 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,20 @@ t_vlst	*v_lstlast(t_vlst *node)
 		node = node->next;
 	}
 	return (node);
+}
+
+bool	get_exported_state(char *var_name, t_vlst **head)
+{
+	t_vlst	*temp;
+
+	temp = *head;
+	while (temp != NULL)
+	{
+		if (streq(var_name, temp->var_name))
+			return (temp->is_exported);
+		temp = temp->next;
+	}
+	return (false);
 }
 
 char	*get_fromvlst(char *var_name, t_vlst **head)

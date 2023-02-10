@@ -6,11 +6,13 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:54:55 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/22 03:04:42 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 01:57:27 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_exit_status;
 
 void	dismiss_signal(int signum)
 {
@@ -20,6 +22,7 @@ void	dismiss_signal(int signum)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_exit_status = 130;
 	}
 }
 

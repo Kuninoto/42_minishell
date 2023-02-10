@@ -6,7 +6,7 @@
 #    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/02/10 01:40:50 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/02/10 03:16:54 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,9 @@ fclean: clean
 	$(RM) $(NAME)
 	
 re: fclean all
+
+noleaks: re
+	valgrind --leak-check=full --show-leak-kinds=all -s ./minishell
 
 run: re
 	./minishell
