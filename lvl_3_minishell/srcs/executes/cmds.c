@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 04:00:08 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:24:15 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 extern int	g_exit_status;
 
-void	print_operator(t_operator operator)
+/* void	print_operator(t_operator operator)
 {
 	const char *operators[6] = {"NONE", ">", ">>", "<", "<<", "|"};
 	printf("OPERATOR = %s", operators[operator]);
 }
+ */
 
 //	bytes written on pipedes[1] can be read on pipedes[0]
 void	exec_cmd(t_statement *current_node, t_data *data)
@@ -29,7 +30,6 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 		exec_executables(current_node, data);
 	else
 		exec_redirects(current_node, data);
-//	exec_cmd(current_node->next, data);
 	g_exit_status = EXIT_SUCCESS;
 	exit(EXIT_SUCCESS);
 }
