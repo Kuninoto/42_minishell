@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 01:47:56 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 04:54:49 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int ac, char **av, char **envp)
 			free(input);
 			continue ;
 		}
+		printf("expanded = %s\n", input);
 		statement_list = parser(input);
 		exec_type(statement_list, &data);
 		wait_clean_parsed(statement_list);

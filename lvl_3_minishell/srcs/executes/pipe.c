@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:58:39 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/07 16:39:22 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/10 04:07:17 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	right_side(t_statement *nd, t_data *data, int pdes[2])
 	dup(pdes[0]);
 	close(pdes[0]);
 	close(pdes[1]);
-	exec_cmd(nd->next, data);
+	exec_cmd(nd, data);
 }
 
 void	exec_pipe(t_statement *node, t_data *data)
@@ -48,7 +48,7 @@ void	exec_pipe(t_statement *node, t_data *data)
 	if (child_pid == -1)
 		panic(data, FORK_ERR, EXIT_FAILURE);
 	if (child_pid == 0)
-		right_side(node, data, pipedes);
+		right_side(node->next, data, pipedes);
 	close(pipedes[0]);
 	close(pipedes[1]);
 	waitpid(child_pid, &status, 0);

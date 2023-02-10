@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 02:17:34 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 04:16:12 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,8 +186,6 @@ size_t				get_nr_statements(char *input);
 t_statement			*parser(char *input);
 
 void				print_operator(t_operator operator);
-
-void				debug_args(t_statement *head);
 
 void				panic(t_data *data, char *error_msg, int exit_status);
 
