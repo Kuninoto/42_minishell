@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/09 14:00:17 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/09 23:54:24 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ char				*join_free_both(char *s1, char *s2);
 
 /* Frees all elements in the matrix and its pointer */
 void				free_matrix(char **matrix);
+
+size_t				matrix_len(char **matrix);
 
 /* Checks if both strings passed as parameters are absolutely equal */
 bool				streq(char *str1, char *str2);

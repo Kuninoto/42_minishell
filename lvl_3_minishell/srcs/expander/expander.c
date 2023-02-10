@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 17:13:35 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/09 18:48:38 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/10 00:34:56 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ size_t	expand_exit_status(char *expanded_input_at_i, size_t *i)
 	return (j);
 }
 
-size_t	expand_variable(char *expandend_input_at_i, char *input,
+size_t	expand_variable(char *expanded_input_at_i, char *input,
 	size_t *i, t_data *data)
 {
 	char	*var_name;
@@ -43,19 +43,22 @@ size_t	expand_variable(char *expandend_input_at_i, char *input,
 	size = 0;
 	j = 0;
 	k = 0;
-	printf("j = %zu\n", j);
 	*i += 1;
-	while (input[*i + size] && input[*i + size] != '$'
-		&& input[*i + size] != ' ')
+	while (input[*i + size] 
+		&& input[*i + size] != ' '
+		&& input[*i + size] != '$')
 		size += 1;
 	var_name = ft_substr(input, *i, size);
 	var_value = get_fromvlst(var_name, &data->envp_lst);
 	free(var_name);
+	*i += size;
 	if (!var_value)
 		return (0);
 	while (var_value[k])
-		expandend_input_at_i[j++] = var_value[k++];
-	*i += size;
+	{
+		expanded_input_at_i[j] = var_value[k++];
+		j += 1;
+	}
 	return (j);
 }
 
@@ -70,7 +73,6 @@ char	*expander(char *input, t_data *data)
 	j = 0;
 	in_quotes = false;
 	expanded_input = malloc((expanded_size(input, data) + 1) * sizeof(char));
-	printf("a %d\n",expanded_size(input, data));
 	while (input[i])
 	{
 		if (input[i] == '\'')
@@ -82,7 +84,6 @@ char	*expander(char *input, t_data *data)
 		else
 			expanded_input[j++] = input[i++];
 	}
-	printf("j %zu %zu\n", j, i);
 	expanded_input[j] = '\0';
 	free(input);
 	return (expanded_input);
