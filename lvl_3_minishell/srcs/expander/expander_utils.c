@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:25:28 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/09 18:47:16 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/10 00:34:50 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t	exit_status_size(void)
 	return (size);
 }
 
-size_t	expand_size(char *input, size_t *i, t_data *data)
+size_t	expand_size(char *input_at_i, size_t *i, t_data *data)
 {
 	size_t	var_size;
 	char	*var_name;
@@ -33,18 +33,18 @@ size_t	expand_size(char *input, size_t *i, t_data *data)
 
 	*i += 1;
 	var_size = 0;
-	while (input[var_size + 1]
-		&& input[var_size + 1] != ' '
-		&& input[var_size + 1] != '$')
+	while (input_at_i[var_size + 1]
+		&& input_at_i[var_size + 1] != ' '
+		&& input_at_i[var_size + 1] != '$')
 				var_size += 1;
 	if (var_size == 0)
 		return (0);
-	var_name = ft_substr(input, *i, var_size);
+	var_name = ft_substr(input_at_i, 1, var_size);
 	var_value = get_fromvlst(var_name, &data->envp_lst);
-	if (!var_value)
-		return (0);
 	free(var_name);
 	*i += var_size;
+	if (!var_value)
+		return (0);
 	return (ft_strlen(var_value));
 }
 
@@ -60,10 +60,7 @@ int	expanded_size(char *input, t_data *data)
 	while (input[i])
 	{
 		if (input[i] == '\'')
-		{
 			in_quotes = !in_quotes;
-			i += 1;
-		}
 		if ((input[i] == '$' && input[i + 1] == '?') && !in_quotes)
 		{
 			size += exit_status_size() - 1;

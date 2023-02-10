@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/09 16:32:50 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/10 00:11:18 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@
 /* ERROR MESSAGES */
 
 # define CL_ARGUMENTS_ERR "no support for command-line arguments"
+# define NO_PIPE_PROMPT "minishell: no support for pipe prompt"
 # define UNCLOSED_QUOTES "minishell: unclosed quotes"
-# define STARTS_WITH_PIPE "minishell: syntax error near unexpected token `|'"
-# define STARTS_WITH_REDIR "minishell: syntax error near unexpected\
-							token `newline'"
+# define SYNTAX_ERR_PIPE "minishell: syntax error near unexpected token `|'"
+# define SYNTAX_ERR_REDIR "minishell: syntax error near unexpected token `newline'"
 
 # define PIPE_ERR "pipe() failed"
 # define FORK_ERR "fork() failed"
