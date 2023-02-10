@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:25:28 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 00:34:50 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:17:24 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ size_t	expand_size(char *input_at_i, size_t *i, t_data *data)
 	char	*var_value;
 
 	*i += 1;
+	if (single_dollar(input_at_i))
+		return (1);
 	var_size = 0;
 	while (input_at_i[var_size + 1]
 		&& input_at_i[var_size + 1] != ' '
+		&& input_at_i[var_size + 1] != '\"'
 		&& input_at_i[var_size + 1] != '$')
 				var_size += 1;
 	if (var_size == 0)

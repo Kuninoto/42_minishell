@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 04:16:12 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 05:25:54 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,14 @@ size_t				get_nr_statements(char *input);
 char				*remove_quotes(char	*parsed);
 
 // EXPANDER UTILS
+
+static inline bool	single_dollar(char *input_at_i)
+{
+	return ((!input_at_i[1]
+			|| input_at_i[1] == ' '
+			|| input_at_i[1] == '\"'));
+}
+
 size_t				exit_status_size(void);
 size_t				expand_size(char *input, size_t *i, t_data *data);
 int					expanded_size(char *input, t_data *data);
