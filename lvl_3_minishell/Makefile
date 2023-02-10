@@ -6,12 +6,12 @@
 #    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/02/10 03:16:54 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/02/10 04:41:49 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
 LINK = -I./includes
 VPATH = srcs srcs/parser srcs/expander srcs/commands srcs/commands/builtins srcs/executes srcs/utils srcs/utils/linked_lists
 RM = rm -rf
@@ -66,6 +66,9 @@ fclean: clean
 re: fclean all
 
 noleaks: re
+	valgrind ./minishell
+
+noleaksfull: re
 	valgrind --leak-check=full --show-leak-kinds=all -s ./minishell
 
 run: re

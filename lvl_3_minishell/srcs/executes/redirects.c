@@ -6,11 +6,13 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 03:15:49 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 04:31:03 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern int	g_exit_status;
 
 static void	redirect_input_until(t_statement *node)
 {
@@ -38,7 +40,9 @@ static void	redirect_input(t_statement *node)
 
 	if (node->next->argv[0])
 	{
-		if (access(node->next->argv[0], F_OK) == 0)
+		while (node->next->operator == RDR_INPUT)
+			node = node->next;
+		if (access(node->next->argv[0], F_OK | X_OK) == 0)
 		{
 			in_file = open(node->next->argv[0], O_RDONLY);
 			dup2(in_file, STDIN_FILENO);
@@ -48,6 +52,7 @@ static void	redirect_input(t_statement *node)
 			error_msg = ft_strjoin("minishell: ", node->next->argv[0]);
 			perror(error_msg);
 			free(error_msg);
+			g_exit_status = 2;
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -56,7 +61,8 @@ static void	redirect_input(t_statement *node)
 static void	redirect_output(t_statement *node)
 {
 	close(STDOUT_FILENO);
-	while (node->next->operator != NONE)
+	while (node->next->operator == RDR_OUT_REPLACE
+		|| node->next->operator == RDR_OUT_APPEND)
 	{
 		if (node->operator == RDR_OUT_REPLACE)
 			open(node->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0666);
@@ -73,12 +79,20 @@ static void	redirect_output(t_statement *node)
 
 void	exec_redirects(t_statement *node, t_data *data)
 {
+	t_statement	*temp;
+
+	temp = node;
 	if (node->operator == RDR_INPUT)
 		redirect_input(node);
 	else if (node->operator == RDR_INPUT_UNTIL)
 		redirect_input_until(node);
 	else
 		redirect_output(node);
-	node->operator = NONE;
-	exec_cmd(node, data);
+	temp->operator = NONE;
+	while (node->operator != NONE && node->operator != PIPE)
+		node = node->next;
+	if (node->operator == NONE)
+		exec_cmd(temp, data);
+	else
+		exec_pipe(node, data);
 }

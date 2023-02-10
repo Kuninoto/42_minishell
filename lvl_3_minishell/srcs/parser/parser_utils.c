@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:23:00 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 01:28:57 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 04:51:30 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ size_t	get_token_len(char *input_at_i)
 	}
 	while (input_at_i[i] && !is_spaces(input_at_i[i]))
 	{
+		printf("input[%ld] = %c\n", i, input_at_i[i]);
 		if (is_onstr(QUOTES, input_at_i[i]))
 		{
 			quotes = input_at_i[i++];
