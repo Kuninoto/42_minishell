@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/27 18:16:18 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 03:15:49 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	redirect_input(t_statement *node)
 
 	if (node->next->argv[0])
 	{
-		if (access(node->next->argv[0], F_OK) == SUCCESS)
+		if (access(node->next->argv[0], F_OK) == 0)
 		{
 			in_file = open(node->next->argv[0], O_RDONLY);
 			dup2(in_file, STDIN_FILENO);
@@ -56,10 +56,19 @@ static void	redirect_input(t_statement *node)
 static void	redirect_output(t_statement *node)
 {
 	close(STDOUT_FILENO);
+	while (node->next->operator != NONE)
+	{
+		if (node->operator == RDR_OUT_REPLACE)
+			open(node->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0666);
+		else if (node->operator == RDR_OUT_APPEND)
+			open(node->next->argv[0], O_WRONLY | O_APPEND | O_CREAT, 0666);
+		node = node->next;
+		close(1);
+	}
 	if (node->operator == RDR_OUT_REPLACE)
 		open(node->next->argv[0], O_WRONLY | O_TRUNC | O_CREAT, 0666);
 	else if (node->operator == RDR_OUT_APPEND)
-		open(node->next->argv[0], O_WRONLY | O_APPEND, 0666);
+		open(node->next->argv[0], O_WRONLY | O_APPEND | O_CREAT, 0666);
 }
 
 void	exec_redirects(t_statement *node, t_data *data)

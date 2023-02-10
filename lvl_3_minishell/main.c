@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 01:41:27 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 01:47:56 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		input = get_input();
-		if (!valid_input(input, &data) || input[0] == '\0')
+		if (!valid_input(input, &data))
 			continue ;
 		add_history(input);
 		input = expander(input, &data);

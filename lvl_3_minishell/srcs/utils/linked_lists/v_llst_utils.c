@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v_llst_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/08 14:47:49 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/10 02:18:03 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_vlst	*init_envp_lst(char **envp)
 	return (head);
 }
 
-void	save_user_vars(char *statement, t_vlst **head, bool is_exported)
+void	save_user_vars(char *statement, t_vlst **head, bool to_export)
 {
 	char	**line;
 
@@ -77,7 +77,9 @@ void	save_user_vars(char *statement, t_vlst **head, bool is_exported)
 		free(line);
 		return ;
 	}
+	if (get_exported_state(line[0], head) && !to_export)
+		to_export = true;
 	cmd_unset(line[0], head);
-	v_lstadd_back(head, v_new_node(line[0], line[1], is_exported));
+	v_lstadd_back(head, v_new_node(line[0], line[1], to_export));
 	free(line);
 }

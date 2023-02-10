@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:31:56 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 01:34:48 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 01:49:51 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ bool	valid_input(char *input, t_data *data)
 		free(input);
 		cmd_exit(127, data);
 	}
+	if (input[0] == '\0')
+		valid = false;
 	else if (unclosed_quotes(input))
 	{
 		ft_putendl_fd(UNCLOSED_QUOTES, STDERR_FILENO);
