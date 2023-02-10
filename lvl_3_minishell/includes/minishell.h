@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 00:11:18 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/10 01:34:11 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@
 # define CL_ARGUMENTS_ERR "no support for command-line arguments"
 # define NO_PIPE_PROMPT "minishell: no support for pipe prompt"
 # define UNCLOSED_QUOTES "minishell: unclosed quotes"
-# define SYNTAX_ERR_PIPE "minishell: syntax error near unexpected token `|'"
-# define SYNTAX_ERR_REDIR "minishell: syntax error near unexpected token `newline'"
+# define SYTX_ERR_PIPE "minishell: syntax error near unexpected token `|'"
+# define SYTX_ERR_RDR "minishell: syntax error near unexpected token `newline'"
 
 # define PIPE_ERR "pipe() failed"
 # define FORK_ERR "fork() failed"
