@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 02:18:03 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:26:52 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,19 +67,15 @@ t_vlst	*init_envp_lst(char **envp)
 	return (head);
 }
 
-void	save_user_vars(char *statement, t_vlst **head, bool to_export)
+int	save_user_vars(char *statement, t_vlst **head, bool to_export)
 {
 	char	**line;
 
 	line = split_envp(statement);
-	if (!*line[0] || !*line[1])
-	{
-		free(line);
-		return ;
-	}
 	if (get_exported_state(line[0], head) && !to_export)
 		to_export = true;
 	cmd_unset(line[0], head);
 	v_lstadd_back(head, v_new_node(line[0], line[1], to_export));
 	free(line);
+	return (EXIT_SUCCESS);
 }

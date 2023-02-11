@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/27 17:36:28 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:18:48 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print(t_statement *statement, int i)
 	}
 }
 
-void	cmd_echo(t_statement *statement)
+int	cmd_echo(t_statement *statement)
 {
 	bool	has_n;
 	int		i;
@@ -41,7 +41,7 @@ void	cmd_echo(t_statement *statement)
 	if (has_n)
 	{
 		if (!statement->argv[2])
-			return ;
+			return (EXIT_SUCCESS);
 		i = 2;
 	}
 	while (i != statement->argc)
@@ -53,4 +53,5 @@ void	cmd_echo(t_statement *statement)
 	}
 	if (!has_n)
 		ft_putchar_fd('\n', STDOUT_FILENO);
+	return (EXIT_SUCCESS);
 }

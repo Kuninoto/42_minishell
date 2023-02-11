@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:06:14 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/23 00:22:30 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:09:40 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 /* 0 as length parameter lets getcwd() copy the entire 
 / absolute path without length restrictions */
-void	cmd_pwd(void)
+
+int	cmd_pwd(void)
 {
 	char	*path;
 
@@ -23,8 +24,9 @@ void	cmd_pwd(void)
 	if (path == NULL)
 	{
 		perror("minishell:");
-		return ;
+		return (EXIT_FAILURE);
 	}
 	ft_putendl_fd(path, STDOUT_FILENO);
 	free(path);
+	return (EXIT_SUCCESS);
 }

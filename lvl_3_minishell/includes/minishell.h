@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 05:25:54 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:39:10 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,28 @@
 
 /* ERROR MESSAGES */
 
-# define CL_ARGUMENTS_ERR "no support for command-line arguments"
+// MINISHELL
+
+# define CL_ARGUMENTS_ERR "minishell: no support for command-line arguments"
 # define NO_PIPE_PROMPT "minishell: no support for pipe prompt"
+# define PIPE_ERR "pipe() failed"
+# define FORK_ERR "fork() failed"
+
+// SYNTAX
+
 # define UNCLOSED_QUOTES "minishell: unclosed quotes"
 # define SYTX_ERR_PIPE "minishell: syntax error near unexpected token `|'"
 # define SYTX_ERR_RDR "minishell: syntax error near unexpected token `newline'"
 
-# define PIPE_ERR "pipe() failed"
-# define FORK_ERR "fork() failed"
+// EXIT CMD
 
-# define TOO_MANY_ARGS "exit: too many arguments"
+# define EXIT_TOO_MANY_ARGS "minishell: exit: too many arguments"
+# define EXIT_NON_NUMERIC_ARG "minishell: exit: numeric argument required" 
+
+// CD CMD
+
+# define CD_TOO_MANY_ARGS "minishell: cd: too many arguments"
+
 
 typedef enum e_operator {
 	NONE,
@@ -99,19 +111,24 @@ bool				builtin_without_fork(t_statement *statement, t_data *data);
 executed a binary from /usr/bin */
 void				cmd_binaries(t_statement *statement, t_data *data);
 // Wannabe echo
-void				cmd_echo(t_statement *statement);
+int					cmd_echo(t_statement *statement);
 // Wannabe pwd
-void				cmd_pwd(void);
+int					cmd_pwd(void);
 // Wannabe cd
-void				cmd_cd(char *path);
+int					cmd_cd(char *path);
+static inline int	cd_too_many_args(void)
+{
+	ft_putendl_fd(CD_TOO_MANY_ARGS, STDERR_FILENO);
+	return (EXIT_FAILURE);
+}
 // Wannabe env
-void				cmd_env(t_data *data);
+int					cmd_env(t_data *data);
 // Wannabe export
-void				cmd_export(char *var_name, t_data *data);
+int					cmd_export(t_statement *statement, t_data *data);
 // Wannabe exit
 void				cmd_exit(int exit_status, t_data *data);
 // Wannabe unset
-void				cmd_unset(char *var_name, t_vlst **head);
+int					cmd_unset(char *var_name, t_vlst **head);
 
 static inline void	cmd_not_found(char *cmd_name)
 {
@@ -160,7 +177,7 @@ void				v_lstclear(t_vlst **head);
 bool				get_exported_state(char *var_name, t_vlst **head);
 char				*get_fromvlst(char *var_name, t_vlst **head);
 
-void				save_user_vars(char *statement, t_vlst **head,
+int					save_user_vars(char *statement, t_vlst **head,
 						bool to_export);
 
 t_vlst				*init_vars_lst(void);
