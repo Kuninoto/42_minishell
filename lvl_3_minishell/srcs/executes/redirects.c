@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 17:48:36 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:51:52 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	redirect_input(t_statement *node)
 	{
 		while (node->next->operator == RDR_INPUT)
 			node = node->next;
-		if (access(node->next->argv[0], F_OK | X_OK) == 0)
+		if (access(node->next->argv[0], F_OK) == 0)
 		{
 			in_file = open(node->next->argv[0], O_RDONLY, 0666);
 			dup2(in_file, STDIN_FILENO);
