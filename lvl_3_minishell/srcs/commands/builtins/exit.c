@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 18:17:34 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 03:38:57 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:29:32 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	cmd_exit(int exit_status, t_data *data)
 		ft_putendl_fd(EXIT_TOO_MANY_ARGS, STDERR_FILENO);
 	else if (exit_status == 2)
 		ft_putendl_fd(EXIT_NON_NUMERIC_ARG, STDERR_FILENO);
-	exit(exit_status);
+	exit(g_exit_status);
 }
