@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 04:12:26 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 17:48:36 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	redirect_input(t_statement *node)
 			node = node->next;
 		if (access(node->next->argv[0], F_OK | X_OK) == 0)
 		{
-			in_file = open(node->next->argv[0], O_RDONLY);
+			in_file = open(node->next->argv[0], O_RDONLY, 0666);
 			dup2(in_file, STDIN_FILENO);
 		}
 		else
