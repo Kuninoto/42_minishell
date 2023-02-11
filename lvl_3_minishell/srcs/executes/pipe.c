@@ -6,13 +6,13 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:58:39 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 03:30:23 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:18:31 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int g_exit_status;
+extern int	g_exit_status;
 
 static void	left_side(t_statement *nd, t_data *data, int pdes[2])
 {
@@ -37,6 +37,7 @@ void	exec_pipe(t_statement *node, t_data *data)
 {
 	pid_t	child_pid;
 	int		pipedes[2];
+	int		temp_status;
 
 	node->operator = NONE;
 	if (pipe(pipedes) == -1)
@@ -54,7 +55,9 @@ void	exec_pipe(t_statement *node, t_data *data)
 	close(pipedes[0]);
 	close(pipedes[1]);
 	printf("g_exit_status = %d\n", g_exit_status);
-	waitpid(child_pid, &g_exit_status, 0);
+	waitpid(child_pid, &temp_status, 0);
+	g_exit_status = temp_status;
 	printf("g_exit_status = %d\n", g_exit_status);
-	waitpid(child_pid, &g_exit_status, 0);
+	waitpid(child_pid, &temp_status, 0);
+	g_exit_status = temp_status;
 }

@@ -6,7 +6,7 @@
 #    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/02/11 03:20:15 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/02/11 04:11:20 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ EXPANDER = expander expander_utils
 GENERAL = config_signals setup_shell
 COMMANDS = binaries builtins 
 BUILTINS = cd echo env exit export pwd unset
-EXECUTES = cmds executables pipe redirects
+EXECUTES = exec_cmd executables pipe redirects
 
 NAME = minishell
 SRCS =	$(addsuffix .c, $(UTILS))\

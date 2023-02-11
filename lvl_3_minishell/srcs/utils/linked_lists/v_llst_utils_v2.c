@@ -6,35 +6,19 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 18:12:42 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 02:10:43 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 03:59:09 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_vlst	*v_lstlast(t_vlst *node)
+char	*get_varvalue_fromvlst(char *var_name, t_data *data)
 {
-	while (node)
-	{
-		if (!node->next)
-			break ;
-		node = node->next;
-	}
-	return (node);
-}
+	char	*var_value;
 
-bool	get_exported_state(char *var_name, t_vlst **head)
-{
-	t_vlst	*temp;
-
-	temp = *head;
-	while (temp != NULL)
-	{
-		if (streq(var_name, temp->var_name))
-			return (temp->is_exported);
-		temp = temp->next;
-	}
-	return (false);
+	var_value = get_fromvlst(var_name, &data->envp_lst);
+	free(var_name);
+	return (var_value);
 }
 
 char	*get_fromvlst(char *var_name, t_vlst **head)
@@ -61,6 +45,17 @@ t_vlst	*v_new_node(char *var_name, char *var_value, bool is_exported)
 	new_node->is_exported = is_exported;
 	new_node->next = NULL;
 	return (new_node);
+}
+
+t_vlst	*v_lstlast(t_vlst *node)
+{
+	while (node)
+	{
+		if (!node->next)
+			break ;
+		node = node->next;
+	}
+	return (node);
 }
 
 void	v_lstadd_back(t_vlst **head, t_vlst *new)

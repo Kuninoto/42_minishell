@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.c                                             :+:      :+:    :+:   */
+/*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 01:10:28 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:16:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern int	g_exit_status;
-
-/* void	print_operator(t_operator operator)
-{
-	const char *operators[6] = {"NONE", ">", ">>", "<", "<<", "|"};
-	printf("OPERATOR = %s", operators[operator]);
-}
- */
 
 void	exec_cmd(t_statement *current_node, t_data *data)
 {
