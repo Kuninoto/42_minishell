@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 04:31:03 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:12:26 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	redirect_input_until(t_statement *node)
 static void	redirect_input(t_statement *node)
 {
 	int		in_file;
-	char	*error_msg;
+	char	*error_msg_prefix;
 
 	if (node->next->argv[0])
 	{
@@ -49,9 +49,9 @@ static void	redirect_input(t_statement *node)
 		}
 		else
 		{
-			error_msg = ft_strjoin("minishell: ", node->next->argv[0]);
-			perror(error_msg);
-			free(error_msg);
+			error_msg_prefix = ft_strjoin("minishell: ", node->next->argv[0]);
+			perror(error_msg_prefix);
+			free(error_msg_prefix);
 			g_exit_status = 2;
 			exit(EXIT_FAILURE);
 		}

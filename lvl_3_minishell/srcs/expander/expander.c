@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 17:13:35 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 05:33:22 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:03:06 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ size_t	expand_exit_status(char *expanded_input_at_i, size_t *i)
 size_t	expand_variable(char *expanded_input_at_i, char *input,
 	size_t *i, t_data *data)
 {
-	char	*var_name;
 	char	*var_value;
 	size_t	size;
 	size_t	j;
@@ -49,12 +48,10 @@ size_t	expand_variable(char *expanded_input_at_i, char *input,
 		expanded_input_at_i[0] = '$';
 		return (1);
 	}
-	while (input[*i + size] && input[*i + size] != ' ' 
+	while (input[*i + size] && input[*i + size] != ' '
 		&& input[*i + size] != '\"' && input[*i + size] != '$')
 		size += 1;
-	var_name = ft_substr(input, *i, size);
-	var_value = get_fromvlst(var_name, &data->envp_lst);
-	free(var_name);
+	var_value = get_varvalue_fromvlst(ft_substr(input, *i, size), data);
 	*i += size;
 	if (!var_value)
 		return (0);

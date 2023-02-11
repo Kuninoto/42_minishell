@@ -6,29 +6,24 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 03:26:52 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:02:47 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	v_lstclear(t_vlst **head)
+bool	get_exported_state(char *var_name, t_vlst **head)
 {
 	t_vlst	*temp;
-	t_vlst	*next_node;
 
-	if (!head)
-		return ;
 	temp = *head;
 	while (temp != NULL)
 	{
-		next_node = temp->next;
-		free(temp->var_name);
-		free(temp->var_value);
-		free(temp);
-		temp = next_node;
+		if (streq(var_name, temp->var_name))
+			return (temp->is_exported);
+		temp = temp->next;
 	}
-	*head = NULL;
+	return (false);
 }
 
 char	**split_envp(char *env)
@@ -42,6 +37,19 @@ char	**split_envp(char *env)
 	splitted[1] = ft_substr(env, indexof_equal + 1,
 			ft_strlen(&env[indexof_equal]));
 	return (splitted);
+}
+
+int	save_user_vars(char *statement, t_vlst **head, bool to_export)
+{
+	char	**line;
+
+	line = split_envp(statement);
+	if (get_exported_state(line[0], head) && !to_export)
+		to_export = true;
+	cmd_unset(line[0], head);
+	v_lstadd_back(head, v_new_node(line[0], line[1], to_export));
+	free(line);
+	return (EXIT_SUCCESS);
 }
 
 t_vlst	*init_envp_lst(char **envp)
@@ -65,17 +73,4 @@ t_vlst	*init_envp_lst(char **envp)
 		i += 1;
 	}
 	return (head);
-}
-
-int	save_user_vars(char *statement, t_vlst **head, bool to_export)
-{
-	char	**line;
-
-	line = split_envp(statement);
-	if (get_exported_state(line[0], head) && !to_export)
-		to_export = true;
-	cmd_unset(line[0], head);
-	v_lstadd_back(head, v_new_node(line[0], line[1], to_export));
-	free(line);
-	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 03:39:10 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 04:13:46 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@
 
 # define CD_TOO_MANY_ARGS "minishell: cd: too many arguments"
 
-
 typedef enum e_operator {
 	NONE,
 	RDR_OUT_REPLACE,
@@ -108,7 +107,7 @@ implemented command that doesn't need a fork */
 bool				builtin_without_fork(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully 
-executed a binary from /usr/bin */
+executed a binary from PATH */
 void				cmd_binaries(t_statement *statement, t_data *data);
 // Wannabe echo
 int					cmd_echo(t_statement *statement);
@@ -116,6 +115,7 @@ int					cmd_echo(t_statement *statement);
 int					cmd_pwd(void);
 // Wannabe cd
 int					cmd_cd(char *path);
+
 static inline int	cd_too_many_args(void)
 {
 	ft_putendl_fd(CD_TOO_MANY_ARGS, STDERR_FILENO);
@@ -177,10 +177,13 @@ void				v_lstclear(t_vlst **head);
 bool				get_exported_state(char *var_name, t_vlst **head);
 char				*get_fromvlst(char *var_name, t_vlst **head);
 
+/* same as get_fromvlst except that it
+encapsulates the free procedure for <var_name> */
+char				*get_varvalue_fromvlst(char *var_name, t_data *data);
+
 int					save_user_vars(char *statement, t_vlst **head,
 						bool to_export);
 
-t_vlst				*init_vars_lst(void);
 t_vlst				*init_envp_lst(char **envp);
 
 size_t				get_nr_statements(char *input);
