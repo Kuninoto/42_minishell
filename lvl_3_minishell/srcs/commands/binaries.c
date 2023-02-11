@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binaries.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 13:31:03 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:15:37 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ static void	exit_and_free_matrix(char **paths, char *cmd, int exit_status)
 	free_matrix(paths);
 	if (!WIFSIGNALED(g_exit_status))
 		g_exit_status = exit_status;
-	ft_putendl_fd("AAAAAAA", STDOUT_FILENO);
 	exit(g_exit_status);
 }
 
@@ -88,6 +87,5 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 		exit_and_free_matrix(paths, statement->argv[0], 127);
 	}
 	free(binary_path);
-	ft_putendl_fd("BBBB", STDOUT_FILENO);
 	exit_and_free_matrix(paths, NULL, EXIT_SUCCESS);
 }

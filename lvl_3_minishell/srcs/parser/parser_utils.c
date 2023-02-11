@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:23:00 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 04:57:23 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:12:14 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ size_t	get_token_len(char *input_at_i)
 	char	quotes;
 
 	i = 0;
-	if (is_onstr(REDIRECTS, input_at_i[i]))
+	if (is_onstr(OPERATORS, input_at_i[i]))
 	{
 		if (input_at_i[i] == input_at_i[i + 1])
 			return (2);
@@ -80,7 +80,7 @@ size_t	get_nr_statements(char *input)
 	has_quotes = false;
 	while (*input)
 	{
-		if (is_onstr(REDIRECTS, *input))
+		if (is_onstr(OPERATORS, *input))
 			count += 1;
 		if (is_onstr(QUOTES, *input) && *input == *(input + 1))
 			input += 2;

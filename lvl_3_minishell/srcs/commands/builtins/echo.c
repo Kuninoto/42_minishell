@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 05:53:18 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 14:35:44 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	cmd_echo(t_statement *statement)
 	int		i;
 
 	i = 1;
+	has_n = false;
 	if (statement->argc >= 2)
 		has_n = streq(statement->argv[1], "-n");
 	if (has_n)
