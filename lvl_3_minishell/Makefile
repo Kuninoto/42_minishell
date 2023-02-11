@@ -6,12 +6,12 @@
 #    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/02/10 04:41:49 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/02/11 03:20:15 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g
 LINK = -I./includes
 VPATH = srcs srcs/parser srcs/expander srcs/commands srcs/commands/builtins srcs/executes srcs/utils srcs/utils/linked_lists
 RM = rm -rf
@@ -19,9 +19,9 @@ LIBFT = ./libft/libft.a
 
 UTILS = is_all_digits panic destroy valid_input
 UTILS_LL = p_llst_utils v_llst_utils v_llst_utils_v2
-PARSER = parser parser_utils
+PARSER = parser parser_utils remove_quotes
 EXPANDER = expander expander_utils
-GENERAL = config_signals setup_shell remove_quotes
+GENERAL = config_signals setup_shell
 COMMANDS = binaries builtins 
 BUILTINS = cd echo env exit export pwd unset
 EXECUTES = cmds executables pipe redirects

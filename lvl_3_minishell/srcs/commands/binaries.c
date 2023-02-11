@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 04:39:12 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 01:11:07 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	exit_and_free_matrix(char **paths, char *cmd, int status)
 		perror(cmd);
 	free_matrix(paths);
 	g_exit_status = status;
+	printf("g_exit_status = %d\n", g_exit_status);
 	if (status == EXIT_SUCCESS)
 		return ;
 	exit(status);

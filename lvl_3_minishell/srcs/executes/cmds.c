@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 05:24:15 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 01:10:28 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ extern int	g_exit_status;
 }
  */
 
-//	bytes written on pipedes[1] can be read on pipedes[0]
 void	exec_cmd(t_statement *current_node, t_data *data)
 {
 	if (current_node->operator == PIPE)
@@ -30,8 +29,8 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 		exec_executables(current_node, data);
 	else
 		exec_redirects(current_node, data);
-	g_exit_status = EXIT_SUCCESS;
-	exit(EXIT_SUCCESS);
+	// pipes are always quiting on this exit_status
+	exit(g_exit_status);
 }
 
 void	exec_type(t_statement *statement_list, t_data *data)
