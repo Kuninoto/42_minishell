@@ -6,15 +6,15 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:23:00 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 17:49:14 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:53:45 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_operator get_operator(char *operator)
+t_operator	get_operator(char *operator)
 {
-	t_operator op;
+	t_operator	op;
 
 	if (!operator)
 		op = NONE;
@@ -34,9 +34,9 @@ t_operator get_operator(char *operator)
 	return (op);
 }
 
-size_t get_argc(char **parsed)
+size_t	get_argc(char **parsed)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (parsed[i])
@@ -44,10 +44,10 @@ size_t get_argc(char **parsed)
 	return (i);
 }
 
-size_t get_token_len(char *input_at_i)
+size_t	get_token_len(char *input_at_i)
 {
-	size_t i;
-	char quotes;
+	size_t	i;
+	char	quotes;
 
 	i = 0;
 	if (is_onstr(OPERATORS, input_at_i[i]))
@@ -69,11 +69,11 @@ size_t get_token_len(char *input_at_i)
 	return (i);
 }
 
-size_t get_nr_statements(char *input)
+size_t	get_nr_statements(char *input)
 {
-	size_t count;
-	bool flag;
-	bool has_quotes;
+	size_t	count;
+	bool	flag;
+	bool	has_quotes;
 
 	count = 0;
 	flag = false;
