@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:31:56 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 01:49:51 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 12:49:01 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,14 @@ static int	unclosed_quotes(char *str)
 
 static bool	invalid_syntax(char *input)
 {
-	if (input[ft_strlen(input) - 1] == '|')
+	if (input[0] == '|')
 	{
 		ft_putendl_fd(SYTX_ERR_PIPE, STDERR_FILENO);
+		return (true);
+	}
+	if (input[ft_strlen(input) - 1] == '|')
+	{
+		ft_putendl_fd(NO_PIPE_PROMPT, STDERR_FILENO);
 		return (true);
 	}
 	if (is_onstr(REDIRECTS, input[ft_strlen(input) - 1]))
@@ -70,14 +75,13 @@ bool	valid_input(char *input, t_data *data)
 	{
 		ft_putendl_fd(UNCLOSED_QUOTES, STDERR_FILENO);
 		valid = false;
-		g_exit_status = 2;
 	}
 	else if (invalid_syntax(input))
-	{
 		valid = false;
+	if (!valid)
+	{
+		free(input);
 		g_exit_status = 2;
 	}
-	if (!valid)
-		free(input);
 	return (valid);
 }

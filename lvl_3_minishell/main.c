@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 06:27:01 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:00:59 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char	*get_input(void)
 	return (input);
 }
 
-void	clean_parsed(t_statement **statement_list, t_data *data)
+static void	clean_parsed(t_statement **statement_list, t_data *data)
 {
 	p_lstclear(statement_list);
 	*statement_list = NULL;
@@ -47,7 +47,7 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		add_history(input);
 		input = expander(input, &data);
-		if (!input || !input[0])
+		if (!input[0])
 		{
 			free(input);
 			continue ;
