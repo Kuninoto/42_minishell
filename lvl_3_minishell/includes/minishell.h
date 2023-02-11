@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 06:30:32 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:17:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_data {
 	t_statement	*head;
 }				t_data;
 
+void				child_signals(int signum);
+void				dismiss_signal(int signum);
 /* Setups Minishell. 
 Casts argc and argv to void
 Saves envp

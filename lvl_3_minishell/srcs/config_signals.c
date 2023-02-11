@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:54:55 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 06:04:16 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:17:21 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,22 @@
 
 extern int	g_exit_status;
 
+void	child_signals(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putstr_fd(" A TUA MAE", STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
+		g_exit_status = 130;
+		exit(130);
+	}
+}
+
 void	dismiss_signal(int signum)
 {
 	if (signum == SIGINT)
 	{
+		ft_putstr_fd(" O TEU PAI", STDOUT_FILENO);
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 05:56:50 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 13:21:52 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ static void	exit_and_free_matrix(char **paths, char *cmd, int exit_status)
 	if (cmd)
 		perror(cmd);
 	free_matrix(paths);
-	g_exit_status = exit_status;
+	if (!WIFSIGNALED(g_exit_status))
+		g_exit_status = exit_status;
+	ft_putendl_fd("AAAAAAA", STDOUT_FILENO);
 	exit(exit_status);
 }
 
@@ -86,5 +88,6 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 		exit_and_free_matrix(paths, statement->argv[0], 127);
 	}
 	free(binary_path);
+	ft_putendl_fd("BBBB", STDOUT_FILENO);
 	exit_and_free_matrix(paths, NULL, EXIT_SUCCESS);
 }
