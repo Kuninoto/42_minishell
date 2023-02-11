@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 16:54:55 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 01:57:27 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 06:04:16 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	dismiss_signal(int signum)
 {
 	if (signum == SIGINT)
 	{
-		write(STDOUT_FILENO, "\n", 1);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

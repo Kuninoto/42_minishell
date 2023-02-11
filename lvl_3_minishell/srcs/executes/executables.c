@@ -3,19 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   executables.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:02:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/01/21 00:12:37 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:52:41 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+extern int	g_exit_status;
+
 void	exec_executables(t_statement *node, t_data *data)
 {
-	if (builtin_without_fork(node, data))
+	if (builtin(node, data))
+	{
+		exit(g_exit_status);
 		return ;
+	}
 	cmd_binaries(node, data);
-	exit(EXIT_SUCCESS);
 }

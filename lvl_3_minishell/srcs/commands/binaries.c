@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 01:11:07 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:56:50 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,13 @@ static char	*get_bin_path(char *cmd, char **paths)
 	return (NULL);
 }
 
-static void	exit_and_free_matrix(char **paths, char *cmd, int status)
+static void	exit_and_free_matrix(char **paths, char *cmd, int exit_status)
 {
 	if (cmd)
 		perror(cmd);
 	free_matrix(paths);
-	g_exit_status = status;
-	printf("g_exit_status = %d\n", g_exit_status);
-	if (status == EXIT_SUCCESS)
-		return ;
-	exit(status);
+	g_exit_status = exit_status;
+	exit(exit_status);
 }
 
 void	cmd_binaries(t_statement *statement, t_data *data)
