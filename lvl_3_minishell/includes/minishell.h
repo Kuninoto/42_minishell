@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 13:17:33 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 15:28:13 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,6 @@ static inline void	cmd_not_found(char *cmd_name)
 }
 
 // Utils
-
 static inline bool	is_absolute_path(t_statement *statement)
 {
 	if (is_onstr(statement->argv[0], '/'))

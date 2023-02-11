@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 13:19:55 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 16:13:39 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 		exec_executables(current_node, data);
 	else
 		exec_redirects(current_node, data);
-	printf("exit %d\n", g_exit_status);
 	exit(g_exit_status);
 }
 
@@ -46,7 +45,6 @@ void	exec_type(t_statement *statement_list, t_data *data)
 	{
 		waitpid(child_pid, &temp_status, 0);
 		g_exit_status = temp_status >> 8;
-		printf("RECEBI = %d\n", g_exit_status);
 	}
 }
 
