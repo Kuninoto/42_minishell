@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:58:39 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 04:18:31 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:52:34 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,8 @@ void	exec_pipe(t_statement *node, t_data *data)
 		right_side(node->next, data, pipedes);
 	close(pipedes[0]);
 	close(pipedes[1]);
-	printf("g_exit_status = %d\n", g_exit_status);
 	waitpid(child_pid, &temp_status, 0);
-	g_exit_status = temp_status;
-	printf("g_exit_status = %d\n", g_exit_status);
+	g_exit_status = temp_status >> 8;
 	waitpid(child_pid, &temp_status, 0);
-	g_exit_status = temp_status;
+	g_exit_status = temp_status >> 8;
 }

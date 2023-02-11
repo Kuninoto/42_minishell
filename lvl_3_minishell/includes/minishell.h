@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 04:13:46 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:44:45 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@
 
 # define CL_ARGUMENTS_ERR "minishell: no support for command-line arguments"
 # define NO_PIPE_PROMPT "minishell: no support for pipe prompt"
-# define PIPE_ERR "pipe() failed"
-# define FORK_ERR "fork() failed"
+# define PIPE_ERR "minishell: pipe() failed"
+# define FORK_ERR "minishell: fork() failed"
 
 // SYNTAX
 
@@ -102,9 +102,8 @@ void				setup_shell(char **envp, t_data *data,
 
 /* COMMANDS */
 
-/* Returns true if it has sucessfully executed an
-implemented command that doesn't need a fork */
-bool				builtin_without_fork(t_statement *statement, t_data *data);
+/* Returns true if it has executed a builtin command */
+bool				builtin(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully 
 executed a binary from PATH */
@@ -127,6 +126,8 @@ int					cmd_env(t_data *data);
 int					cmd_export(t_statement *statement, t_data *data);
 // Wannabe exit
 void				cmd_exit(int exit_status, t_data *data);
+/* Encapsulate if's. Norm Purposes*/
+void				call_cmd_exit(t_statement *statement, t_data *data);
 // Wannabe unset
 int					cmd_unset(char *var_name, t_vlst **head);
 
@@ -155,6 +156,7 @@ void				config_signals(void);
 
 void				exec_cmd(t_statement *current_node, t_data *data);
 void				exec_type(t_statement *statement_list, t_data *data);
+int					shift_8(int temp_status);
 void				exec_executables(t_statement *node, t_data *data);
 void				exec_pipe(t_statement *node, t_data *data);
 void				exec_redirects(t_statement *node, t_data *data);

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 04:43:05 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:53:18 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print(char *str)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (str[i])
 	{

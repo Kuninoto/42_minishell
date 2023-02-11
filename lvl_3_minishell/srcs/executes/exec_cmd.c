@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 04:31:51 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:52:50 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,29 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 		exec_executables(current_node, data);
 	else
 		exec_redirects(current_node, data);
-	// pipes are always quiting on this exit_status
 	exit(g_exit_status);
 }
 
 void	exec_type(t_statement *statement_list, t_data *data)
 {
-	if (p_lstsize(statement_list) == 1)
+	pid_t	child_pid;
+	int		temp_status;
+
+	if (streq(statement_list->argv[0], "exit"))
 	{
-		if (!builtin_without_fork(statement_list, data)
-			&& fork() == 0)
-		{
-			exec_cmd(statement_list, data);
-			g_exit_status = EXIT_SUCCESS;
-			exit(EXIT_SUCCESS);
-		}
+		call_cmd_exit(statement_list, data);
+		return ;
 	}
-	else if (fork() == 0)
+	child_pid = fork();
+	if (child_pid == -1)
+		panic(data, FORK_ERR, EXIT_FAILURE);
+	if (child_pid == 0)
 		exec_cmd(statement_list, data);
+	else
+	{
+		waitpid(child_pid, &temp_status, 0);
+		g_exit_status = temp_status >> 8;
+	}
 }
+
+/* 127, i.e command not found, comes from waitpid as 32512. 32512 >> 8 = 127 */

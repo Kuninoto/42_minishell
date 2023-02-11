@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/10 15:48:50 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 05:52:12 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ static char	*get_input(void)
 	raw_input = readline("minishell$ ");
 	input = trim_free(raw_input, " \t");
 	return (input);
-}
-
-static void	wait_clean_parsed(t_statement *statement_list)
-{
-	wait(&g_exit_status);
-	if (WIFEXITED(g_exit_status))
-		g_exit_status = WEXITSTATUS(g_exit_status);
-	p_lstclear(statement_list);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -55,7 +47,7 @@ int	main(int ac, char **av, char **envp)
 		}
 		statement_list = parser(input);
 		exec_type(statement_list, &data);
-		wait_clean_parsed(statement_list);
+		p_lstclear(statement_list);
 	}
 	return (EXIT_SUCCESS);
 }
