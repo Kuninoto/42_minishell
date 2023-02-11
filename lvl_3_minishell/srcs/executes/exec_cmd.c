@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 16:13:39 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/11 17:44:11 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ void	exec_type(t_statement *statement_list, t_data *data)
 	pid_t	child_pid;
 	int		temp_status;
 
-	if (streq(statement_list->argv[0], "exit"))
-	{
-		call_cmd_exit(statement_list, data);
+	if (builtin(statement_list, data))
 		return ;
-	}
 	child_pid = fork();
 	if (child_pid == -1)
 		panic(data, FORK_ERR, EXIT_FAILURE);
