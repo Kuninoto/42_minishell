@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   p_llst_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 17:23:01 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/08 18:19:04 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/11 06:12:38 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	p_lstclear(t_statement *head)
+void	p_lstclear(t_statement **head)
 {
 	t_statement	*temp;
 	t_statement	*next_node;
 
 	if (!head)
 		return ;
-	temp = head;
+	temp = *head;
 	while (temp != NULL)
 	{
 		next_node = temp->next;
@@ -27,6 +27,7 @@ void	p_lstclear(t_statement *head)
 		free(temp);
 		temp = next_node;
 	}
+	*head = NULL;
 }
 
 size_t	p_lstsize(t_statement *head)

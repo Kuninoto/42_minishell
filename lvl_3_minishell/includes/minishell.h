@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 05:44:45 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 06:30:32 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,14 +76,17 @@ typedef struct s_statement {
 	struct s_statement	*next;
 }				t_statement;
 
-/* All functions regarding t_vars are prefixed
-with v_ referring to variables */
+/* All functions regarding t_vars 
+are prefixed with v_ referring to variables */
 typedef struct s_vlst {
 	char			*var_name;
 	char			*var_value;
 	bool			is_exported;
 	struct s_vlst	*next;
 }				t_vlst;
+
+/* data keeps a pointer to the head node in
+ case of a need to call panic() (fork or pipe error) */
 
 typedef struct s_data {
 	char		**envp;
@@ -168,7 +171,7 @@ t_statement			*p_new_node(int argc);
 which head is passed as a parameter */
 size_t				p_lstsize(t_statement *head);
 /* Frees the linked list which head is passed as parameter */
-void				p_lstclear(t_statement *head);
+void				p_lstclear(t_statement **head);
 
 t_vlst				*v_new_node(char *var_name, char *var_value,
 						bool is_exported);

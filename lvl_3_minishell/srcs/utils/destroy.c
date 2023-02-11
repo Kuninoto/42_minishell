@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:09:59 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 03:58:34 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/11 06:22:30 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,6 @@ void	destroy(t_data *data)
 	rl_clear_history();
 	if (data->envp_lst)
 		v_lstclear(&data->envp_lst);
+	if (data->head)
+		p_lstclear(&data->head);
 }
