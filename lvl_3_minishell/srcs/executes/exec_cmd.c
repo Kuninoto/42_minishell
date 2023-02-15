@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 17:44:11 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/15 20:12:36 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 		exec_executables(current_node, data);
 	else
 		exec_redirects(current_node, data);
-	exit(g_exit_status);
+//	exit(g_exit_status);
 }
 
 void	exec_type(t_statement *statement_list, t_data *data)
@@ -31,8 +31,11 @@ void	exec_type(t_statement *statement_list, t_data *data)
 	pid_t	child_pid;
 	int		temp_status;
 
-	if (builtin(statement_list, data))
+	if (is_builtin(statement_list))
+	{
+		exec_cmd(statement_list, data);	
 		return ;
+	}
 	child_pid = fork();
 	if (child_pid == -1)
 		panic(data, FORK_ERR, EXIT_FAILURE);
