@@ -3,16 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 19:51:02 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 16:13:30 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/15 22:02:05 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern int	g_exit_status;
+
+void	print_operator(t_operator operator)
+{
+	const char *operators[6] = {"NONE", ">", ">>", "<", "<<", "|"};
+	printf("OPERATOR = %s", operators[operator]);
+}
+void	debug_args(t_statement *head)
+{
+	for (t_statement *temp = head; temp != NULL; temp = temp->next)
+	{
+		printf("ARGC = %d\n", temp->argc);
+		printf("ARGV = ");
+		for (int i = 0; i < temp->argc; i += 1)
+			printf("%s -> ", temp->argv[i]);
+		printf("\n");
+		print_operator(temp->operator);
+		printf("\n\n");
+	}
+	printf("OUTPUT: \n");
+}
 
 char	**parse_input(char *input)
 {
@@ -69,5 +89,6 @@ t_statement	*parser(char *input)
 	}
 	temp->next = NULL;
 	free(parsed);
+	debug_args(head);
 	return (head);
 }

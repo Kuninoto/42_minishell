@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 15:28:13 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/15 21:58:00 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 // CD CMD
 
 # define CD_TOO_MANY_ARGS "minishell: cd: too many arguments"
+# define OLDPWD_NOT_SET "minishell: cd: OLDPWD not set"
 
 typedef enum e_operator {
 	NONE,
@@ -108,6 +109,7 @@ void				setup_shell(char **envp, t_data *data,
 /* COMMANDS */
 
 /* Returns true if it has executed a builtin command */
+bool				is_builtin(t_statement *statement);
 bool				builtin(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully 
@@ -160,7 +162,6 @@ void				config_signals(void);
 
 void				exec_cmd(t_statement *current_node, t_data *data);
 void				exec_type(t_statement *statement_list, t_data *data);
-int					shift_8(int temp_status);
 void				exec_executables(t_statement *node, t_data *data);
 void				exec_pipe(t_statement *node, t_data *data);
 void				exec_redirects(t_statement *node, t_data *data);
