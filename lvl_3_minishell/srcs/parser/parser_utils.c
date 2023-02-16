@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:23:00 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/15 22:06:25 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:47:54 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,11 @@ t_operator	get_operator(char *operator)
 size_t	get_argc(char **parsed)
 {
 	size_t	i;
-	size_t	count;
 
 	i = 0;
-	count = 0;
 	while (parsed[i])
-	{
-		if (!is_onstr(OPERATORS, parsed[i][0]))	
-			count += 1;
 		i += 1;
-	}
-	return (count);
+	return (i);
 }
 
 size_t	get_token_len(char *input_at_i)
