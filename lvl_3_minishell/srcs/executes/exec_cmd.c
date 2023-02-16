@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/15 20:12:36 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:48:20 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,24 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 		exec_executables(current_node, data);
 	else
 		exec_redirects(current_node, data);
-//	exit(g_exit_status);
+	exit(g_exit_status);
 }
 
 void	exec_type(t_statement *statement_list, t_data *data)
 {
-	pid_t	child_pid;
+	int		temp_status;
+	
+	if (p_lstsize(statement_list) == 1)
+	{
+		if (!builtin(statement_list, data) && fork() == 0)
+				exec_executables(statement_list, data);
+	}
+	else if (fork() == 0)
+		exec_cmd(statement_list, data);
+	waitpid(-1, &temp_status, 0);
+	g_exit_status = temp_status >> 8;
+
+/* 	pid_t	child_pid;
 	int		temp_status;
 
 	if (is_builtin(statement_list))
@@ -45,7 +57,7 @@ void	exec_type(t_statement *statement_list, t_data *data)
 	{
 		waitpid(child_pid, &temp_status, 0);
 		g_exit_status = temp_status >> 8;
-	}
+	} */
 }
 
 /* 127, i.e command not found, comes from waitpid as 32512. 32512 >> 8 = 127 */
