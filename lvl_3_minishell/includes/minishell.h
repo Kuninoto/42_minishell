@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/18 15:44:20 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/18 20:17:34 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 
 # define CL_ARGUMENTS_ERR "minishell: no support for command-line arguments"
 # define NO_PIPE_PROMPT "minishell: no support for pipe prompt"
+# define NO_SYTX_PROMPT "minishell: no support for syntax prompt"
 # define PIPE_ERR "minishell: pipe() failed"
 # define FORK_ERR "minishell: fork() failed"
 
@@ -47,6 +48,9 @@
 
 # define UNCLOSED_QUOTES "minishell: unclosed quotes"
 # define SYTX_ERR_PIPE "minishell: syntax error near unexpected token `|'"
+# define NO_BRACE_PROMPT "minishell: no support for brace prompt"
+# define ERR_BRACE_F "minishell: syntax error near unexpected token `)'"
+# define ERR_RECT_BRACE_F "minishell: syntax error near unexpected token `}'"
 # define SYTX_ERR_RDR "minishell: syntax error near unexpected token `newline'"
 
 // EXIT CMD
@@ -131,8 +135,9 @@ int					cmd_env(t_data *data);
 // Wannabe export
 int					cmd_export(t_statement *statement, t_data *data);
 // Wannabe exit
-void				cmd_exit(int exit_status, t_data *data);
-/* Encapsulate if's. Norm Purposes*/
+// void				cmd_exit(int exit_status, t_data *data);
+void				cmd_exit(t_statement *s, t_data *data);
+/* Encapsulate if's. Norm Purposes */
 void				call_cmd_exit(t_statement *statement, t_data *data);
 // Wannabe unset
 int					cmd_unset(char *var_name, t_vlst **head);
@@ -153,7 +158,7 @@ static inline bool	is_absolute_path(t_statement *statement)
 
 bool				valid_input(char *input, t_data *data);
 
-bool				is_all_digits(char *str);
+bool				is_all_digits_or_signals(char *str);
 
 void				destroy(t_data *data);
 

@@ -6,13 +6,22 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:31:56 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/18 17:36:01 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/18 20:23:20 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern int	g_exit_status;
+
+static void	exit_shell(int exit_status, t_data *data)
+{
+	ft_putendl_fd("exit", STDOUT_FILENO);
+	g_exit_status = exit_status;
+	if (data)
+		destroy(data);
+	exit(g_exit_status);
+}
 
 static int	unclosed_quotes(char *str)
 {
@@ -39,11 +48,31 @@ static int	unclosed_quotes(char *str)
 		return (1);
 }
 
-static bool	invalid_syntax(char *input)
+static bool	invalid_syntax2(char *input)
 {
 	if (input[0] == '|')
 	{
 		ft_putendl_fd(SYTX_ERR_PIPE, STDERR_FILENO);
+		return (true);
+	}
+	if (input[0] == '(' || input[0] == '{' || input[0] == '\\')
+	{
+		ft_putendl_fd(NO_SYTX_PROMPT, STDERR_FILENO);
+		return (true);
+	}
+	if (input[0] == ')')
+	{
+		ft_putendl_fd(ERR_BRACE_F, STDERR_FILENO);
+		return (true);
+	}
+	return (false);
+}
+
+static bool	invalid_syntax(char *input)
+{
+	if (input[0] == '}')
+	{
+		ft_putendl_fd(ERR_RECT_BRACE_F, STDERR_FILENO);
 		return (true);
 	}
 	if (input[ft_strlen(input) - 1] == '|')
@@ -67,7 +96,7 @@ bool	valid_input(char *input, t_data *data)
 	if (input == NULL)
 	{
 		free(input);
-		cmd_exit(EXIT_SUCCESS, data);
+		exit_shell(EXIT_SUCCESS, data);
 	}
 	if (input[0] == '\0')
 		valid = false;
@@ -76,7 +105,7 @@ bool	valid_input(char *input, t_data *data)
 		ft_putendl_fd(UNCLOSED_QUOTES, STDERR_FILENO);
 		valid = false;
 	}
-	else if (invalid_syntax(input))
+	else if (invalid_syntax(input) || invalid_syntax2(input))
 		valid = false;
 	if (!valid)
 	{

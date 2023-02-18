@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_all_digits.c                                    :+:      :+:    :+:   */
+/*   is_all_digits_or_signals.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 18:06:31 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/01/19 18:16:54 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/18 19:56:08 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include "minishell.h"
 
-bool	is_all_digits(char *str)
+bool	is_all_digits_or_signals(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (!(str[i] >= '0' && str[i] <= '9'))
+		if (!is_digit(str[i]) && str[i] != '-' && str[i] != '+')
 			return (false);
 		i += 1;
 	}
