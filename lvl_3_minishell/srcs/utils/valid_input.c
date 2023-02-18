@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 13:31:56 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 12:49:01 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/18 17:36:01 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ bool	valid_input(char *input, t_data *data)
 	if (input == NULL)
 	{
 		free(input);
-		cmd_exit(127, data);
+		cmd_exit(EXIT_SUCCESS, data);
 	}
 	if (input[0] == '\0')
 		valid = false;

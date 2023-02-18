@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:23:00 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/18 16:41:21 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/18 17:42:04 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ size_t	get_nr_statements(char *input)
 		if (is_onstr(OPERATORS, *input))
 			count += 1;
 		if (is_onstr(QUOTES, *input) && *input == *(input + 1))
-			input += 2;
+			input += 1;
 		else if (is_onstr(QUOTES, *input))
 			quotes = !quotes;
 		if (*input != ' ' && !is_onstr(OPERATORS, *input) && !flag && !quotes)
