@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/16 12:53:01 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/18 15:57:43 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	cmd_echo(t_statement *statement)
 		has_n = streq(statement->argv[1], "-n");
 	if (has_n)
 		i += 1;
-	while (i != statement->argc)
+	while (statement->argv[i] && i != statement->argc)
 	{
 		print(statement->argv[i]);
 		if (i + 1 < statement->argc)
