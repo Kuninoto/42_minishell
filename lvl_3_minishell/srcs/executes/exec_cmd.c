@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:00:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/16 12:48:20 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/18 15:42:42 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,16 @@ void	exec_cmd(t_statement *current_node, t_data *data)
 void	exec_type(t_statement *statement_list, t_data *data)
 {
 	int		temp_status;
-	
+
 	if (p_lstsize(statement_list) == 1)
 	{
 		if (!builtin(statement_list, data) && fork() == 0)
-				exec_executables(statement_list, data);
+			exec_executables(statement_list, data);
 	}
 	else if (fork() == 0)
 		exec_cmd(statement_list, data);
 	waitpid(-1, &temp_status, 0);
 	g_exit_status = temp_status >> 8;
-
-/* 	pid_t	child_pid;
-	int		temp_status;
-
-	if (is_builtin(statement_list))
-	{
-		exec_cmd(statement_list, data);	
-		return ;
-	}
-	child_pid = fork();
-	if (child_pid == -1)
-		panic(data, FORK_ERR, EXIT_FAILURE);
-	if (child_pid == 0)
-		exec_cmd(statement_list, data);
-	else
-	{
-		waitpid(child_pid, &temp_status, 0);
-		g_exit_status = temp_status >> 8;
-	} */
 }
 
 /* 127, i.e command not found, comes from waitpid as 32512. 32512 >> 8 = 127 */

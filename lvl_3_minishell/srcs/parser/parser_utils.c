@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:23:00 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/16 12:47:54 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/18 16:41:21 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,9 @@ size_t	get_token_len(char *input_at_i)
 			return (2);
 		return (1);
 	}
-	while (input_at_i[i] && !is_spaces(input_at_i[i]))
+	while (input_at_i[i]
+		&& !is_spaces(input_at_i[i])
+		&& !is_onstr(OPERATORS, input_at_i[i]))
 	{
 		if (is_onstr(QUOTES, input_at_i[i]))
 		{
@@ -73,11 +75,11 @@ size_t	get_nr_statements(char *input)
 {
 	size_t	count;
 	bool	flag;
-	bool	has_quotes;
+	bool	quotes;
 
 	count = 0;
 	flag = false;
-	has_quotes = false;
+	quotes = false;
 	while (*input)
 	{
 		if (is_onstr(OPERATORS, *input))
@@ -85,13 +87,13 @@ size_t	get_nr_statements(char *input)
 		if (is_onstr(QUOTES, *input) && *input == *(input + 1))
 			input += 2;
 		else if (is_onstr(QUOTES, *input))
-			has_quotes = !has_quotes;
-		if (*input != ' ' && !flag && !has_quotes)
+			quotes = !quotes;
+		if (*input != ' ' && !is_onstr(OPERATORS, *input) && !flag && !quotes)
 		{
 			flag = true;
 			count += 1;
 		}
-		else if (*input == ' ')
+		else if (*input == ' ' || is_onstr(OPERATORS, *input))
 			flag = false;
 		input += 1;
 	}

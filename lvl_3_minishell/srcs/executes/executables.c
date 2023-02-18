@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executables.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:02:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/15 20:11:48 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:42:52 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	exec_executables(t_statement *node, t_data *data)
 {
 	if (builtin(node, data))
 	{
-	//	exit(g_exit_status);
 		return ;
 	}
 	cmd_binaries(node, data);

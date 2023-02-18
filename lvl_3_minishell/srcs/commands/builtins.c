@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/15 21:58:07 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:44:26 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,4 @@ bool	builtin(t_statement *statement, t_data *data)
 	else
 		return (false);
 	return (true);
-}
-
-bool	is_builtin(t_statement *statement)
-{
-	if (streq(statement->argv[0], "exit")
-	|| streq(statement->argv[0], "unset")
-	|| streq(statement->argv[0], "export")
-	|| streq(statement->argv[0], "cd")
-	|| ft_strchr(statement->argv[0], '=')
-	|| streq(statement->argv[0], "echo")
-	|| streq(statement->argv[0], "pwd")
-	|| streq(statement->argv[0], "env"))
-		return (true);
-	return (false);
 }

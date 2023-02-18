@@ -6,7 +6,7 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:58:39 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 16:15:17 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/18 16:29:04 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,9 @@ void	exec_pipe(t_statement *node, t_data *data)
 		panic(data, FORK_ERR, EXIT_FAILURE);
 	if (child_pid == 0)
 		left_side(node, data, pipedes);
-	child_pid = fork();
-	if (child_pid == -1)
-		panic(data, FORK_ERR, EXIT_FAILURE);
-	if (child_pid == 0)
-		right_side(node->next, data, pipedes);
+	right_side(node->next, data, pipedes);
 	close(pipedes[0]);
 	close(pipedes[1]);
-	waitpid(child_pid, &temp_status, 0);
-	g_exit_status = temp_status >> 8;
 	waitpid(child_pid, &temp_status, 0);
 	g_exit_status = temp_status >> 8;
 }

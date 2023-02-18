@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/15 21:58:00 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/18 15:44:20 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ void				setup_shell(char **envp, t_data *data,
 /* COMMANDS */
 
 /* Returns true if it has executed a builtin command */
-bool				is_builtin(t_statement *statement);
 bool				builtin(t_statement *statement, t_data *data);
 
 /* Returns true if it has sucessfully 
