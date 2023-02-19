@@ -1,3 +1,5 @@
+Check if minishell is infact calling the builtins
+
 INVALID SYNTAX -----------
 &
 |
@@ -32,10 +34,15 @@ export
 pwd 1
 
 CD ------------
+cd - (at the minishell start to check if it is aware of OLDPWD_NOT_SET)
+cd
+cd -
 cd 1 2
+cd ~
 $?
 cd 1
 $?
+check if cd updates the environment variables PWD & OLDPWD
 
 PIPES ---------------
 echo "hello"|"'world"
@@ -44,6 +51,7 @@ seq 0 10 | sort -r | grep 2 | wc -l
 USER VARS -----------
 a-=2
 a+=2
+$ENV -> SIGSEGV !!!!!!!!!!!!!!!!!!!!!!!
 
 Checking if minishell gets the exectuables from PATH ----------- 
 norminette

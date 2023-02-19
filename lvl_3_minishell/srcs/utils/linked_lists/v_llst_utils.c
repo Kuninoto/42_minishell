@@ -6,18 +6,11 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/19 15:37:28 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:27:57 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	invalid_identifier(char *identifier)
-{
-	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
-	ft_putstr_fd(identifier, STDERR_FILENO);
-	ft_putendl_fd("\': not a valid identifier", STDERR_FILENO);
-}
 
 bool	get_exported_state(char *var_name, t_vlst **head)
 {
@@ -52,12 +45,6 @@ int	save_user_vars(char *statement, t_vlst **head, bool to_export)
 	char	**line;
 
 	line = split_envp(statement);
-	if (is_all_digits(line[0]))
-	{
-		invalid_identifier(statement);
-		free_matrix(line);
-		return (EXIT_FAILURE);
-	}
 	if (get_exported_state(line[0], head) && !to_export)
 		to_export = true;
 	cmd_unset(line[0], head);
@@ -86,5 +73,6 @@ t_vlst	*init_envp_lst(char **envp)
 		temp = temp->next;
 		i += 1;
 	}
+	cmd_unset("OLDPWD", &head);
 	return (head);
 }

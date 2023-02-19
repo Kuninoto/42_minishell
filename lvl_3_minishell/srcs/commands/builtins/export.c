@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 16:03:10 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/19 16:04:01 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:27:21 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	cmd_export(t_statement *statement, t_data *data)
 	i = 0;
 	while (statement->argv[++i])
 	{	
-		if (is_onid(statement->argv[i], '-'))
+		if (!is_valid_id(statement->argv[i]))
 			exit_status = export_bad_identifier(statement->argv[i]);
 		else if (is_onstr(statement->argv[i], '='))
 		{
