@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binaries.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 16:15:37 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/19 20:31:14 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static char	*get_bin_path(char *cmd, char **paths)
 	char	*tmp;
 	char	*bin_path;
 
-	i = 0;
 	if (!paths)
 		return (NULL);
+	i = 0;
 	while (paths[i])
 	{
 		tmp = ft_strjoin(paths[i], "/");

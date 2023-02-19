@@ -6,7 +6,7 @@
 #    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/02/19 18:01:01 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/02/19 19:26:51 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,9 @@ noleaksfull: re
 	valgrind --leak-check=full --show-leak-kinds=all -s ./minishell
 
 run: re
+	./minishell
+
+run2:
 	./minishell
 
 .PHONY: all clean fclean re run

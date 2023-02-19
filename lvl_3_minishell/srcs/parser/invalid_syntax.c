@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:45:44 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/19 19:15:31 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 20:03:10 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,6 @@ bool	unexpected_token(char token)
 	return (true);
 }
 
-bool	has_operators(char *input)
-{
-	size_t	i;
-
-	i = 0;
-	while (input[i])
-	{
-		if (is_onstr(OPERATORS, input[i]))
-			return (true);
-		i += 1;
-	}
-	return (false);
-}
-
 // OPERATORS
 bool	invalid_syntax2(char *input)
 {
@@ -73,13 +59,12 @@ bool	invalid_syntax2(char *input)
 			in_quotes = !in_quotes;
 		if (((input[i] == '>' && input[i + 1] == '<')
 				|| (input[i] == '<' && input[i + 1] == '>')
-				|| (input[i] == '|' && input[i + 1] == '|')
-				|| (input[i] == '&' && input[i + 1] == '&')) && !in_quotes)
+				|| (input[i] == '|' && input[i + 1] == '|')) && !in_quotes)
 			return (unexpected_token(input[i + 1]));
 		else if ((input[i] == '{' || input[i] == '}'
 				|| input[i] == '(' || input[i] == ')'
 				|| input[i] == '[' || input[i] == ']'
-				|| input[i] == ';') && !in_quotes)
+				|| input[i] == ';' || input[i] == '&') && !in_quotes)
 			return (unexpected_token(input[i]));
 		i += 1;
 	}
