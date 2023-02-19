@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/19 19:15:13 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:25:46 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 
 // CD CMD
 
+# define PATH_MAX	4096
 # define CD_TOO_MANY_ARGS "minishell: cd: too many arguments"
 # define OLDPWD_NOT_SET "minishell: cd: OLDPWD not set"
 
@@ -120,7 +121,8 @@ int					cmd_echo(t_statement *statement);
 // Wannabe pwd
 int					cmd_pwd(void);
 // Wannabe cd
-int					cmd_cd(char *path);
+// int					cmd_cd(char *path);
+int					cmd_cd(char *path, t_data *data);
 
 static inline int	cd_too_many_args(void)
 {
@@ -152,6 +154,8 @@ static inline bool	is_absolute_path(t_statement *statement)
 		return (true);
 	return (false);
 }
+
+bool				is_valid_id(char *str);
 
 int					unclosed_quotes(char *str);
 bool				invalid_syntax(char *input);

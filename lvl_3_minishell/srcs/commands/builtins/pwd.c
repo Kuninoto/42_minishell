@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 20:06:14 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/11 03:09:40 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 20:53:19 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 
 int	cmd_pwd(void)
 {
-	char	*path;
+	char	*cwd;
 
-	path = NULL;
-	path = getcwd(path, 0);
-	if (path == NULL)
+	cwd = NULL;
+	cwd = getcwd(cwd, 0);
+	if (cwd == NULL)
 	{
 		perror("minishell:");
 		return (EXIT_FAILURE);
 	}
-	ft_putendl_fd(path, STDOUT_FILENO);
-	free(path);
+	ft_putendl_fd(cwd, STDOUT_FILENO);
+	free(cwd);
 	return (EXIT_SUCCESS);
 }
