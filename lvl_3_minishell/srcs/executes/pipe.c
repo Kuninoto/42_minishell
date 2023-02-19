@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 14:58:39 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/18 16:29:04 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/19 22:53:37 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	g_exit_status;
+extern long long	g_exit_status;
 
 static void	left_side(t_statement *nd, t_data *data, int pdes[2])
 {

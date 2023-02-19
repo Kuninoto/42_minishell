@@ -6,13 +6,13 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:25:28 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/10 05:17:24 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:53:46 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	g_exit_status;
+extern long long	g_exit_status;
 
 size_t	exit_status_size(void)
 {
