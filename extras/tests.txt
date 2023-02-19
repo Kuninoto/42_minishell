@@ -1,0 +1,51 @@
+INVALID SYNTAX -----------
+&
+|
+<
+>
+>>
+<<
+<cmd> >< a
+
+QUOTES -------------
+echo "' "?? "? ' '"
+echo "'$USER'"
+
+EXIT ---------
+exit 1
+exit -1
+exit 4000
+exit 42 hello
+exit 42 hello world
+
+EXPAND --------
+echo $?HELLO
+echo $
+echo $?
+echo$
+echo$?
+
+echo <>a
+
+unset
+export
+pwd 1
+
+CD ------------
+cd 1 2
+$?
+cd 1
+$?
+
+PIPES ---------------
+echo "hello"|"'world"
+seq 0 10 | sort -r | grep 2 | wc -l
+
+USER VARS -----------
+a-=2
+a+=2
+
+Checking if minishell gets the exectuables from PATH ----------- 
+norminette
+unset $PATH
+unset PATH
