@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 01:35:12 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/09 23:54:24 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 23:06:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ char				*ft_strnstr(const char *big, const char *little,
 
 /* Converts a string to an integer */
 int					ft_atoi(const char *str);
-
 /* Converts a string to a ssize_t */
 ssize_t				ft_atol(const char *str);
+/* Converts a string to a long long */
+long long			ft_atoll(const char *str);
 
 void				*ft_calloc(size_t nmemb, size_t size);
 char				*ft_strdup(const char *s);
@@ -58,7 +59,12 @@ char				*trim_free(char *s1, char const *set);
 
 char				**ft_split(char const *s, char c);
 char				**split_per_set(char const *s, const char *set);
+
 char				*ft_itoa(int n);
+char				*ft_utoa(unsigned int n);
+char				*ft_ltoa(ssize_t n);
+char				*ft_lltoa(long long n);
+
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void				ft_striteri(char *s, void (*f)(unsigned int, char*));
 

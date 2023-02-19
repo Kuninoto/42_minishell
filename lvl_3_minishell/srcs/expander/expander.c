@@ -6,13 +6,13 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 17:13:35 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/11 04:03:06 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:53:50 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern int	g_exit_status;
+extern long long	g_exit_status;
 
 size_t	expand_exit_status(char *expanded_input_at_i, size_t *i)
 {
