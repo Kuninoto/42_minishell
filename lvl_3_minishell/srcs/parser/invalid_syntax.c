@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:45:44 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/19 18:05:53 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 19:15:31 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	unclosed_quotes(char *str)
 
 bool	unexpected_token(char token)
 {
-	ft_putstr_fd("minishell: syntax error near unexpected token `", STDERR_FILENO);
+	ft_putstr_fd(UNEXPECTED_TOKEN, STDERR_FILENO);
 	ft_putchar_fd(token, STDERR_FILENO);
 	ft_putendl_fd("'", STDERR_FILENO);
 	return (true);
@@ -60,50 +60,36 @@ bool	has_operators(char *input)
 }
 
 // OPERATORS
-bool	invalid_syntax3(char *input)
-{
-	size_t	i;
-
-	i = 0;
-	if (!has_operators(input))
-		return (false);
-	while (input[i] && !is_onstr(OPERATORS, input[i]))
-		i += 1;
-	if ((input[i] == '>' && input[i + 1] == '<')
-	|| (input[i] == '<' && input[i + 1] == '>')
-	|| (input[i] == '|' && input[i + 1] == '|')
-	|| (input[i] == '&' && input[i + 1] == '&'))
-		return (unexpected_token(input[i + 1]));
-	return (false);	
-}
-
 bool	invalid_syntax2(char *input)
 {
-	if (input[0] == '|')
+	size_t	i;
+	bool	in_quotes;
+
+	i = 0;
+	in_quotes = false;
+	while (input[i])
 	{
-		ft_putendl_fd(SYTX_ERR_PIPE, STDERR_FILENO);
-		return (true);
-	}
-	if (input[0] == '(' || input[0] == '{' || input[0] == '\\')
-	{
-		ft_putendl_fd(NO_SYTX_PROMPT, STDERR_FILENO);
-		return (true);
-	}
-	if (input[0] == ')')
-	{
-		ft_putendl_fd(ERR_BRACE_F, STDERR_FILENO);
-		return (true);
+		if (is_onstr(QUOTES, input[i]))
+			in_quotes = !in_quotes;
+		if (((input[i] == '>' && input[i + 1] == '<')
+				|| (input[i] == '<' && input[i + 1] == '>')
+				|| (input[i] == '|' && input[i + 1] == '|')
+				|| (input[i] == '&' && input[i + 1] == '&')) && !in_quotes)
+			return (unexpected_token(input[i + 1]));
+		else if ((input[i] == '{' || input[i] == '}'
+				|| input[i] == '(' || input[i] == ')'
+				|| input[i] == '[' || input[i] == ']'
+				|| input[i] == ';') && !in_quotes)
+			return (unexpected_token(input[i]));
+		i += 1;
 	}
 	return (false);
 }
 
 bool	invalid_syntax(char *input)
 {
-	if (input[0] == '}')
-	{
-		ft_putendl_fd(ERR_RECT_BRACE_F, STDERR_FILENO);
-		return (true);
-	}
+	if (input[0] == '|')
+		return (unexpected_token('|'));
 	if (input[ft_strlen(input) - 1] == '|')
 	{
 		ft_putendl_fd(NO_PIPE_PROMPT, STDERR_FILENO);

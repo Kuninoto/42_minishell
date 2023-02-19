@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/19 18:00:29 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 19:15:13 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@
 // SYNTAX
 
 # define UNCLOSED_QUOTES "minishell: unclosed quotes"
-# define SYTX_ERR_PIPE "minishell: syntax error near unexpected token `|'"
-# define NO_BRACE_PROMPT "minishell: no support for brace prompt"
-# define ERR_BRACE_F "minishell: syntax error near unexpected token `)'"
-# define ERR_RECT_BRACE_F "minishell: syntax error near unexpected token `}'"
+# define UNEXPECTED_TOKEN "minishell: syntax error near unexpected token `"
 # define SYTX_ERR_RDR "minishell: syntax error near unexpected token `newline'"
 
 // EXIT CMD
@@ -156,11 +153,9 @@ static inline bool	is_absolute_path(t_statement *statement)
 	return (false);
 }
 
-
 int					unclosed_quotes(char *str);
 bool				invalid_syntax(char *input);
 bool				invalid_syntax2(char *input);
-bool				invalid_syntax3(char *input);
 bool				valid_input(char *input, t_data *data);
 
 bool				is_all_digits_or_signals(char *str);
