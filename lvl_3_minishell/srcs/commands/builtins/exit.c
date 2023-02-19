@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 18:17:34 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/18 20:20:59 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/19 16:17:32 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	cmd_exit(t_statement *s, t_data *data)
 		}
 	}
 	else if (s->argc > 2)
+	{
+		g_exit_status = EXIT_FAILURE;
 		ft_putendl_fd(EXIT_TOO_MANY_ARGS, STDERR_FILENO);
+	}
 	else
 		g_exit_status = EXIT_SUCCESS;
 	if (data)

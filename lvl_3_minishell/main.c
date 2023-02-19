@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/18 16:39:02 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/19 14:52:14 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@ int	main(int ac, char **av, char **envp)
 			continue ;
 		add_history(input);
 		input = expander(input, &data);
-		if (!input[0])
-		{
-			free(input);
-			continue ;
-		}
 		statement_list = parser(input);
 		data.head = statement_list;
 		exec_type(statement_list, &data);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/18 20:17:34 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/19 18:00:29 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,11 @@ static inline bool	is_absolute_path(t_statement *statement)
 	return (false);
 }
 
+
+int					unclosed_quotes(char *str);
+bool				invalid_syntax(char *input);
+bool				invalid_syntax2(char *input);
+bool				invalid_syntax3(char *input);
 bool				valid_input(char *input, t_data *data);
 
 bool				is_all_digits_or_signals(char *str);

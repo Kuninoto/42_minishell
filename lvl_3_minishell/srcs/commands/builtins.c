@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/18 20:20:40 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/19 15:38:08 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	builtin(t_statement *s, t_data *data)
 		g_exit_status = cmd_export(s, data);
 	else if (streq(s->argv[0], "cd"))
 		g_exit_status = call_cmd_cd(s);
-	else if (ft_strchr(s->argv[0], '=') && !is_valid_id(s->argv[0][0]))
+	else if (ft_strchr(s->argv[0], '=') && is_valid_id(s->argv[0][0]))
 		g_exit_status = save_user_vars(s->argv[0],
 				&data->envp_lst, false);
 	else if (streq(s->argv[0], "echo"))
