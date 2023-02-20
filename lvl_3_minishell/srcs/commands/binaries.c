@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/19 22:53:13 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 00:50:56 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,31 +61,41 @@ static void	exit_and_free_matrix(char **paths, char *cmd, int exit_status)
 	exit(g_exit_status);
 }
 
+/* static void save_current_bin_on_env(char *bin_path, t_vlst **head)
+{
+	char	*temp;
+
+	temp = ft_strjoin("_=", bin_path);
+	save_user_vars(temp, head, true);
+} */
+
 void	cmd_binaries(t_statement *statement, t_data *data)
 {
-	char	*binary_path;
+	char	*bin_path;
 	char	**paths;
 
-	binary_path = statement->argv[0];
+	bin_path = statement->argv[0];
 	paths = get_paths(data->envp_lst);
 	if (is_absolute_path(statement))
 	{
-		if (execve(binary_path, statement->argv, data->envp) == -1)
+	//	save_current_bin_on_env(bin_path, &data->envp_lst);
+		if (execve(bin_path, statement->argv, data->envp) == -1)
 			exit_and_free_matrix(paths, statement->argv[0], 127);
 		exit_and_free_matrix(paths, NULL, EXIT_SUCCESS);
 		return ;
 	}
-	binary_path = get_bin_path(statement->argv[0], paths);
-	if (binary_path == NOT_FOUND)
+	bin_path = get_bin_path(statement->argv[0], paths);
+	if (bin_path == NOT_FOUND)
 	{
 		cmd_not_found(statement->argv[0]);
 		exit_and_free_matrix(paths, NULL, 127);
 	}
-	if (execve(binary_path, statement->argv, data->envp) == -1)
+//	save_current_bin_on_env(bin_path, &data->envp_lst);
+	if (execve(bin_path, statement->argv, data->envp) == -1)
 	{
-		free(binary_path);
+		free(bin_path);
 		exit_and_free_matrix(paths, statement->argv[0], 127);
 	}
-	free(binary_path);
+	free(bin_path);
 	exit_and_free_matrix(paths, NULL, EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:45:44 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/19 20:03:10 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 23:29:11 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ bool	invalid_syntax2(char *input)
 		else if ((input[i] == '{' || input[i] == '}'
 				|| input[i] == '(' || input[i] == ')'
 				|| input[i] == '[' || input[i] == ']'
-				|| input[i] == ';' || input[i] == '&') && !in_quotes)
+				|| input[i] == ';' || input[i] == '&' || input[i] == '*')
+			&& !in_quotes)
 			return (unexpected_token(input[i]));
 		i += 1;
 	}

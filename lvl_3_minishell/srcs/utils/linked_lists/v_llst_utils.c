@@ -6,11 +6,27 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/19 22:27:57 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 00:50:40 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+size_t	v_lstsize_exported(t_vlst **head)
+{
+	t_vlst	*temp;
+	size_t	count;
+
+	temp = *head;
+	count = 0;
+	while (temp != NULL)
+	{
+		if (temp->is_exported)
+			count += 1;
+		temp = temp->next;
+	}
+	return (count);
+}
 
 bool	get_exported_state(char *var_name, t_vlst **head)
 {

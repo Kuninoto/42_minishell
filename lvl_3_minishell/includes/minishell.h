@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/19 22:25:46 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 00:14:20 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,9 +187,11 @@ t_vlst				*v_new_node(char *var_name, char *var_value,
 						bool is_exported);
 void				v_lstadd_back(t_vlst **head, t_vlst *new);
 t_vlst				*v_lstlast(t_vlst *node);
+size_t				v_lstsize_exported(t_vlst **head);
 void				v_lstclear(t_vlst **head);
 
 bool				get_exported_state(char *var_name, t_vlst **head);
+char				**get_envp_arr(t_vlst **envp_lst);
 char				*get_fromvlst(char *var_name, t_vlst **head);
 
 /* same as get_fromvlst except that it
