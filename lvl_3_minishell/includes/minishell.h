@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 14:44:38 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 18:10:00 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ bool				builtin(t_statement *statement, t_data *data);
 executed a binary from PATH */
 void				cmd_binaries(t_statement *statement, t_data *data);
 // Wannabe echo
-int					cmd_echo(t_statement *statement);
+int					cmd_echo(t_statement *statement, bool has_n);
 // Wannabe pwd
 int					cmd_pwd(void);
 // Wannabe cd
@@ -200,6 +200,7 @@ char				*get_fromvlst(char *var_name, t_vlst **head);
 encapsulates the free procedure for <var_name> */
 char				*get_varvalue_fromvlst(char *var_name, t_data *data);
 
+char				**split_envp(char *env);
 int					save_user_vars(char *statement, t_vlst **head,
 						bool to_export);
 

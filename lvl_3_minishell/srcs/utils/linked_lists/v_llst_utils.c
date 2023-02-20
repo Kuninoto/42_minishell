@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/20 14:43:57 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:10:19 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	**split_envp(char *env)
 	return (splitted);
 }
 
+
 int	save_user_vars(char *statement, t_vlst **head, bool to_export)
 {
 	char	**line;
@@ -67,28 +68,4 @@ int	save_user_vars(char *statement, t_vlst **head, bool to_export)
 	v_lstadd_back(head, v_new_node(line[0], line[1], to_export));
 	free(line);
 	return (EXIT_SUCCESS);
-}
-
-t_vlst	*init_envp_lst(char **envp)
-{
-	t_vlst	*head;
-	t_vlst	*temp;
-	char	**line;
-	size_t	i;
-
-	line = split_envp(envp[0]);
-	head = v_new_node(line[0], line[1], true);
-	free(line);
-	i = 1;
-	temp = head;
-	while (envp[i])
-	{
-		line = split_envp(envp[i]);
-		temp->next = v_new_node(line[0], line[1], true);
-		free(line);
-		temp = temp->next;
-		i += 1;
-	}
-	unset_var("OLDPWD", &head);
-	return (head);
 }
