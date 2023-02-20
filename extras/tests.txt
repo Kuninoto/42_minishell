@@ -12,6 +12,7 @@ INVALID SYNTAX -----------
 QUOTES -------------
 echo "' "?? "? ' '"
 echo "'$USER'"
+echo '<'>teste
 
 EXIT ---------
 exit 1
