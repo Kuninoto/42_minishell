@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:25:28 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/19 22:53:46 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:53:21 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	exit_status_size(void)
 	char	*exit_status;
 	size_t	size;
 
-	exit_status = ft_itoa(g_exit_status);
+	exit_status = ft_lltoa(g_exit_status);
 	size = ft_strlen(exit_status);
 	free(exit_status);
 	return (size);
