@@ -6,13 +6,13 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:21:57 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/19 23:22:06 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/19 23:26:56 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static bool	fits_in_longlong(char *str)
+bool	fits_in_longlong(char *str)
 {
 	long long	out;
 	int			c;
