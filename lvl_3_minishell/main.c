@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 01:00:45 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:03:40 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	clean_parsed(t_statement **statement_list, t_data *data)
  /*
  TODO: 
   - save '_' env var upon any command execution
+  - fix all script tests
  */
 
 int	main(int ac, char **av, char **envp)
