@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/18 15:57:43 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/20 19:14:49 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,20 @@ static void	print(char *str)
 	}
 }
 
-int	cmd_echo(t_statement *statement)
+int	cmd_echo(t_statement *statement, bool has_n)
 {
-	bool	has_n;
 	int		i;
 
-	if (!statement->argv[1])
-	{
-		ft_putchar_fd('\n', STDOUT_FILENO);
-		return (EXIT_SUCCESS);
-	}
 	i = 1;
-	has_n = false;
-	if (statement->argc >= 2)
-		has_n = streq(statement->argv[1], "-n");
 	if (has_n)
 		i += 1;
 	while (statement->argv[i] && i != statement->argc)
 	{
 		print(statement->argv[i]);
-		if (i + 1 < statement->argc)
-			ft_putchar_fd(' ', STDOUT_FILENO);
+		if (!statement->argv[i + 1] && statement->operator != RDR_INPUT)
+			break;
+		ft_putchar_fd(' ', STDOUT_FILENO);
 		i += 1;
 	}
-	if (!has_n)
-		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }
