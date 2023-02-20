@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 17:13:35 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/19 22:53:50 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 11:52:33 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ size_t	expand_exit_status(char *expanded_input_at_i, size_t *i)
 	size_t	j;
 
 	*i += 2;
-	exit_status = ft_itoa(g_exit_status);
+	exit_status = ft_lltoa(g_exit_status);
 	j = 0;
 	while (exit_status[j])
 	{

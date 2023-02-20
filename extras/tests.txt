@@ -28,6 +28,8 @@ echo $?
 echo$
 echo$?
 
+REDIRS ---------
+echo ola > ficheiro1 > ficheiro2
 echo <>a
 
 unset
@@ -52,7 +54,7 @@ seq 0 10 | sort -r | grep 2 | wc -l
 USER VARS -----------
 a-=2
 a+=2
-$ENV -> SIGSEGV !!!!!!!!!!!!!!!!!!!!!!!
+$ENV
 
 Checking if minishell gets the exectuables from PATH ----------- 
 norminette
