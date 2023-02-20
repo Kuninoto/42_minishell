@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 18:29:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/20 14:47:36 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:14:53 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,32 +48,13 @@ int	unset_var(char *var_name, t_vlst **head)
 
 int	cmd_unset(t_statement *s, t_vlst **head)
 {
-	int		i;
-	t_vlst	*temp;
-	t_vlst	*next_node;
+	int	i;
 
-	i = 0;
-	while (++i < s->argc)
+	i = 1;
+	while (i < s->argc)
 	{
-		temp = *head;
-		if (ft_strchr(s->argv[i], '='))
-		{
-			invalid_identifer(s->argv[i]);
-			return (EXIT_FAILURE);
-		}
-		while (temp && temp->next != NULL)
-		{
-			if (streq(s->argv[i], temp->next->var_name))
-			{
-				next_node = temp->next->next;
-				free(temp->next->var_name);
-				free(temp->next->var_value);
-				free(temp->next);
-				temp->next = next_node;
-				break ;
-			}
-			temp = temp->next;
-		}
+		unset_var(s->argv[i], head);
+		i += 1;
 	}
 	return (EXIT_SUCCESS);
 }
