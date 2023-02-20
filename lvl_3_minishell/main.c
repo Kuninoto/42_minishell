@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 00:59:02 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:00:45 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,9 @@ static void	clean_parsed(t_statement **statement_list, t_data *data)
 	data->head = NULL;
 }
 
- /* 
+ /*
  TODO: 
   - save '_' env var upon any command execution
- 
  */
 
 int	main(int ac, char **av, char **envp)
@@ -56,7 +55,7 @@ int	main(int ac, char **av, char **envp)
 		if (!input[0])
 		{
 			free(input);
-			continue;
+			continue ;
 		}
 		statement_list = parser(input);
 		data.head = statement_list;
