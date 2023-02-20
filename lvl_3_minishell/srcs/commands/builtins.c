@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 00:57:41 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:39:12 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	call_cmd_unset(t_statement *s, t_data *data)
 {
 	if (s->argc == 1)
 		return (EXIT_SUCCESS);
-	return (cmd_unset(s->argv[1], &data->envp_lst));
+	return (cmd_unset(s, &data->envp_lst));
 }
 
 static int	call_cmd_cd(t_statement *s, t_data *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 00:14:20 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 14:44:38 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,9 @@ void				cmd_exit(t_statement *s, t_data *data);
 /* Encapsulate if's. Norm Purposes */
 void				call_cmd_exit(t_statement *statement, t_data *data);
 // Wannabe unset
-int					cmd_unset(char *var_name, t_vlst **head);
+// int				cmd_unset(char *var_name, t_vlst **head);
+int					unset_var(char *var_name, t_vlst **head);
+int					cmd_unset(t_statement *s, t_vlst **head);
 
 static inline void	cmd_not_found(char *cmd_name)
 {
