@@ -6,7 +6,7 @@
 /*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 18:29:09 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/20 14:55:00 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:14:53 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	unset_var(char *var_name, t_vlst **head)
 
 int	cmd_unset(t_statement *s, t_vlst **head)
 {
-	int		i;
+	int	i;
 
 	i = 1;
 	while (i < s->argc)

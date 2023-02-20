@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 12:10:00 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/20 16:15:35 by nnuno-ca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ static void	clean_parsed(t_statement **statement_list, t_data *data)
  /*
  TODO: 
   - save '_' env var upon any command execution
-  - echo "'$USER'"
-  - echo '"$USER"'
-  - echo '"'$USER'"'
   - fix all script tests
  */
 
