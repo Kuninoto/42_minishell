@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirects.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 15:04:22 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/19 22:53:42 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:00:13 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static void	redirect_input(t_statement *node)
 
 	if (node->next->argv[0])
 	{
+		while (node->next->operator == RDR_INPUT)
+			node = node->next;
 		while (node->next->operator == RDR_INPUT)
 			node = node->next;
 		if (access(node->next->argv[0], F_OK) == 0)
