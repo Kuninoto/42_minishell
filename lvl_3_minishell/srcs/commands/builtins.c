@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 19:09:38 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:02:21 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	call_cmd_cd(t_statement *s, t_data *data)
 
 static int	call_cmd_echo(t_statement *s)
 {
-	t_statement *temp;
+	t_statement	*temp;
 	bool		has_n;
 
 	temp = s;
@@ -60,7 +60,7 @@ static int	call_cmd_echo(t_statement *s)
 	while (temp != NULL && temp->argc > 2)
 	{
 		cmd_echo(temp, false);
-		if (temp->operator == PIPE) 	
+		if (temp->operator == PIPE)
 			break ;
 		temp = temp->next;
 	}
@@ -83,7 +83,6 @@ bool	builtin(t_statement *s, t_data *data)
 		g_exit_status = save_user_vars(s->argv[0],
 				&data->envp_lst, false);
 	else if (streq(s->argv[0], "echo"))
-//		g_exit_status = cmd_echo(s);
 		g_exit_status = call_cmd_echo(s);
 	else if (streq(s->argv[0], "pwd"))
 		g_exit_status = cmd_pwd();

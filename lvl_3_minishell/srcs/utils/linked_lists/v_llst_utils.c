@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   v_llst_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:21:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/20 17:10:19 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:59:18 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	**split_envp(char *env)
 	splitted[2] = NULL;
 	return (splitted);
 }
-
 
 int	save_user_vars(char *statement, t_vlst **head, bool to_export)
 {
