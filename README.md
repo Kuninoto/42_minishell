@@ -5,13 +5,33 @@
 ## Grade: 101/100
 
 ###  Demonstration:
+![](./extras/showcase.gif)
 
 ### Installing and running the project:
+1- Installing minishell dependencies:  
+
+	sudo apt-get install make libreadline-dev
+2- Clone this repository:  
+
+	git clone https://github.com/Kuninoto/42_minishell
+3- Navigate to _lvl_3_minishell_ and run `make`
+
+	cd 42_minishell/lvl_3_minishell
+	make
+4- `make clean` so that you don't keep those object files that you won't need anymore  
+
+	make clean
+5- Run minishell
+
+	./minishell
 
 ###  Subject: [minishell en_subject](./extras/en.subject_minishell.pdf)
 
 #### Makefile Available Targets:  
-
+`make` or `make all` - compiles minishell      
+`make clean` - wipes all object files   
+`make fclean` - deletes minishell and all object files   
+`make re` - fclean  + all   
 
 ## Useful links
 Understanding Bash/Shell behavior:  
@@ -36,6 +56,7 @@ Understanding Bash/Shell behavior:
 - https://www.rozmichelle.com/pipes-forks-dups/  
 - https://velog.io/@sham/minishell%EA%B3%BC-readline  
 - https://github.com/Swoorup/mysh  
+
 Parsing:  
 - https://youtu.be/bxpc9Pp5pZM  
 - https://youtu.be/r6vNthpQtSI  
@@ -43,12 +64,14 @@ Parsing:
 - https://www.youtube.com/watch?v=SToUyjAsaFk  
 - https://github.com/mit-pdos/xv6-public/blob/master/sh.c  
 - https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html  
+
 AST:  
 - https://en.wikipedia.org/wiki/Abstract_syntax_tree  
 - https://stackoverflow.com/questions/1721553/how-to-construct-an-abstract-syntax-tree  
 - https://www.twilio.com/blog/abstract-syntax-trees  
+
 Parsing/AST/Interpreter:  
-https://github.com/Swoorup/mysh  
+- https://github.com/Swoorup/mysh  
 
 ## Disclaimer
 > At [42School](https://en.wikipedia.org/wiki/42_(school)), almost every project must be written in accordance to the [Norm](./extras/en_norm.pdf), the schools' coding standard. As a result, the implementation of certain parts may appear strange and for sure had room for improvement.
