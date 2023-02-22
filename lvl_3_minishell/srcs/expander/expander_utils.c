@@ -6,13 +6,21 @@
 /*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:25:28 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/20 15:00:24 by roramos          ###   ########.fr       */
+/*   Updated: 2023/02/22 17:08:05 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 extern long long	g_exit_status;
+
+void	init_vars(size_t *i, size_t *size, bool *in_quotes, bool *in_dquotes)
+{
+	*i = 0;
+	*size = 0;
+	*in_quotes = false;
+	*in_dquotes = false;
+}
 
 size_t	exit_status_size(void)
 {
@@ -56,17 +64,14 @@ int	expanded_size(char *input, t_data *data)
 	size_t	i;
 	size_t	size;
 	bool	in_quotes;
-	bool	in_d_quotes;
+	bool	in_dquotes;
 
-	i = 0;
-	size = 0;
-	in_quotes = false;
-	in_d_quotes = false;
+	init_vars(&i, &size, &in_quotes, &in_dquotes);
 	while (input[i])
 	{
 		if (input[i] == '\"' && !in_quotes)
-			in_d_quotes = !in_d_quotes;
-		if (input[i] == '\'' && !in_d_quotes)
+			in_dquotes = !in_dquotes;
+		if (input[i] == '\'' && !in_dquotes)
 			in_quotes = !in_quotes;
 		if ((input[i] == '$' && input[i + 1] == '?') && !in_quotes)
 		{

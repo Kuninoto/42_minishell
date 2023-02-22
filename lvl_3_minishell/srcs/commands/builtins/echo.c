@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 14:57:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 19:14:49 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:00:41 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	cmd_echo(t_statement *statement, bool has_n)
 	{
 		print(statement->argv[i]);
 		if (!statement->argv[i + 1] && statement->operator != RDR_INPUT)
-			break;
+			break ;
 		ft_putchar_fd(' ', STDOUT_FILENO);
 		i += 1;
 	}

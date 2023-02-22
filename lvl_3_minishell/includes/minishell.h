@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:52:09 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 18:10:00 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:08:11 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,7 @@ bool				is_valid_id(char *str);
 int					unclosed_quotes(char *str);
 bool				invalid_syntax(char *input);
 bool				invalid_syntax2(char *input);
+bool				invalid_syntax_on_operator(char *input);
 bool				valid_input(char *input, t_data *data);
 
 bool				is_all_digits_or_signals(char *str);
@@ -223,6 +224,7 @@ size_t				exit_status_size(void);
 size_t				expand_size(char *input, size_t *i, t_data *data);
 int					expanded_size(char *input, t_data *data);
 
+void				init_vars(size_t *i, size_t *size, bool *in_quotes, bool *in_dquotes);
 char				*expander(char *input, t_data *data);
 
 // PARSER UTILS
