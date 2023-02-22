@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 15:24:53 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 14:39:12 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:02:21 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,29 @@ static int	call_cmd_cd(t_statement *s, t_data *data)
 		return (cmd_cd(s->argv[1], data));
 }
 
+static int	call_cmd_echo(t_statement *s)
+{
+	t_statement	*temp;
+	bool		has_n;
+
+	temp = s;
+	has_n = false;
+	if (s->argc >= 2)
+		has_n = streq(s->argv[1], "-n");
+	cmd_echo(temp, has_n);
+	temp = temp->next;
+	while (temp != NULL && temp->argc > 2)
+	{
+		cmd_echo(temp, false);
+		if (temp->operator == PIPE)
+			break ;
+		temp = temp->next;
+	}
+	if (!has_n)
+		ft_putchar_fd('\n', STDOUT_FILENO);
+	return (EXIT_SUCCESS);
+}
+
 bool	builtin(t_statement *s, t_data *data)
 {
 	if (streq(s->argv[0], "exit"))
@@ -60,7 +83,7 @@ bool	builtin(t_statement *s, t_data *data)
 		g_exit_status = save_user_vars(s->argv[0],
 				&data->envp_lst, false);
 	else if (streq(s->argv[0], "echo"))
-		g_exit_status = cmd_echo(s);
+		g_exit_status = call_cmd_echo(s);
 	else if (streq(s->argv[0], "pwd"))
 		g_exit_status = cmd_pwd();
 	else if (streq(s->argv[0], "env"))

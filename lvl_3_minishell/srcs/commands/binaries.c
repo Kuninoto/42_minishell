@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   binaries.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 16:27:50 by roramos           #+#    #+#             */
-/*   Updated: 2023/02/20 00:50:56 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:01:20 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,6 @@ static void	exit_and_free_matrix(char **paths, char *cmd, int exit_status)
 	exit(g_exit_status);
 }
 
-/* static void save_current_bin_on_env(char *bin_path, t_vlst **head)
-{
-	char	*temp;
-
-	temp = ft_strjoin("_=", bin_path);
-	save_user_vars(temp, head, true);
-} */
-
 void	cmd_binaries(t_statement *statement, t_data *data)
 {
 	char	*bin_path;
@@ -78,7 +70,6 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 	paths = get_paths(data->envp_lst);
 	if (is_absolute_path(statement))
 	{
-	//	save_current_bin_on_env(bin_path, &data->envp_lst);
 		if (execve(bin_path, statement->argv, data->envp) == -1)
 			exit_and_free_matrix(paths, statement->argv[0], 127);
 		exit_and_free_matrix(paths, NULL, EXIT_SUCCESS);
@@ -90,7 +81,6 @@ void	cmd_binaries(t_statement *statement, t_data *data)
 		cmd_not_found(statement->argv[0]);
 		exit_and_free_matrix(paths, NULL, 127);
 	}
-//	save_current_bin_on_env(bin_path, &data->envp_lst);
 	if (execve(bin_path, statement->argv, data->envp) == -1)
 	{
 		free(bin_path);

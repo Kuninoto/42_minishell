@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+         #
+#    By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/17 19:26:52 by nnuno-ca          #+#    #+#              #
-#    Updated: 2023/02/19 19:26:51 by nnuno-ca         ###   ########.fr        #
+#    Updated: 2023/02/20 17:04:28 by nnuno-ca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ RM = rm -rf
 LIBFT = ./libft/libft.a
 
 UTILS = is_all_digits_or_signals panic destroy valid_input
-UTILS_LL = p_llst_utils v_llst_utils v_llst_utils_v2
+UTILS_LL = p_llst_utils v_llst_utils v_llst_utils_v2 init_envp_lst
 PARSER = invalid_syntax parser parser_utils remove_quotes
 EXPANDER = expander expander_utils
 GENERAL = config_signals setup_shell

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42.fr>          +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 02:02:08 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/20 16:15:35 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 16:59:39 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ static void	clean_parsed(t_statement **statement_list, t_data *data)
 	*statement_list = NULL;
 	data->head = NULL;
 }
-
- /*
- TODO: 
-  - save '_' env var upon any command execution
-  - fix all script tests
- */
 
 int	main(int ac, char **av, char **envp)
 {

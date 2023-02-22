@@ -7,6 +7,7 @@ INVALID SYNTAX -----------
 >
 >>
 <<
+*
 <cmd> >< a
 
 QUOTES -------------
@@ -52,6 +53,8 @@ check if cd updates the environment variables PWD & OLDPWD
 PIPES ---------------
 echo "hello"|"'world"
 seq 0 10 | sort -r | grep 2 | wc -l
+seq 0 10 | sort -r | grep 2 | wc -l > outfile
+cat outfile
 
 USER VARS -----------
 a-=2

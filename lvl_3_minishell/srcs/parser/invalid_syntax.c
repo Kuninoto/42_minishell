@@ -3,39 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   invalid_syntax.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnuno-ca <nnuno-ca@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: roramos <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 17:45:44 by nnuno-ca          #+#    #+#             */
-/*   Updated: 2023/02/19 23:29:11 by nnuno-ca         ###   ########.fr       */
+/*   Updated: 2023/02/22 17:12:47 by roramos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	unclosed_quotes(char *str)
-{
-	char	last_opened;
-
-	last_opened = 0;
-	while (*str && !last_opened)
-	{
-		if (*str == '\'' || *str == '"')
-			last_opened = *str;
-		str++;
-	}
-	while (*str && last_opened)
-	{
-		if (*str && *str == last_opened)
-			last_opened = 0;
-		str++;
-	}
-	if (*str)
-		return (unclosed_quotes(str));
-	else if (!last_opened)
-		return (0);
-	else
-		return (1);
-}
 
 bool	unexpected_token(char token)
 {
@@ -45,7 +20,52 @@ bool	unexpected_token(char token)
 	return (true);
 }
 
-// OPERATORS
+bool	has_operator(char *input)
+{
+	size_t	i;
+
+	i = 0;
+	while (input[i])
+	{
+		if (is_onstr(OPERATORS, input[i]))
+			return (true);
+		i += 1;
+	}
+	return (false);
+}
+
+bool	invalid_syntax_on_operator(char *input)
+{
+	size_t	i;
+	bool	in_quotes;
+
+	i = 0;
+	in_quotes = false;
+	while (has_operator(&input[i]))
+	{
+		if (is_onstr(QUOTES, input[i]))
+			in_quotes = !in_quotes;
+		if (is_onstr(OPERATORS, input[i]) && !in_quotes)
+		{
+			if (input[i] == input[i + 1])
+				i += 2;
+			else
+				i += 1;
+			if (input[i] == ' ')
+			{
+				while (input[i] && input[i] == ' ')
+					i += 1;
+				if (is_onstr(OPERATORS, input[i]))
+					return (unexpected_token(input[i]));
+			}
+			if (is_onstr(OPERATORS, input[i]))
+				return (unexpected_token(input[i]));
+		}
+		i += 1;
+	}
+	return (false);
+}
+
 bool	invalid_syntax2(char *input)
 {
 	size_t	i;
