@@ -54,7 +54,19 @@ Understanding Bash/Shell behavior and related functions:
 [Writing a UNIX shell part 3](https://indradhanush.github.io/blog/writing-a-unix-shell-part-3/)  
 [GNU documentation about redirections](https://www.gnu.org/software/bash/manual/html_node/Redirections.html)  
 [Shell Program Explained](https://www.youtube.com/watch?v=ubt-UjcQUYg)  
-[Tinyshell case study](http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/index.html)  
+[Shell Code - More Detail](https://www.youtube.com/watch?v=ZjzMdsTWF0U)  
+[EnthusiastiCon - Stefanie Schirmer “OMG building a shell in 10 minutes”](https://www.youtube.com/watch?v=k6TTj4C0LF0)  
+[execve()](https://www.tutorialspoint.com/unix_system_calls/execve.htm)  
+[Signals and traps in UNIX](https://www.geeksforgeeks.org/signals-and-traps-in-unix/)  
+[UNIX signals and traps](https://www.tutorialspoint.com/unix/unix-signals-traps.htm)  
+[List of terminal generated signals (eg Ctrl-C -> SIGINT)](https://unix.stackexchange.com/questions/362559/list-of-terminal-generated-signals-eg-ctrl-c-sigint#362566)  
+[What's a relative path?](https://www.computerhope.com/jargon/r/relapath.htm)  
+[What's an absolute path?](https://www.techopedia.com/definition/5817/absolute-path)  
+[TERM environment variable (UNIX)](https://www.ibm.com/docs/en/informix-servers/12.10?topic=products-term-environment-variable-unix)  
+[What is an environment variable?](https://kinsta.com/knowledgebase/what-is-an-environment-variable/)  
+[TERM environment variable not set](https://linuxconfig.org/term-environment-variable-not-set-solution)  
+[Writing your own shell](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)  
+[Tiny Shell - case study](http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/index.html)  
 [Pipes, Forks, & Dups: Understanding Command Execution and Input/Output Data Flow](https://www.rozmichelle.com/pipes-forks-dups/)  
 [Open-source alike project](https://github.com/Swoorup/mysh)  
 
@@ -74,19 +86,6 @@ Abstract Syntax Tree (AST):
 ## Disclaimer
 > At [42School](https://en.wikipedia.org/wiki/42_(school)), almost every project must be written in accordance to the "Norm", the schools' coding standard. As a result, the implementation of certain parts may appear strange and for sure had room for improvement.
 
-[Shell Code - More Detail](https://www.youtube.com/watch?v=ZjzMdsTWF0U)  
-[EnthusiastiCon - Stefanie Schirmer “OMG building a shell in 10 minutes”](https://www.youtube.com/watch?v=k6TTj4C0LF0)  
-[execve()](https://www.tutorialspoint.com/unix_system_calls/execve.htm)  
-[Signals and traps in UNIX](https://www.geeksforgeeks.org/signals-and-traps-in-unix/)  
-[UNIX signals and traps](https://www.tutorialspoint.com/unix/unix-signals-traps.htm)  
-[List of terminal generated signals (eg Ctrl-C -> SIGINT)](https://unix.stackexchange.com/questions/362559/list-of-terminal-generated-signals-eg-ctrl-c-sigint#362566)  
-[What's a relative path?](https://www.computerhope.com/jargon/r/relapath.htm)  
-[What's an absolute path?](https://www.techopedia.com/definition/5817/absolute-path)  
-[TERM environment variable (UNIX)](https://www.ibm.com/docs/en/informix-servers/12.10?topic=products-term-environment-variable-unix)  
-[What is an environment variable?](https://kinsta.com/knowledgebase/what-is-an-environment-variable/)  
-[TERM environment variable not set](https://linuxconfig.org/term-environment-variable-not-set-solution)  
-[Writing your own shell](https://www.cs.purdue.edu/homes/grr/SystemsProgrammingBook/Book/Chapter5-WritingYourOwnShell.pdf)  
-[Tiny Shell - case 
 ---
 Made by Nuno Carvalho (Kuninoto) | nnuno-ca@student.42porto.com  
 <div id="badge"> <a href="https://www.linkedin.com/in/nuno-carvalho-218822247"/> <img src="https://img.shields.io/badge/LinkedIn-blue?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge"/>&nbsp;
