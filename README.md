@@ -53,7 +53,8 @@ Understanding Bash/Shell behavior and related functions:
 [Writing a UNIX shell part 2](https://indradhanush.github.io/blog/writing-a-unix-shell-part-2/)  
 [Writing a UNIX shell part 3](https://indradhanush.github.io/blog/writing-a-unix-shell-part-3/)  
 [GNU documentation about redirections](https://www.gnu.org/software/bash/manual/html_node/Redirections.html)  
-[Shell Program Explained](https://www.youtube.com/watch?v=ubt-UjcQUYg)  study](http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/index.html)  
+[Shell Program Explained](https://www.youtube.com/watch?v=ubt-UjcQUYg)  
+[Tinyshell case study](http://www.cems.uwe.ac.uk/~irjohnso/coursenotes/lrc/system/shell/index.html)  
 [Pipes, Forks, & Dups: Understanding Command Execution and Input/Output Data Flow](https://www.rozmichelle.com/pipes-forks-dups/)  
 [Open-source alike project](https://github.com/Swoorup/mysh)  
 
